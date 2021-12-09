@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'main';
+    src: url("./assets/fonts/iranyekanwebregular(fanum).eot") format('eot'),
+    url("./assets/fonts/iranyekanwebregular(fanum).eot") format('truetype'),
+    url("./assets/fonts/iranyekanwebregular(fanum).woff") format('woff'),
+    url("./assets/fonts/iranyekanwebregular(fanum).woff2") format('woff2')
+}
+
+
+*, html, body {
+    font-family: 'main' !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    direction: rtl;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
