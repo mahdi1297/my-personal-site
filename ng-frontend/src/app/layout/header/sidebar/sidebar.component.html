@@ -1,0 +1,22 @@
+<div class="sidebar-container">
+  <div>
+    <i-feather
+      name="x"
+      style="color: red"
+      (click)="closeSidebarClick()"
+      class="c-pointer"
+    ></i-feather>
+  </div>
+
+  <section class="header-menu">
+    <ul class="sidebar-nav">
+      <li *ngFor="let route of sidebarRoutes">
+        <a routerLink="{{ route.path }}">{{ route.title }}</a>
+      </li>
+    </ul>
+  </section>
+  <section class="header-auth-btns w-100 flex align-center">
+    <button class="auth-btn login-btn">ورود</button>
+    <button class="auth-btn register-btn">ثبت نام</button>
+  </section>
+</div>
