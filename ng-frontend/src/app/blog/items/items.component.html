@@ -1,0 +1,52 @@
+<div class="blog_items w-100">
+  <div *ngIf="blogs.result; else loading">
+    <div class="blog_items-container">
+      <div *ngFor="let item of blogs.result" class="blog_items-item">
+        <div class="blog_items-card_header">
+          <a routerLink="/blog/{{ item.slug }}">
+            <img
+              src="http://localhost:5000/{{ item.thumbnail }}"
+              alt=""
+              width="100%"
+            />
+          </a>
+        </div>
+        <div class="blog_items-card_body">
+          <h2>
+            <a routerLink="/blog/{{ item.slug }}" class="c-black">{{
+              item.title
+            }}</a>
+          </h2>
+          <p class="w-100">
+            {{ item.description }}
+          </p>
+        </div>
+        <div class="blog-card_footer">
+          <div class="flex style__Flex-sc-1qvhncc-1 fejrce">
+            <div>views 1389</div>
+            <div>likes 15</div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination w-100 flex justify-center">
+        <button
+          [ngClass]="blogs.result.length === 0 ? 'disabled' : ''"
+          (click)="nextPageBtnHandler($event)"
+        >
+          <i-feather name="chevron-right"></i-feather>
+        </button>
+        <p>{{ pageNumber }}</p>
+        <button
+          [ngClass]="pageNumber === 1 ? 'disabled' : ''"
+          (click)="prevPageBtnHandler($event)"
+        >
+          <i-feather name="chevron-left"></i-feather>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

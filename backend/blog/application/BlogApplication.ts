@@ -115,9 +115,9 @@ class BlogApplication {
                 content: req.body.content,
                 tags: req.body.tags,
                 writer: req.body.writer,
+                comments_length: 0,
             };
             const result = await this._repo.create(<IBlogDomain>dataToStore);
-            console.log(result);
 
             if (result !== null) {
                 return res.json({

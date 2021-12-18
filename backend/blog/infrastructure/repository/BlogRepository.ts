@@ -6,9 +6,13 @@ class BlogRepository<T extends mongoose.Document>
     implements IBlogRepository<T>
 {
     private _model = BlogSchema;
+
     async list(pageNumber: number) {
-        console.log(pageNumber);
-        return await this._model.find({}).limit(15).skip(pageNumber);
+        console.log(pageNumber - 1);
+        return await this._model
+            .find({})
+            .limit(12)
+            .skip(12 * (pageNumber - 1));
     }
 
     async getByID(_id: string) {

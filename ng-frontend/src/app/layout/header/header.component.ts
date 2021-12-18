@@ -11,7 +11,9 @@ export class HeaderComponent implements OnInit {
   headerRoutes = routes;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
 
   sidebarOpenHandler() {
     this.sidebarStatus = !this.sidebarStatus;

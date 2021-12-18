@@ -1,0 +1,45 @@
+.blog_detail-footer > div > div {
+  width: 100%;
+  height: auto;
+}
+.title {
+  padding: 5px;
+}
+.title h3 {
+  font-size: 18px;
+}
+.blog_detail-footer span {
+  margin-right: 10px;
+  font-size: 14px;
+}
+.writer-tags ul {
+  margin-top: -10px;
+}
+
+.writer-tags li {
+  display: inline-block;
+  list-style: none;
+  height: 28px;
+  line-height: 1;
+  margin-left: 10px;
+  margin-bottom: 7px;
+  border-radius: 3px;
+  border: 2px solid #ccc;
+}
+.writer-tags li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 6px 5px 0 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+.writer-tags li a:hover {
+  color: #7a76ff;
+}
+
+@media screen and (min-width: 1000px) {
+  .blog_detail-footer > div > div {
+    width: 48%;
+  }
+}

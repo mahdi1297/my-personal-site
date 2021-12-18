@@ -8,15 +8,11 @@
     <div class="header-wrapper flex justify-between">
       <div class="flex align-center">
         <h1 class="header_logo">
-          <a href="/">Mahdi Alipour</a>
+          <a href="/" class="c-theme">Mahdi Alipour</a>
         </h1>
       </div>
 
       <div class="header-sm-wrapper flex align-center">
-        <app-sidebar
-          [ngClass]="sidebarStatus ? 'sidebar-container' : 'sidebar-close'"
-          (closeSidebarHandler)="sidebarCloser()"
-        ></app-sidebar>
         <i-feather
           name="menu"
           class="c-black"
@@ -39,3 +35,8 @@
     </div>
   </div>
 </header>
+<app-sidebar
+  class="sidebar-container"
+  [ngClass]="sidebarStatus ? 'sidebar-open' : 'sidebar-close'"
+  (closeSidebarHandler)="sidebarCloser()"
+></app-sidebar>

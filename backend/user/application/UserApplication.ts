@@ -4,6 +4,8 @@ import { resError } from "../../0-framework/error-handler/errors";
 import UserRepository from "../infrastructure/repository/UserRepository";
 import IUserDomain from "../domain/IUserDomain";
 import { hashPassword } from "../../0-framework/middlewares/bcrypt";
+import TokenRepository from "../../token/infrastructure/repository/TokenRepository";
+import ITokenDomain from "../../token/domain/ITokenDomain";
 
 const app = express();
 
@@ -11,6 +13,7 @@ app.use(fileUpload());
 
 class UserApplication {
     private _repo: UserRepository<IUserDomain>;
+    private _tokenRepo: TokenRepository<ITokenDomain>;
 
     constructor() {
         this._repo = new UserRepository();
@@ -52,6 +55,16 @@ class UserApplication {
             const result = await this._repo.create(
                 <IUserDomain>requestBodyData
             );
+            if (result === null || result === undefined) {
+                return resError(res, 400, "مشکلی پیش آمد");
+            }
+            console.log(result);
+            console.log(result._id);
+            // const tokenPack = {
+
+            // }
+            // const userToken = await this._tokenRepo.create()
+
             res.json({
                 status: 200,
                 messaeg: "حساب شما با موفقیت ساخته شد",

@@ -1,0 +1,50 @@
+<section class="blog_detail-footer">
+  <div class="flex justify-between flex-wrap">
+    <div class="writer-tags">
+      <div class="title">
+        <h3>درباره نویسنده</h3>
+      </div>
+      <div>
+        <a href="/">
+          <div
+            *ngIf="writer !== undefined; else loading"
+            class="flex align-center"
+          >
+            <img
+              src="./../../../../assets/img/avatar.jpeg"
+              class="br-100"
+              alt=""
+            />
+            <span>{{ writer }}</span>
+          </div>
+        </a>
+      </div>
+      <div class="title">
+        <h3>تگ ها</h3>
+      </div>
+      <section class="tags w-100">
+        <ul class="flex flex-wrap">
+          <li *ngFor="let tag of tags">
+            <a href="/categories/{{ tag.label }}">{{ tag.label }}</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <!-- ///// -->
+    <div>
+      <div class="title">
+        <h3>مقالات مرتبط</h3>
+        <ul>
+          <li class="flex">
+            <div></div>
+            <div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <h2>Loading...</h2>
+</ng-template>

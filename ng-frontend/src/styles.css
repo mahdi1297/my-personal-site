@@ -28,6 +28,15 @@ a {
 button {
   cursor: pointer;
 }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #272443;
+}
 
 /* layout */
 .container {
@@ -52,6 +61,9 @@ button {
 .align-center {
   align-items: center;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 
 /**/
 .w-100 {
@@ -63,6 +75,10 @@ button {
 
 .c-pointer {
   cursor: pointer;
+}
+
+.br-100 {
+  border-radius: 100%;
 }
 
 /* colors */
@@ -114,6 +130,10 @@ button {
   background: #7a76ff;
 }
 
+.content img {
+  width: 100% !important;
+}
+
 @media screen and (min-width: 1000px) {
   .container {
     width: 82%;
@@ -128,4 +148,12 @@ button {
   visibility: visible;
   z-index: 10000;
   background: rgba(39, 36, 67, 0.43);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.header_logo a,
+.footer_logo a {
+  font-family: "Lobster", cursive !important;
+  font-size: 20px;
 }

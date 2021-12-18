@@ -1,0 +1,34 @@
+footer {
+  height: 260px;
+  background: #7a76ff;
+  margin-top: 150px;
+  /* overflow-x: hidden; */
+}
+
+
+.footer_logo {
+  margin-top: 60px;
+}
+.footer_logo a:hover {
+  color: #141c3a;
+}
+.footer-list {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.footer-list li {
+  padding: 10px 0 10px 30px;
+}
+.footer-list li a {
+  color: #fcfdfe;
+}
+.footer-list li a:hover {
+  color: #141c3a;
+}
+
+@media screen and (min-width: 900px) {
+  .ads {
+    width: 75%;
+  }
+}

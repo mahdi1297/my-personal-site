@@ -1,38 +1,43 @@
 .blog_hero {
-  height: 400px;
-  background: linear-gradient(to left, rgba(122, 118, 255, 0.09), #fff);
-}
-.blog_hero .container > div {
-  width: 100%;
-  padding: 10px;
-  height: 400px;
+  height: auto;
+  min-height: 450px;
 }
 
-.blog_hero-desc h1 {
-  font-size: 45px;
-  margin: 0;
-  width: 100%;
-  margin-top: 60px;
-  margin-bottom: 30px;
+.blog_hero h1 {
+  margin: auto;
+  margin-top: 90px;
+  font-size: 38px;
+  width: 90%;
+  font-weight: 900;
+  text-align: center;
+  color: #141c3a;
 }
 
-.blog_hero-img {
-  display: none;
+.blog_hero p {
+  direction: ltr;
+  margin: auto;
+  text-align: center;
+  margin-top: 40px;
+  color: rgba(10, 10, 10, 0.9);
+}
+
+.blue-cover {
+  margin-top: -40px;
+  width: 100%;
+  height: 550px;
+  overflow-x: hidden;
+}
+.blue-cover h2 {
+  margin: auto;
+  margin-top: 100px;
+  /* color: #fff; */
+  font-size: 30px;
+  text-align: center;
 }
 
 @media screen and (min-width: 1000px) {
-  .blog_hero-img {
-    display: block !important;
-    background: url(./../../../assets/img/course-hero.png) center center;
-    width: 50%;
-    height: 400px;
-    background-size: cover !important;
-  }
-  .blog_hero .container > div {
-    width: 50%;
-    height: 400px;
-  }
-  .blog_hero-desc h1 {
-    width: 80%;
+  .blog_hero h1 {
+    width: 60%;
+    font-size: 45px;
   }
 }

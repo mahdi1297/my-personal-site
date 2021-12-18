@@ -1,5 +1,5 @@
-<div class="sidebar-container">
-  <div>
+<div class="inner_sidebar-container w-100">
+  <div class="w-100">
     <i-feather
       name="x"
       style="color: red"
@@ -8,13 +8,12 @@
     ></i-feather>
   </div>
 
-  <section class="header-menu">
-    <ul class="sidebar-nav">
-      <li *ngFor="let route of sidebarRoutes">
-        <a routerLink="{{ route.path }}">{{ route.title }}</a>
-      </li>
-    </ul>
-  </section>
+  <ul class="sidebar-nav w-100">
+    <li *ngFor="let route of sidebarRoutes">
+      <a routerLink="{{ route.path }}" class="c-black">{{ route.title }}</a>
+    </li>
+  </ul>
+
   <section class="header-auth-btns w-100 flex align-center">
     <button class="auth-btn login-btn">ورود</button>
     <button class="auth-btn register-btn">ثبت نام</button>

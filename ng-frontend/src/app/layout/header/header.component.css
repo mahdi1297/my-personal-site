@@ -3,7 +3,6 @@
 }
 
 .header_body {
-  box-shadow: 1px 3px 8px rgb(122, 118, 255, 10%);
   height: 83px;
 }
 
@@ -12,6 +11,11 @@
 }
 .header-sm-wrapper {
   display: flex;
+}
+
+.header_logo a {}
+.header_logo a:hover {
+  color: #ecedff;
 }
 
 .header-sm-wrapper i-feather {
@@ -70,8 +74,9 @@
   font-size: 15px;
 }
 .sidebar-container {
+  transform: translateX(-30px);
   position: fixed;
-  width: 280px;
+  width: 0 !important;
   height: 100vh;
   top: 0;
   right: 0;
@@ -89,6 +94,10 @@
   width: 0;
   opacity: 0;
 }
+.sidebar-open {
+  width: 200px !important;
+  transform: translateX(30px);
+}
 
 @media screen and (min-width: 800px) {
   .header-lg-wrapper {
@@ -97,14 +106,4 @@
   .header-sm-wrapper {
     display: none;
   }
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
-
-.header_logo a {
-  font-family: "Lobster", cursive !important;
-  font-size: 20px;
-}
-.header_logo a:hover {
-  color: #ecedff;
 }
