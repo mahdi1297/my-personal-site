@@ -8,7 +8,6 @@ import cookieParser from "cookie-parser";
 import BaseRoutes from "./BaseRoutes";
 import path from "path";
 import * as dotenv from "dotenv";
-const cloudinary = require("cloudinary").v2;
 
 const app = express();
 const route = express.Router();
@@ -33,14 +32,12 @@ if (cluster.isPrimary) {
         cluster.fork();
     });
 } else {
-    app.use(express.json({ limit: "50mb" }));
-    app.use(express.urlencoded({ limit: "50mb" }));
-    app.use(fileUpload());
-    app.use(cors());
-
-    app.use(helmet());
-
-    app.use(cookieParser());
+    app.use(express.json({ limit: "50mb" }))
+        .use(express.urlencoded({ limit: "50mb" }))
+        .use(fileUpload())
+        .use(cors())
+        .use(helmet())
+        .use(cookieParser());
 
     route.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*");

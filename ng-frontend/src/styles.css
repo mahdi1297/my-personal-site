@@ -1,1 +1,159 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "main";
+  src: url("./assets/fonts/iranyekanwebregular(fanum).eot") format("eot"),
+    url("./assets/fonts/iranyekanwebregular(fanum).eot") format("truetype"),
+    url("./assets/fonts/iranyekanwebregular(fanum).woff") format("woff"),
+    url("./assets/fonts/iranyekanwebregular(fanum).woff2") format("woff2");
+}
+
+* {
+  font-family: main;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #fcfdfe;
+  direction: rtl;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+button {
+  cursor: pointer;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #272443;
+}
+
+/* layout */
+.container {
+  width: 95%;
+  margin: auto;
+}
+.flex {
+  display: flex;
+}
+.block {
+  display: block;
+}
+.none {
+  display: none;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/**/
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+
+.br-100 {
+  border-radius: 100%;
+}
+
+/* colors */
+.bg-theme {
+  background: #7a76ff;
+}
+.c-theme {
+  color: #7a76ff;
+}
+.bg-blcak {
+  background: #272443;
+}
+.c-black {
+  color: #272443;
+}
+.bg-white {
+  background: #fcfdfe;
+}
+.c-white {
+  color: #fcfdfe;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+button {
+  padding: 0px 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 13px;
+  height: 40px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background: #7a76ff;
+}
+
+.content img {
+  width: 100% !important;
+}
+
+@media screen and (min-width: 1000px) {
+  .container {
+    width: 82%;
+  }
+}
+
+.dark-page-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: visible;
+  z-index: 10000;
+  background: rgba(39, 36, 67, 0.43);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.header_logo a,
+.footer_logo a {
+  font-family: "Lobster", cursive !important;
+  font-size: 20px;
+}

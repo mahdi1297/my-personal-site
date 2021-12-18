@@ -5,7 +5,7 @@ const createBlogValidators = () => {
         body("title")
             .isLength({ min: 5 })
             .withMessage("طول عنوان باید بیشتر از 5 کاراکتر باشد"),
-        body("comments_length").isNumeric(),
+        // body("comments_length").isNumeric(),
     ];
 };
 

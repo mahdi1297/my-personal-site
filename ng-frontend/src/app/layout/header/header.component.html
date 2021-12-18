@@ -1,0 +1,42 @@
+<div
+  class="dark-page-wrapper"
+  [ngClass]="sidebarStatus ? 'block' : 'none'"
+  (click)="sidebarCloser()"
+></div>
+<header class="header_body flex">
+  <div class="container">
+    <div class="header-wrapper flex justify-between">
+      <div class="flex align-center">
+        <h1 class="header_logo">
+          <a href="/" class="c-theme">Mahdi Alipour</a>
+        </h1>
+      </div>
+
+      <div class="header-sm-wrapper flex align-center">
+        <i-feather
+          name="menu"
+          class="c-black"
+          (click)="sidebarOpenHandler()"
+        ></i-feather>
+      </div>
+      <div class="header-lg-wrapper flex align-center">
+        <section class="header-menu">
+          <ul class="header-nav flex">
+            <li *ngFor="let route of headerRoutes">
+              <a routerLink="{{ route.path }}">{{ route.title }}</a>
+            </li>
+          </ul>
+        </section>
+        <section class="header-auth-btns w-100 flex align-center">
+          <button class="auth-btn login-btn">ورود</button>
+          <button class="auth-btn register-btn">ثبت نام</button>
+        </section>
+      </div>
+    </div>
+  </div>
+</header>
+<app-sidebar
+  class="sidebar-container"
+  [ngClass]="sidebarStatus ? 'sidebar-open' : 'sidebar-close'"
+  (closeSidebarHandler)="sidebarCloser()"
+></app-sidebar>
