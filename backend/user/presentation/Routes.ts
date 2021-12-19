@@ -1,6 +1,9 @@
 import express from "express";
 import validate from "../../0-framework/validators/validationResult";
-import { createUserValidators } from "../infrastructure/validator/validations";
+import {
+    createUserValidators,
+    loginUserValidations,
+} from "../infrastructure/validator/validations";
 import UserController from "./Controller";
 
 const route = express.Router();
@@ -15,7 +18,10 @@ class UserRoutes {
     get routers() {
         var controller = this._controller;
 
-        route.post("/", createUserValidators(), validate, controller.register);
+        route
+            .post("/", createUserValidators(), validate, controller.register)
+            .post("/login", loginUserValidations(), validate, controller.login);
+
         return route;
     }
 }

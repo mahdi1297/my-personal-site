@@ -7,14 +7,17 @@ const mongooseConnection = Context.mongooseConnection;
 
 class TokenSchema {
     static get schema() {
-        var schema = new Schema({
-            userId: {
-                type: String,
+        var schema = new Schema(
+            {
+                userId: {
+                    type: String,
+                },
+                token: {
+                    type: String,
+                },
             },
-            token: {
-                type: String,
-            },
-        });
+            { timestamps: true }
+        );
         return schema;
     }
 }
