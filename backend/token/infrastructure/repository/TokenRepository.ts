@@ -7,12 +7,20 @@ class TokenRepository<T extends mongoose.Document>
 {
     private _model = TokenSchema;
 
+    async get(item: object) {
+        return await this._model.findOne(item);
+    }
+
     async create(item: T) {
         return await this._model.create(item);
     }
 
     async update(_id: string, updatePack: any) {
         return await this._model.findOneAndUpdate({ _id: _id }, updatePack);
+    }
+
+    async exist(userId: string) {
+        return await this._model.exists({ userId: userId });
     }
 }
 

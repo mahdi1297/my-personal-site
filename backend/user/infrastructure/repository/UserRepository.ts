@@ -19,6 +19,10 @@ class UserRepository<T extends mongoose.Document>
         return await this._model.create(item);
     }
 
+    async get(item: any) {
+        return await this._model.findOne(item);
+    }
+
     async checkUser(item: any) {
         return await this._model.exists(item);
     }

@@ -1,11 +1,15 @@
 import express from "express";
-import fileUpload from "express-fileupload";
-import { resError } from "../../0-framework/error-handler/errors";
-import UserRepository from "../infrastructure/repository/UserRepository";
-import IUserDomain from "../domain/IUserDomain";
-import { hashPassword } from "../../0-framework/middlewares/bcrypt";
 import TokenRepository from "../../token/infrastructure/repository/TokenRepository";
+import UserRepository from "../infrastructure/repository/UserRepository";
 import ITokenDomain from "../../token/domain/ITokenDomain";
+import IUserDomain from "../domain/IUserDomain";
+import fileUpload from "express-fileupload";
+import {
+    comparePassword,
+    hashPassword,
+} from "../../0-framework/middlewares/bcrypt";
+import { resError } from "../../0-framework/error-handler/errors";
+import { Signjwt } from "../../0-framework/middlewares/jwt";
 
 const app = express();
 
@@ -17,13 +21,54 @@ class UserApplication {
 
     constructor() {
         this._repo = new UserRepository();
+        this._tokenRepo = new TokenRepository();
     }
 
     async list(req: any, res: any) {}
 
-    async register(req: any, res: any) {
-        const { username, password, email, phone } = req.body;
+    async login(req: any, res: any) {
+        const { email, password } = req.body;
 
+        try {
+            //get user by email
+            const result = await this._repo.get({
+                email: email,
+            });
+            if (result === null || result === undefined) {
+                return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+            }
+
+            //compare incoming password with Db password
+            const comparePasses = await comparePassword(
+                password,
+                result.password
+            );
+            if (!comparePasses) {
+                return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+            }
+
+            const getUserToken = await this._tokenRepo.get({
+                userId: result._id,
+            });
+            if (
+                getUserToken.token === undefined ||
+                !getUserToken.token ||
+                getUserToken.token === null
+            ) {
+                return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+            }
+
+            res.json({
+                status: 200,
+                messaeg: "حساب شما با موفقیت ساخته شد",
+                result: getUserToken.token,
+            });
+        } catch (err) {
+            return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+        }
+    }
+
+    async register(req: any, res: any) {
         const isExistsUser = await this._repo.checkUser({
             $or: [
                 {
@@ -31,9 +76,6 @@ class UserApplication {
                 },
                 {
                     email: req.body.email,
-                },
-                {
-                    phone: req.body.phone,
                 },
             ],
         });
@@ -58,12 +100,36 @@ class UserApplication {
             if (result === null || result === undefined) {
                 return resError(res, 400, "مشکلی پیش آمد");
             }
-            console.log(result);
-            console.log(result._id);
-            // const tokenPack = {
 
-            // }
-            // const userToken = await this._tokenRepo.create()
+            if (
+                result._id === undefined ||
+                result._id === "" ||
+                result._id === null
+            ) {
+                return resError(res, 400, "مشکلی پیش آمد");
+            }
+
+            const tokenGenerator = Signjwt(`${result._id}`, "user");
+            if (
+                tokenGenerator === null ||
+                tokenGenerator === undefined ||
+                tokenGenerator === ""
+            ) {
+                return resError(res, 400, "مشکلی پیش آمد");
+            }
+
+            const tokenPack = {
+                token: tokenGenerator,
+                userId: `${result._id}`,
+            };
+
+            try {
+                const saveToken = await this._tokenRepo.create(
+                    <ITokenDomain>tokenPack
+                );
+            } catch (err) {
+                return resError(res, 400, "مشکلی پیش آمد");
+            }
 
             res.json({
                 status: 200,
