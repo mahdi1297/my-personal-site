@@ -19,6 +19,7 @@ import { TimeService } from './services/time.service';
 import { ContentComponent } from './blog/blog-detail/content/content.component';
 import { BlogDetailFooterComponent } from './blog/blog-detail/footer/footer.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     ContentComponent,
     BlogDetailFooterComponent,
     FooterComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

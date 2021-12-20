@@ -60,7 +60,7 @@ class UserApplication {
 
             res.json({
                 status: 200,
-                messaeg: "حساب شما با موفقیت ساخته شد",
+                messaeg: "ورود موفق",
                 result: getUserToken.token,
             });
         } catch (err) {
