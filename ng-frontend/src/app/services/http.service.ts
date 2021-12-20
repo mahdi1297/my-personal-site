@@ -50,7 +50,11 @@ export class ApiService {
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
-    return throwError(errorMessage);
+
+    if (error.status === 404) {
+      alert(error.error.message);
+    }
+
+    return throwError(error.error);
   }
 }
