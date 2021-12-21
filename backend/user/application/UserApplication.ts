@@ -4,12 +4,14 @@ import UserRepository from "../infrastructure/repository/UserRepository";
 import ITokenDomain from "../../token/domain/ITokenDomain";
 import IUserDomain from "../domain/IUserDomain";
 import fileUpload from "express-fileupload";
+import jwt_decode from "jwt-decode";
+import jwt from "jsonwebtoken";
+import { resError } from "../../0-framework/error-handler/errors";
+import { Signjwt } from "../../0-framework/middlewares/jwt";
 import {
     comparePassword,
     hashPassword,
 } from "../../0-framework/middlewares/bcrypt";
-import { resError } from "../../0-framework/error-handler/errors";
-import { Signjwt } from "../../0-framework/middlewares/jwt";
 
 const app = express();
 
@@ -25,6 +27,61 @@ class UserApplication {
     }
 
     async list(req: any, res: any) {}
+
+    async getByToken(req: any, res: any, next: any) {
+        const { token } = req.body;
+
+        var decoded: any = jwt_decode(token);
+
+        const token_id = decoded["identity"];
+        if (token_id === undefined || token_id === null || token_id === "") {
+            return resError(res, 400, "درخواست اشتباه");
+        }
+
+        async function getUserDataByToken(res: any, token_id: any) {
+            try {
+                const result = await this._repo.get({ _id: token_id });
+                if (result === null) {
+                    return resError(res, 400, "درخواست اشتباه");
+                }
+                res.json({
+                    message: "عملیات با موفقیت انجام شد",
+                    result,
+                });
+            } catch (err) {
+                return res.status(403).json({
+                    message: "شما دسترسی لازم را ندارید",
+                    status: 403,
+                });
+            }
+        }
+
+        jwt.verify(
+            token,
+            process.env.JWT_SECRET_KEY as string,
+            async (err: any, data: any) => {
+                // renew token
+                if (err === null) {
+                    await getUserDataByToken(res, token_id);
+                }
+                if (err) {
+                    const tokenGenerator = Signjwt(`${token_id}`, "user");
+                    const renewToken = await this._tokenRepo.update(token_id, {
+                        token: tokenGenerator,
+                        userId: `${token_id}`,
+                    });
+                    console.log(renewToken);
+                    if (renewToken === null) {
+                        return res.status(403).json({
+                            message: "شما دسترسی لازم را ندارید",
+                            status: 403,
+                        });
+                    }
+                }
+                //get user data
+            }
+        );
+    }
 
     async login(req: any, res: any) {
         const { email, password } = req.body;
@@ -110,6 +167,7 @@ class UserApplication {
             }
 
             const tokenGenerator = Signjwt(`${result._id}`, "user");
+
             if (
                 tokenGenerator === null ||
                 tokenGenerator === undefined ||

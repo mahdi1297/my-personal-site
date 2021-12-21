@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -17,7 +17,6 @@ import { CvComponent } from './cv/cv.component';
 import { HeroComponent } from './blog/hero/hero.component';
 import { ItemsComponent } from './blog/items/items.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
-import { LoadingComponent } from './shared/loading/loading.component';
 import { ContentComponent } from './blog/blog-detail/content/content.component';
 import { BlogDetailFooterComponent } from './blog/blog-detail/footer/footer.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -27,18 +26,10 @@ import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
+    SidebarComponent,
+    CvComponent,
     AppComponent,
     HeaderComponent,
-    SidebarComponent,
-    BlogComponent,
-    CvComponent,
-    HeroComponent,
-    ItemsComponent,
-    BlogDetailComponent,
-    LoadingComponent,
-    HeadComponent,
-    ContentComponent,
-    BlogDetailFooterComponent,
     FooterComponent,
     RegisterComponent,
   ],
@@ -48,6 +39,7 @@ import { CookieService } from 'ngx-cookie-service';
     IconsModule,
     HttpClientModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ApiService, TimeService, CookieService],
   bootstrap: [AppComponent],
 })
