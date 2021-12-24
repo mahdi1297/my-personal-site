@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { TokenService } from 'src/app/services/token.service';
+import { IUserModel } from 'src/app/user.mode';
 import { routes } from './header.routes';
 
 @Component({
@@ -6,13 +9,18 @@ import { routes } from './header.routes';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  userSub: Subscription = new Subscription();
   sidebarStatus: boolean = false;
   headerRoutes = routes;
-  constructor() {}
+  userData: any;
 
-  ngOnInit(): void {
-   
+  constructor(private tokenService: TokenService) {}
+
+  ngOnInit() {
+    this.userSub = this.tokenService.user.subscribe((user) => {
+      this.userData = user;
+    });
   }
 
   sidebarOpenHandler() {
@@ -21,5 +29,9 @@ export class HeaderComponent implements OnInit {
 
   sidebarCloser() {
     this.sidebarStatus = false;
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }

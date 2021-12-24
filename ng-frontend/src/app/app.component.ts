@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './services/http.service';
+import { TokenService } from './services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,9 @@ import { ApiService } from './services/http.service';
 })
 export class AppComponent {
   cookieValue: string = '';
+  TOKEN_API_ADDRESS: string = 'user/get-user';
 
-  constructor(
-    private cookieService: CookieService,
-    private apiService: ApiService
-  ) {
-    this.getUserData();
-  }
-
-  getUserData() {
-    this.cookieValue = this.cookieService.get('u_t');
-    const isExistsCookie = this.cookieService.check('u_s');
-
-    if (isExistsCookie) {
-      // this.apiService.post('')
-    }
+  constructor(private tokenService: TokenService) {
+    this.tokenService.checkTokenToRequest();
   }
 }

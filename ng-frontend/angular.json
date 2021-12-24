@@ -70,6 +70,9 @@
             },
             "development": {
               "browserTarget": "ng-frontend:build:development"
+            },
+            "dev": {
+              "browserTarget": "appEnv:build:dev"
             }
           },
           "defaultConfiguration": "development"
