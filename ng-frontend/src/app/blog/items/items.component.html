@@ -1,4 +1,6 @@
 <div class="blog_items w-100">
+  <app-blog-categories></app-blog-categories>
+
   <div *ngIf="blogs.result; else loading">
     <div class="blog_items-container">
       <div *ngFor="let item of blogs.result" class="blog_items-item">

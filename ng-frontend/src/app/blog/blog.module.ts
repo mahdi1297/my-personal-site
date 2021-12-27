@@ -10,6 +10,7 @@ import { BlogDetailFooterComponent } from './blog-detail/footer/footer.component
 import { HeadComponent } from './blog-detail/head/head.component';
 import { BlogRoutingModule } from './blog-routes.module';
 import { BlogComponent } from './blog.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { HeroComponent } from './hero/hero.component';
 import { ItemsComponent } from './items/items.component';
 
@@ -24,6 +25,7 @@ import { ItemsComponent } from './items/items.component';
     ContentComponent,
     BlogDetailFooterComponent,
     LoadingComponent,
+    CategoriesComponent,
   ],
   //   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [BlogComponent],

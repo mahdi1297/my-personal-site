@@ -1,17 +1,11 @@
 .blog_items {
   margin: auto;
   margin-top: 30px;
-  overflow-x: hidden;
-  overflow-y: clip;
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 2px;
-  background: #fcfdfe;
-  /* border: 1px solid #eee; */
-  box-shadow: 1px 2px 14px 0px #eee;
   margin-top: -300px;
   width: 100%;
   margin-bottom: 200px;
+  overflow-y: hidden;
+  overflow-x: clip;
 }
 .blog_items-title h2 {
   display: inline;
@@ -20,7 +14,7 @@
 }
 .blog_items-container {
   margin: auto;
-  width: 95%;
+  width: 80%;
   height: auto;
   display: -webkit-box;
   display: -webkit-flex;
