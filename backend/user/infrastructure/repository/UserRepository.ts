@@ -11,10 +11,6 @@ class UserRepository<T extends mongoose.Document>
         return await this._model.find({});
     }
 
-    async getById(_id: string) {
-        return await this._model.findOne({ _id: _id }, { isRegistered: true });
-    }
-
     async create(item: T) {
         return await this._model.create(item);
     }

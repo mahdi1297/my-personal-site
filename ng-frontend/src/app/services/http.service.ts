@@ -16,11 +16,6 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  //   createEmployee(data): Observable<any> {
-  //     let url = `${this.baseUri}/create`;
-  //     return this.http.post(url, data).pipe(catchError(this.errorMgmt));
-  //   }
-
   get(url: string) {
     return this.http.get(`${this.baseUri}${url}`);
   }
@@ -55,7 +50,11 @@ export class ApiService {
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
-    return throwError(errorMessage);
+
+    if (error.status === 404) {
+      alert(error.error.message);
+    }
+
+    return throwError(error.error);
   }
 }

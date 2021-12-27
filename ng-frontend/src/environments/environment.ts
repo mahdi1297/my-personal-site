@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  JWT_SECRET_KEY:
+    'SKLZDSDSFG_8437??????843Y5dkjslkdfjsdflksdjfsdlkfjsdlfjzlhjdfd!@#$)(*^&*^92384YSDJKVFH*&^(*&#@(*&@(SDFHSOKDFHAOSDIFHSDAOASDFHSUFDISHDFAISDUFG)))',
 };
 
 /*

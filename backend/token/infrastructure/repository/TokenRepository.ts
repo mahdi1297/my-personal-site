@@ -16,7 +16,7 @@ class TokenRepository<T extends mongoose.Document>
     }
 
     async update(_id: string, updatePack: any) {
-        return await this._model.findOneAndUpdate({ _id: _id }, updatePack);
+        return await this._model.findOneAndUpdate({ userId: _id }, updatePack);
     }
 
     async exist(userId: string) {

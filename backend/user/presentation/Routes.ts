@@ -3,6 +3,7 @@ import validate from "../../0-framework/validators/validationResult";
 import {
     createUserValidators,
     loginUserValidations,
+    getByTokenValidations,
 } from "../infrastructure/validator/validations";
 import UserController from "./Controller";
 
@@ -20,7 +21,13 @@ class UserRoutes {
 
         route
             .post("/", createUserValidators(), validate, controller.register)
-            .post("/login", loginUserValidations(), validate, controller.login);
+            .post("/login", loginUserValidations(), validate, controller.login)
+            .post(
+                "/get-user",
+                getByTokenValidations(),
+                validate,
+                controller.getByToken
+            );
 
         return route;
     }

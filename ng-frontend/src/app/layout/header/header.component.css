@@ -13,7 +13,8 @@
   display: flex;
 }
 
-.header_logo a {}
+.header_logo a {
+}
 .header_logo a:hover {
   color: #ecedff;
 }
@@ -97,6 +98,12 @@
 .sidebar-open {
   width: 200px !important;
   transform: translateX(30px);
+}
+.username {
+  font-size: 12px;
+  margin-top: 17px;
+  margin-left: 10px;
+  color: #9d9d9d;
 }
 
 @media screen and (min-width: 800px) {

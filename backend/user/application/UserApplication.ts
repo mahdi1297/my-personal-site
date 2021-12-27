@@ -4,12 +4,14 @@ import UserRepository from "../infrastructure/repository/UserRepository";
 import ITokenDomain from "../../token/domain/ITokenDomain";
 import IUserDomain from "../domain/IUserDomain";
 import fileUpload from "express-fileupload";
+import jwt_decode from "jwt-decode";
+import jwt from "jsonwebtoken";
+import { resError } from "../../0-framework/error-handler/errors";
+import { Signjwt } from "../../0-framework/middlewares/jwt";
 import {
     comparePassword,
     hashPassword,
 } from "../../0-framework/middlewares/bcrypt";
-import { resError } from "../../0-framework/error-handler/errors";
-import { Signjwt } from "../../0-framework/middlewares/jwt";
 
 const app = express();
 
@@ -25,6 +27,87 @@ class UserApplication {
     }
 
     async list(req: any, res: any) {}
+
+    async getByToken(req: any, res: any, next: any) {
+        const { token } = req.body;
+
+        var decoded: any = jwt_decode(token);
+
+        const token_id = decoded["identity"];
+        if (token_id === undefined || token_id === null || token_id === "") {
+            return resError(res, 400, "درخواست اشتباه");
+        }
+
+        async function getUserDataByToken(res: any, token_id: any) {}
+
+        jwt.verify(
+            token,
+            process.env.JWT_SECRET_KEY as string,
+            async (err: any, data: any) => {
+                // renew token
+                if (err === null) {
+                    await getUserDataByToken(res, token_id);
+                    try {
+                        const result: any = await this._repo.get({
+                            _id: token_id,
+                        });
+                        if (result === null) {
+                            return resError(res, 400, "درخواست اشتباه");
+                        }
+                        result.password = "";
+                        result.createdAt = "";
+                        result.updatedAt = "";
+                        res.json({
+                            message: "عملیات با موفقیت انجام شد",
+                            result,
+                        });
+                    } catch (err) {
+                        return res.status(403).json({
+                            message: "شما دسترسی لازم را ندارید",
+                            status: 403,
+                        });
+                    }
+                }
+                if (err) {
+                    const tokenGenerator = Signjwt(`${token_id}`, "user");
+                    const renewToken = await this._tokenRepo.update(token_id, {
+                        token: tokenGenerator,
+                        userId: `${token_id}`,
+                    });
+
+                    if (renewToken === null) {
+                        return res.status(403).json({
+                            message: "شما دسترسی لازم را ندارید",
+                            status: 403,
+                        });
+                    }
+                    try {
+                        const result: any = await this._repo.get({
+                            _id: token_id,
+                        });
+                        if (result === null) {
+                            return resError(res, 400, "درخواست اشتباه");
+                        }
+                        result.password = "";
+                        result.createdAt = "";
+                        result.updatedAt = "";
+                        res.json({
+                            message: "عملیات با موفقیت انجام شد",
+                            result,
+                            token: renewToken.token,
+                        });
+                    } catch (err) {
+                        return res.status(403).json({
+                            message: "1شما دسترسی لازم را ندارید",
+                            status: 403,
+                        });
+                    }
+                    // await getUserDataByToken(res, token_id);
+                }
+                //get user data
+            }
+        );
+    }
 
     async login(req: any, res: any) {
         const { email, password } = req.body;
@@ -60,7 +143,7 @@ class UserApplication {
 
             res.json({
                 status: 200,
-                messaeg: "حساب شما با موفقیت ساخته شد",
+                messaeg: "ورود موفق",
                 result: getUserToken.token,
             });
         } catch (err) {
@@ -110,6 +193,7 @@ class UserApplication {
             }
 
             const tokenGenerator = Signjwt(`${result._id}`, "user");
+
             if (
                 tokenGenerator === null ||
                 tokenGenerator === undefined ||

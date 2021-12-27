@@ -134,6 +134,51 @@ button {
   width: 100% !important;
 }
 
+/* forms */
+.form-container {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+.form-container label {
+  width: 100%;
+  display: block;
+  color: rgba(41, 51, 71, 0.65);
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+input {
+  -webkit-appearance: none;
+  -webkit-box-align: center;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: -webkit-inline-box;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding: 30px;
+  position: relative;
+  vertical-align: top;
+  border-color: #e6ecf8;
+  width: 100%;
+  box-sizing: border-box;
+}
+form.ng-submitted input.ng-invalid.ng-untouched,
+form.ng-submitted input.ng-invalid.ng-touched {
+  border: 2px solid #ff7a76 !important;
+  transition: border ease-in 0.2s;
+}
+
 @media screen and (min-width: 1000px) {
   .container {
     width: 82%;

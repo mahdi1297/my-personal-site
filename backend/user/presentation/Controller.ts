@@ -11,6 +11,15 @@ class UserController {
         const _app = new UserApplication();
         await _app.login(req, res);
     }
+
+    async getByToken(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        const _app = new UserApplication();
+        await _app.getByToken(req, res, next);
+    }
 }
 
 export default UserController;

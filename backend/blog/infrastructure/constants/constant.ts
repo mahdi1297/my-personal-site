@@ -1,0 +1,25 @@
+const PROBLEM_IN_GET_LIST_OF_BLOG = "مشکلی در گرفتن لیست بلاگ خا به وجود آمد",
+    PROBLEM_IN_GET_BLOG = "مشکل در ردیافت بلاگ",
+    PROBLEM_IN_CREATE_BLOG = "مشکل در ساخت بلاگ",
+    SUCCESS_IN_CREATE_BLOG = "بلاگ با موفقیت ساخته شد",
+    SUCCESS_IN_UPLOAD_IMAGE = "تص.یر با وفقیت ذخیره شد",
+    BLOG_LIST_NOT_FOUND = "لیست بلاگ پیدا نشد",
+    PLEASE_INSERT_IMAGE = "لطفا تصویر را انتخاب کنید",
+    REPEATED_TITLE = "عنوان تکراریست",
+    REPEATED_SLUG = "slug تکراریست",
+    BLOG_NOT_FOUND = "بلاگی یافت نشد",
+    OK = "Ok";
+
+export {
+    PROBLEM_IN_GET_LIST_OF_BLOG,
+    SUCCESS_IN_UPLOAD_IMAGE,
+    PROBLEM_IN_CREATE_BLOG,
+    SUCCESS_IN_CREATE_BLOG,
+    PROBLEM_IN_GET_BLOG,
+    BLOG_LIST_NOT_FOUND,
+    PLEASE_INSERT_IMAGE,
+    BLOG_NOT_FOUND,
+    REPEATED_TITLE,
+    REPEATED_SLUG,
+    OK,
+};

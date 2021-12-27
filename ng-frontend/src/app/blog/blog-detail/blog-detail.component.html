@@ -1,36 +1,26 @@
-<article>
-  <!-- blog head start -->
+<article *ngIf="blogDetail.result; else loading">
   <app-blog-detail-head
-    *ngIf="blogDetail.result; else loading"
     [title]="blogDetail.result.title"
     [writer]="blogDetail.result.writer"
     [createdAt]="blogDetail.result.createdAt"
     [main_image]="blogDetail.result.main_image"
   ></app-blog-detail-head>
-  <!-- blog head end -->
 
   <div class="container">
     <div class="blog_detail-body">
-      <!-- blog content start -->
       <app-blog-detail-content
-        *ngIf="blogDetail.result; else loading"
         [content]="blogDetail.result.content"
       ></app-blog-detail-content>
-      <!-- blog content end -->
 
-      <!-- blog footer start -->
       <app-blog-detail-footer
-        *ngIf="blogDetail.result; else loading"
         [writer]="blogDetail.result.writer"
         [tags]="blogDetail.result.tags"
       >
         ></app-blog-detail-footer
       >
-      <!-- blog footer end -->
     </div>
   </div>
-
-  <ng-template #loading>
-    <app-loading></app-loading>
-  </ng-template>
 </article>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

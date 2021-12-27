@@ -27,9 +27,23 @@
             </li>
           </ul>
         </section>
-        <section class="header-auth-btns w-100 flex align-center">
-          <button class="auth-btn login-btn">ورود</button>
-          <button class="auth-btn register-btn">ثبت نام</button>
+        <section
+          *ngIf="!userData"
+          class="header-auth-btns w-100 flex align-center"
+        >
+          <a routerLink="/auth/login" class="auth-btn login-btn"> ورود </a>
+          <a routerLink="/auth/signup" class="auth-btn register-btn">
+            ثبت نام
+          </a>
+        </section>
+        <section *ngIf="userData" class="flex align-center">
+          <p class="username">{{ userData.username }}</p>
+          <img
+            src="http://localhost:5000/{{ userData.profile }}"
+            style="border-radius: 50%; margin-top: 7px"
+            width="40"
+            alt=""
+          />
         </section>
       </div>
     </div>

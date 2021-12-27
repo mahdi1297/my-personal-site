@@ -4,6 +4,19 @@ import IBlogDomain from "../domain/IBlogDomain";
 import fileUpload from "express-fileupload";
 import { resError } from "../../0-framework/error-handler/errors";
 import { v4 as uuidv4 } from "uuid";
+import {
+    PROBLEM_IN_GET_LIST_OF_BLOG,
+    PROBLEM_IN_CREATE_BLOG,
+    SUCCESS_IN_CREATE_BLOG,
+    SUCCESS_IN_UPLOAD_IMAGE,
+    PROBLEM_IN_GET_BLOG,
+    BLOG_LIST_NOT_FOUND,
+    PLEASE_INSERT_IMAGE,
+    REPEATED_TITLE,
+    BLOG_NOT_FOUND,
+    REPEATED_SLUG,
+    OK,
+} from "../infrastructure/constants/constant";
 
 const app = express();
 
@@ -16,33 +29,34 @@ class BlogApplication {
         this._repo = new BlogRepository();
     }
 
-    //get list of blog
+    //GET LIST OF BLOG
     async list(req: any, res: any) {
         const { pageNumber } = req.params;
         const result = await this._repo.list(parseInt(pageNumber) || 0);
 
         try {
             result === undefined ||
-                (result === null && resError(res, 400, "Not Found"));
+                (result === null && resError(res, 400, BLOG_LIST_NOT_FOUND));
             res.json({
                 status: 200,
-                message: "blogs list endpoint",
+                message: OK,
                 result,
                 count: result.length,
             });
         } catch (err) {
             return res
                 .status(400)
-                .json({ status: 400, message: "some problem happened" });
+                .json({ status: 400, message: PROBLEM_IN_GET_LIST_OF_BLOG });
         }
     }
 
+    //GET BLOG BY SLUG
     async getBySlug(req: any, res: any) {
         const { slug } = req.body;
         try {
             const result = await this._repo.getBySlug(slug);
             result === undefined ||
-                (result === null && resError(res, 400, "Not Found"));
+                (result === null && resError(res, 400, BLOG_NOT_FOUND));
             res.json({
                 status: 200,
                 message: "blogs list endpoint",
@@ -51,35 +65,30 @@ class BlogApplication {
         } catch (err) {
             return res
                 .status(400)
-                .json({ status: 400, message: "some problem happened" });
+                .json({ status: 400, message: PROBLEM_IN_GET_BLOG });
         }
     }
-    //create new blog
+
+    //CREATE NEW BLOG
     async create(req: any, res: any) {
         const image = req.files.image;
         const { title, slug } = req.body;
 
         if (!image) {
-            return res
-                .status(400)
-                .json({ message: "لطفا تصویر را ارسال کنید" });
+            return res.status(400).json({ message: PLEASE_INSERT_IMAGE });
         }
 
-        //first check exists this title or slug or not
+        //CHECK EXISTING TITLE OR SLUG
         const checkByTitle = await this._repo.existsTitle(title);
         if (checkByTitle) {
-            return res
-                .status(400)
-                .json({ message: "این عنوان قبلا انتخاب شده است" });
+            return res.status(400).json({ message: REPEATED_TITLE });
         }
         const checkBySlug = await this._repo.existsSlug(slug);
         if (checkBySlug) {
-            return res
-                .status(400)
-                .json({ message: "این slug قبلا انتخاب شده است" });
+            return res.status(400).json({ message: REPEATED_SLUG });
         }
 
-        //then store image in local
+        //STORE IMAGE IN LOCAL FILE
         const imageStorageId = uuidv4();
         try {
             const img = await image.mv(
@@ -96,10 +105,10 @@ class BlogApplication {
                 }
             );
         } catch (err) {
-            return res.status(400).json({ message: "مشکلی به وجود آمده است" });
+            return res.status(400).json({ message: PROBLEM_IN_CREATE_BLOG });
         }
 
-        //finally, store data in dataBase
+        //FINALLY STORE IMAGE IN DB
         try {
             const dataToStore = {
                 title: req.body.title,
@@ -122,14 +131,14 @@ class BlogApplication {
             if (result !== null) {
                 return res.json({
                     status: 200,
-                    message: " بلاگ با موفقیت ساخته شد",
+                    message: SUCCESS_IN_CREATE_BLOG,
                     result,
                 });
             }
         } catch (err) {}
     }
 
-    //blog image upload
+    //IMAGE UPLOAD SECTION FOR CREATE BLOG PROCCESS
     async imageUpload(req: any, res: any) {
         const image = req.files.image;
         if (!image) {
@@ -151,7 +160,7 @@ class BlogApplication {
                 }
             );
             res.json({
-                message: " تصویر با موفقیت دخیره شد",
+                message: SUCCESS_IN_UPLOAD_IMAGE,
                 url: `public/uploads/blog/mahdi-alipour-blog-${
                     imageStorageId + "-" + image.name
                 }`,
