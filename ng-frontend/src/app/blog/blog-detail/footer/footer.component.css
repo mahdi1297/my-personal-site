@@ -1,3 +1,10 @@
+.blog_detail-footer {
+  z-index: 100;
+  border-bottom: 2px solid #ecedff;
+  padding-bottom: 30px;
+  line-height: 35px;
+  margin-bottom: 40px;
+}
 .blog_detail-footer > div > div {
   width: 100%;
   height: auto;

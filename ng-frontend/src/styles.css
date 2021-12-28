@@ -8,6 +8,7 @@
 
 * {
   font-family: main;
+  box-sizing: border-box;
 }
 
 body {
@@ -63,6 +64,9 @@ h6 {
 }
 .flex-wrap {
   flex-wrap: wrap;
+}
+.flex-direction-col {
+  flex-direction: column;
 }
 
 /**/

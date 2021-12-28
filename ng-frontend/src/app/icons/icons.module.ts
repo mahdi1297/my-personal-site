@@ -9,13 +9,17 @@ import {
   Twitter,
   Link,
   Menu,
+  Edit,
+  CornerUpLeft,
   X,
 } from 'angular-feather/icons';
 
 const icons = {
   ChevronRight,
   ChevronLeft,
+  CornerUpLeft,
   PenTool,
+  Edit,
   Instagram,
   Linkedin,
   Twitter,

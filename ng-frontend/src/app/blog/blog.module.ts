@@ -5,11 +5,13 @@ import { IconsModule } from '../icons/icons.module';
 
 import { LoadingComponent } from '../shared/loading/loading.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { CommentsComponent } from './blog-detail/comments/comments.component';
 import { ContentComponent } from './blog-detail/content/content.component';
 import { BlogDetailFooterComponent } from './blog-detail/footer/footer.component';
 import { HeadComponent } from './blog-detail/head/head.component';
 import { BlogRoutingModule } from './blog-routes.module';
 import { BlogComponent } from './blog.component';
+import { BlogService } from './blog.service';
 import { CategoriesComponent } from './categories/categories.component';
 import { HeroComponent } from './hero/hero.component';
 import { ItemsComponent } from './items/items.component';
@@ -26,7 +28,9 @@ import { ItemsComponent } from './items/items.component';
     BlogDetailFooterComponent,
     LoadingComponent,
     CategoriesComponent,
+    CommentsComponent,
   ],
+  providers: [BlogService],
   //   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [BlogComponent],
 })
