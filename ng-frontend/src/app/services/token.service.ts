@@ -7,7 +7,8 @@ import { ApiService } from './http.service';
 @Injectable({ providedIn: 'root' })
 export class TokenService {
   user = new Subject<IUserModel>();
-  cookieValue: string = '';
+
+  cookieValue: string;
   TOKEN_API_ADDRESS: string = 'user/get-user';
 
   constructor(
@@ -19,16 +20,16 @@ export class TokenService {
     this.cookieValue = this.cookieService.get('u_t');
     const isExistsCookie = this.cookieService.check('u_t');
 
-    if (isExistsCookie) {
-      this.apiService
-        .post(this.TOKEN_API_ADDRESS, { token: this.cookieValue })
-        .subscribe((data: any) => {
+    this.apiService
+      .post(this.TOKEN_API_ADDRESS, { token: this.cookieValue })
+      .subscribe((data: any) => {
+        if (isExistsCookie) {
           this.user.next(data.result);
           if (data.token) {
             this.cookieValue = data.token;
             this.cookieService.set('u_t', data.token);
           }
-        });
-    }
+        }
+      });
   }
 }

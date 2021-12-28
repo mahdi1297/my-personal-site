@@ -6,6 +6,7 @@ interface ICommentsDomain extends mongoose.Document {
     username: string;
     userId: string;
     isConfirmed: string;
+    replyedParentId: string;
     profile: string;
     content: string;
 }

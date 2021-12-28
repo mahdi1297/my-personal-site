@@ -34,7 +34,7 @@ import { TokenService } from './services/token.service';
     HttpClientModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ApiService, TimeService, CookieService, TokenService],
+  // providers: [ApiService, TimeService, CookieService, TokenService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

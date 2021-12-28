@@ -156,7 +156,8 @@ button {
   box-sizing: border-box;
   margin-bottom: 10px;
 }
-input {
+input,
+textarea {
   -webkit-appearance: none;
   -webkit-box-align: center;
   align-items: center;
@@ -166,7 +167,7 @@ input {
   display: -webkit-inline-box;
   display: inline-flex;
   font-size: 1rem;
-  height: 2.5em;
+
   -webkit-box-pack: start;
   justify-content: flex-start;
   line-height: 1.5;
@@ -177,8 +178,13 @@ input {
   width: 100%;
   box-sizing: border-box;
 }
+input {
+  height: 2.5em;
+}
 form.ng-submitted input.ng-invalid.ng-untouched,
-form.ng-submitted input.ng-invalid.ng-touched {
+form.ng-submitted textarea.ng-invalid.ng-untouched,
+form.ng-submitted input.ng-invalid.ng-touched,
+form.ng-submitted textarea.ng-invalid.ng-touched {
   border: 2px solid #ff7a76 !important;
   transition: border ease-in 0.2s;
 }

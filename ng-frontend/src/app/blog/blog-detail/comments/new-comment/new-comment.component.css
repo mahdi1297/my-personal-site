@@ -1,0 +1,6 @@
+.blog_new-comment button:hover {
+  opacity: 80%;
+}
+.blog_new-comment p {
+  margin-right: 15px;
+}

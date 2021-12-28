@@ -1,0 +1,23 @@
+<section class="write-comment">
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+      <label for="">متن دیدگاه</label>
+      <textarea rows="6" formControlName="content"></textarea>
+    </div>
+
+    <div class="flex justify-between">
+      <div class="form-container" style="width: 48%">
+        <label for="">ایمیل</label>
+        <input type="text" formControlName="email" />
+      </div>
+      <div class="form-container" style="width: 48%">
+        <label for="">رمز عبور</label>
+        <input type="text" formControlName="password" />
+      </div>
+    </div>
+
+    <button class="auth-btn comment-btn in_form-comment-btn" type="submit">
+      ثبت دیدگاه
+    </button>
+  </form>
+</section>
