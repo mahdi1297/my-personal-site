@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CommentsComponent implements OnInit {
   @Input() _id!: any;
+  @Input() tokenData: any;
 
   constructor() {}
 

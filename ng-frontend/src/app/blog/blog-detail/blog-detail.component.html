@@ -15,12 +15,17 @@
       <app-blog-detail-footer
         [writer]="blogDetail.result.writer"
         [tags]="blogDetail.result.tags"
+        [tokenData]="tokenData"
       >
         ></app-blog-detail-footer
       >
+
       <app-blog-detail-comments
         [_id]="blogDetail.result._id"
+        [tokenData]="tokenData"
       ></app-blog-detail-comments>
+
+      <!-- <shared-comment [tokenData]="tokenData"></shared-comment> -->
     </div>
   </div>
 </article>

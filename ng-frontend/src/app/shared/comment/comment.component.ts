@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/http.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'shared-comment',
@@ -9,15 +10,17 @@ import { ApiService } from 'src/app/services/http.service';
   styleUrls: ['./comment.component.css'],
 })
 export class CommentComponent implements OnInit, OnDestroy {
+  @Input() tokenData!: any;
+
   userSub: Subscription = new Subscription();
   userData: any;
 
   commentForm!: FormGroup;
   CREATE_COMMENT_URL = 'comment';
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.commentForm = new FormGroup({
       content: new FormControl(null, [
         Validators.required,
@@ -30,31 +33,34 @@ export class CommentComponent implements OnInit, OnDestroy {
         Validators.max(200),
         Validators.email,
       ]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.min(5),
-        Validators.max(100),
-      ]),
     });
+
+    if (this.tokenData && this.tokenData.email)
+      this.commentForm.patchValue({
+        email: this.tokenData.email,
+      });
   }
-
-  // ngOnInit() {
-
-  // }
 
   onSubmit() {
     if (this.commentForm.valid) {
-      console.log(this.userData);
+      const commentData = {
+        parentId: '_',
+        isReplyed: 'false',
+        username: this.tokenData.username,
+        userId: this.tokenData._id,
+        profile: this.tokenData.profile,
+        content: this.commentForm.value.content,
+      };
 
-      // const commentData = {
-      //   parentId: dataObj.parentId,
-      //   isReplyed: dataObj.isReplyed,
-      //   username: dataObj.username,
-      //   userId: dataObj.userId,
-      //   profile: dataObj.profile,
-      //   content: dataObj.profile,
-      // };
-      // this.apiService.post(this.CREATE_COMMENT_URL, {});
+      console.log(commentData);
+      this.apiService.post('comment', commentData).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 

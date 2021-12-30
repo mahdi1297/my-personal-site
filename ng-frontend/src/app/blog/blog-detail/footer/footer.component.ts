@@ -8,8 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BlogDetailFooterComponent implements OnInit {
   @Input() tags!: any;
   @Input() writer!: string;
+  @Input() tokenData!: string;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }

@@ -11,6 +11,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class BlogDetailComponent implements OnInit, OnDestroy {
   blogDetail: any = {};
+  tokenData: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,8 +21,8 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.tokenService.user.subscribe((user) => {
-      console.log(user);
+    this.tokenService.user.subscribe((data) => {
+      this.tokenData = data;
     });
 
     this.route.params.subscribe((param) => {

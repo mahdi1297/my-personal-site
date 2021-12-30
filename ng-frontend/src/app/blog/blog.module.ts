@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -48,8 +48,8 @@ import { ItemsComponent } from './items/items.component';
     NewCommentComponent,
     CommentComponent,
   ],
-  // providers: [ApiService, TimeService, CookieService, TokenService],
-  //   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [NO_ERRORS_SCHEMA],
   exports: [BlogComponent],
+  bootstrap: [BlogComponent],
 })
 export class BloGModule {}
