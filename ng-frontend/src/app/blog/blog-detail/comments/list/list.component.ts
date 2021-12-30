@@ -10,10 +10,9 @@ import { TimeService } from 'src/app/services/time.service';
 export class BlogListComponent implements OnInit {
   @Input() _id!: any;
 
-  commentsData: any;
-  commentLength: any;
-
   GET_COMMENTS_URL = 'comment/list';
+  commentLength: any;
+  commentsData: any;
 
   constructor(
     private apiServeice: ApiService,

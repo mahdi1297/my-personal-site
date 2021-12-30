@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/http.service';
-import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'shared-comment',
@@ -11,6 +11,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class CommentComponent implements OnInit, OnDestroy {
   @Input() tokenData!: any;
+  @Input() _id!: any;
 
   userSub: Subscription = new Subscription();
   userData: any;
@@ -18,9 +19,9 @@ export class CommentComponent implements OnInit, OnDestroy {
   commentForm!: FormGroup;
   CREATE_COMMENT_URL = 'comment';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private toast: ToastrService) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.commentForm = new FormGroup({
       content: new FormControl(null, [
         Validators.required,
@@ -35,8 +36,11 @@ export class CommentComponent implements OnInit, OnDestroy {
       ]),
     });
 
+    console.log(this.tokenData);
+
     if (this.tokenData && this.tokenData.email)
-      this.commentForm.patchValue({
+      this.commentForm.setValue({
+        content: '',
         email: this.tokenData.email,
       });
   }
@@ -44,7 +48,7 @@ export class CommentComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.commentForm.valid) {
       const commentData = {
-        parentId: '_',
+        parentId: this._id,
         isReplyed: 'false',
         username: this.tokenData.username,
         userId: this.tokenData._id,
@@ -53,14 +57,17 @@ export class CommentComponent implements OnInit, OnDestroy {
       };
 
       console.log(commentData);
-      this.apiService.post('comment', commentData).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      if (this.tokenData) {
+        this.apiService.post('comment', commentData).subscribe(
+          (data) => {
+            this.toast.success('دیدگاه شما با موفقیت ثبت شد و منتظر تایید است');
+            this.commentForm.reset();
+          },
+          (error) => {
+            this.toast.error('مشکلی رخ داد. لطفا مجددا امتحان کنید');
+          }
+        );
+      }
     }
   }
 

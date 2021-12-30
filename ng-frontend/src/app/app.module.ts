@@ -11,6 +11,8 @@ import { SidebarComponent } from './layout/header/sidebar/sidebar.component';
 import { CvComponent } from './cv/cv.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,10 @@ import { RegisterComponent } from './auth/register/register.component';
     AppRoutingModule,
     HttpClientModule,
     IconsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+    }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { ApiService } from './services/http.service';
 import { TokenService } from './services/token.service';
 
 @Component({
@@ -9,9 +7,6 @@ import { TokenService } from './services/token.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  cookieValue: string = '';
-  TOKEN_API_ADDRESS: string = 'user/get-user';
-
   constructor(private tokenService: TokenService) {
     this.tokenService.checkTokenToRequest();
   }
