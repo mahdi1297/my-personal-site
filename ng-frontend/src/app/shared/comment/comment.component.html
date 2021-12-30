@@ -1,7 +1,16 @@
 <section class="write-comment">
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
     <div class="form-container">
-      <label for="">متن دیدگاه</label>
+      <div class="flex align-center justify-between">
+        <label for="">متن دیدگاه</label>
+        <button
+          class="cancel-comment-modal"
+          type="button"
+          (click)="closeModal()"
+        >
+          انصراف
+        </button>
+      </div>
       <textarea rows="6" formControlName="content"></textarea>
     </div>
 

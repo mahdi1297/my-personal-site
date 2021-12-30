@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -12,6 +19,9 @@ import { ApiService } from 'src/app/services/http.service';
 export class CommentComponent implements OnInit, OnDestroy {
   @Input() tokenData!: any;
   @Input() _id!: any;
+  @Input() isReplyed!: any;
+  @Input() replyedParentId!: any;
+  @Output() close: EventEmitter<any> = new EventEmitter();
 
   userSub: Subscription = new Subscription();
   userData: any;
@@ -22,6 +32,7 @@ export class CommentComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService, private toast: ToastrService) {}
 
   ngOnInit() {
+    console.log(this.tokenData); // returns undefined
     this.commentForm = new FormGroup({
       content: new FormControl(null, [
         Validators.required,
@@ -36,8 +47,6 @@ export class CommentComponent implements OnInit, OnDestroy {
       ]),
     });
 
-    console.log(this.tokenData);
-
     if (this.tokenData && this.tokenData.email)
       this.commentForm.setValue({
         content: '',
@@ -49,14 +58,14 @@ export class CommentComponent implements OnInit, OnDestroy {
     if (this.commentForm.valid) {
       const commentData = {
         parentId: this._id,
-        isReplyed: 'false',
+        isReplyed: this.isReplyed ? 'true' : 'false',
         username: this.tokenData.username,
         userId: this.tokenData._id,
         profile: this.tokenData.profile,
         content: this.commentForm.value.content,
+        replyedParentId: this.replyedParentId ? this.replyedParentId : '_',
       };
 
-      console.log(commentData);
       if (this.tokenData) {
         this.apiService.post('comment', commentData).subscribe(
           (data) => {
@@ -69,6 +78,11 @@ export class CommentComponent implements OnInit, OnDestroy {
         );
       }
     }
+  }
+
+  closeModal() {
+    console.log('x');
+    this.close.emit(null);
   }
 
   ngOnDestroy() {

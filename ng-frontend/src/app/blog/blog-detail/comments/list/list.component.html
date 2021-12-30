@@ -22,7 +22,10 @@
             </p>
           </div>
           <div class="flex align-center">
-            <span class="reply-icon flex align-center">
+            <span
+              class="reply-icon flex align-center"
+              (click)="openModal(item._id)"
+            >
               پاسخ
               <i-feather name="corner-up-left"></i-feather>
             </span>
@@ -31,6 +34,17 @@
               <i-feather name="edit"></i-feather>
             </span>
           </div>
+          <!-- write comment modal start -->
+          <div *ngIf="isOpen && id === item._id">
+            <shared-comment
+              [tokenData]="tokenData"
+              [_id]="_id"
+              [isReplyed]="true"
+              [replyedParentId]="item._id"
+              (close)="commentModalCloserHandler($event)"
+            ></shared-comment>
+          </div>
+          <!-- write comment modal end -->
           <div *ngFor="let subitem of commentsData">
             <div
               *ngIf="
@@ -59,10 +73,6 @@
                     </p>
                   </div>
                   <div class="flex align-center">
-                    <span class="reply-icon flex align-center">
-                      پاسخ
-                      <i-feather name="corner-up-left"></i-feather>
-                    </span>
                     <span class="date-icon flex align-center">
                       {{ subitem.createdAt }}
                       <i-feather name="edit"></i-feather>

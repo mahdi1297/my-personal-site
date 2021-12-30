@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/http.service';
 import { TimeService } from 'src/app/services/time.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -11,6 +12,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class BlogDetailComponent implements OnInit, OnDestroy {
   blogDetail: any = {};
+  tokenSub: Subscription = new Subscription();
   tokenData: any;
 
   constructor(
@@ -21,7 +23,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.tokenService.user.subscribe((data) => {
+    this.tokenSub = this.tokenService.user.subscribe((data) => {
       this.tokenData = data;
     });
 
@@ -43,5 +45,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.blogDetail = {};
+    this.tokenData = {};
+    this.tokenSub.unsubscribe();
   }
 }

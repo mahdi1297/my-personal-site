@@ -9,6 +9,9 @@ import { TimeService } from 'src/app/services/time.service';
 })
 export class BlogListComponent implements OnInit {
   @Input() _id!: any;
+  @Input() tokenData!: any;
+  isOpen: boolean = false;
+  id: any;
 
   GET_COMMENTS_URL = 'comment/list';
   commentLength: any;
@@ -40,5 +43,16 @@ export class BlogListComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  openModal(id: string) {
+    this.isOpen = false;
+    this.id = id;
+    this.isOpen = !this.isOpen;
+  }
+
+  commentModalCloserHandler(event: any) {
+    console.log('x');
+    this.isOpen = false;
   }
 }
