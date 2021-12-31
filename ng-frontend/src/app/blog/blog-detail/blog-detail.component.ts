@@ -12,7 +12,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class BlogDetailComponent implements OnInit, OnDestroy {
   blogDetail: any = {};
-  tokenSub: Subscription = new Subscription();
+  tokenSub: Subscription;
   tokenData: any;
 
   constructor(
@@ -24,6 +24,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tokenSub = this.tokenService.user.subscribe((data) => {
+      console.log(data);
       this.tokenData = data;
     });
 

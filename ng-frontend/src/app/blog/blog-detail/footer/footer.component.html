@@ -6,10 +6,7 @@
       </div>
       <div>
         <a href="/">
-          <div
-            *ngIf="writer !== undefined; else loading"
-            class="flex align-center"
-          >
+          <div *ngIf="writer !== undefined  " class="flex align-center">
             <img
               src="./../../../../assets/img/avatar.jpeg"
               class="br-100"
@@ -44,7 +41,3 @@
     </div>
   </div>
 </section>
-
-<ng-template #loading>
-  <h2>Loading...</h2>
-</ng-template>

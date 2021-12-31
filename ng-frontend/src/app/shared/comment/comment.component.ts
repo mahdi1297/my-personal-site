@@ -32,7 +32,7 @@ export class CommentComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService, private toast: ToastrService) {}
 
   ngOnInit() {
-    console.log(this.tokenData); // returns undefined
+    // console.log(this.tokenData); //  undefined
     this.commentForm = new FormGroup({
       content: new FormControl(null, [
         Validators.required,

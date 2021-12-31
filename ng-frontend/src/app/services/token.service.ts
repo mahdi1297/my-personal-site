@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { IUserModel } from '../user.mode';
 import { ApiService } from './http.service';
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {
-  user = new Subject<IUserModel>();
-  newUser: any;
+  user = new ReplaySubject<IUserModel>();
 
   cookieValue: string;
   TOKEN_API_ADDRESS: string = 'user/get-user';
@@ -17,10 +16,6 @@ export class TokenService {
     private apiService: ApiService
   ) {}
 
-  returnUser() {
-    return this.newUser;
-  }
-
   checkTokenToRequest() {
     this.cookieValue = this.cookieService.get('u_t');
     const isExistsCookie = this.cookieService.check('u_t');
@@ -28,14 +23,18 @@ export class TokenService {
     if (isExistsCookie) {
       this.apiService
         .post(this.TOKEN_API_ADDRESS, { token: this.cookieValue })
-        .subscribe((data: any) => {
-          this.user.next(data.result);
-          this.newUser = data.result;
-          if (data.token) {
-            this.cookieValue = data.token;
-            this.cookieService.set('u_t', data.token);
+        .subscribe(
+          (data: any) => {
+            this.user.next(data.result);
+            if (data.token) {
+              this.cookieValue = data.token;
+              this.cookieService.set('u_t', data.token);
+            }
+          },
+          (error) => {
+            console.log(error);
           }
-        });
+        );
     }
   }
 }

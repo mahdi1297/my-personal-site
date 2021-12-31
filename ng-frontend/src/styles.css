@@ -17,6 +17,7 @@ body {
   box-sizing: border-box;
   background: #fcfdfe;
   direction: rtl;
+  scroll-behavior: smooth;
 }
 
 ul {
