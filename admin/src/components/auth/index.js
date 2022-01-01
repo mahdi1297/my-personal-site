@@ -1,9 +1,10 @@
 import React from "react";
-import { Container } from "reactstrap";
+import FormContainer from "./../../shared/form/form-container";
+import { Button, Container } from "reactstrap";
 import { authForm } from "./form-structure";
 import { AuthBody } from "./style";
-import FormContainer from "./../../shared/form/form-container";
 import { useForm } from "react-hook-form";
+import { Redirect } from "react-router-dom";
 
 const Auth = () => {
   const {
@@ -12,12 +13,14 @@ const Auth = () => {
     formState: { errors },
   } = useForm();
 
-  const submitForm = (data) => console.log(data);
+  const submitForm = (data) => {
+    localStorage.setItem("ss", "ss");
+  };
 
   return (
     <Container>
       <AuthBody>
-        <h2>ورود به پنل</h2>
+        <h2>سلام مهدی</h2>
         <form onSubmit={handleSubmit(submitForm)}>
           {authForm.map((x) => (
             <FormContainer
@@ -27,7 +30,12 @@ const Auth = () => {
               errors={errors}
             />
           ))}
+
+          <Button color={"primary"} className={"mt-4"}>
+            ورود به سایت
+          </Button>
         </form>
+        {/* <Redirect from="/" to="/users" /> */}
       </AuthBody>
     </Container>
   );

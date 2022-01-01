@@ -13,4 +13,19 @@ const AuthBody = styled.div`
   text-align: center;
 `;
 
-export { AuthBody };
+const Captch = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  & label {
+    width: 100%;
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: ${themeColor.GRAY}
+  }
+  & input {
+    width: 100%;
+  }
+`;
+
+export { AuthBody, Captch };

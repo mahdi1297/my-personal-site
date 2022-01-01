@@ -12,18 +12,20 @@ import { Toaster } from "react-hot-toast";
 import Auth from "./components/auth";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   setIsAuth(true);
-    // }, 3000);
+    setTimeout(() => {
+      const ls = localStorage.getItem("ssss");
+      console.log(ls);
+      if (ls) setIsAuth(false);
+    }, 3000);
   }, []);
 
   return (
     <>
       <Router>
-        {!isAuth ? (
+        {isAuth ? (
           <Auth />
         ) : (
           <>
