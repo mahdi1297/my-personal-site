@@ -5,36 +5,35 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { IconsModule } from './icons/icons.module';
 
-import { TimeService } from './services/time.service';
-import { ApiService } from './services/http.service';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/header/sidebar/sidebar.component';
 import { CvComponent } from './cv/cv.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { RegisterComponent } from './auth/register/register.component';
-
-import { CookieService } from 'ngx-cookie-service';
-import { TokenService } from './services/token.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    CvComponent,
-    AppComponent,
+    RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    RegisterComponent,
+    CvComponent,
+    AppComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    IconsModule,
     HttpClientModule,
+    IconsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+    }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ApiService, TimeService, CookieService, TokenService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
-import { IUserModel } from 'src/app/user.mode';
 import { routes } from './header.routes';
 
 @Component({

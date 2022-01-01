@@ -10,6 +10,8 @@ const FormContainer = ({ data, register, errors }) => {
   if (data) {
     switch (data.type) {
       case "text":
+      case "email":
+      case "password":
         inp = (
           <Input
             type={data.type}

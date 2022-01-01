@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/http.service';
 import { TimeService } from 'src/app/services/time.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -10,14 +12,22 @@ import { TimeService } from 'src/app/services/time.service';
 })
 export class BlogDetailComponent implements OnInit, OnDestroy {
   blogDetail: any = {};
+  tokenSub: Subscription;
+  tokenData: any;
 
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private timeService: TimeService
+    private timeService: TimeService,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit() {
+    this.tokenSub = this.tokenService.user.subscribe((data) => {
+      console.log(data);
+      this.tokenData = data;
+    });
+
     this.route.params.subscribe((param) => {
       if (!param.slug) {
         return;
@@ -36,5 +46,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.blogDetail = {};
+    this.tokenData = {};
+    this.tokenSub.unsubscribe();
   }
 }

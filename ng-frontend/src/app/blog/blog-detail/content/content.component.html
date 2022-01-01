@@ -1,3 +1,10 @@
-<div class="blog_detail-content">
+<div class="blog_detail-content" id="blog_content">
   <div [innerHtml]="content" class="content"></div>
+</div>
+<div class="Headings">
+  <ul>
+    <li *ngFor="let items of contentArray">
+      <a href="#{{ items }}">{{ items }}</a>
+    </li>
+  </ul>
 </div>

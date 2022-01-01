@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/http.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private toast: ToastrService
   ) {
     this.form = this.fb.group({
       email: ['', Validators.email],
@@ -41,11 +43,21 @@ export class LoginComponent implements OnInit {
         (data: any) => {
           if (data && data.status === 200) {
             this.cookieService.set('u_t', data.result, 100000);
-            window.location.href = '/';
+            if (this.cookieService.check('u_t')) {
+              this.toast.success(
+                'بعد از 5 ثانیه به خانه منتقل میشوید',
+                'ورود موفق'
+              );
+              setTimeout(() => {
+                window.location.href = '/';
+              }, 5000);
+            } else {
+              this.toast.error('لطفا مججدا امتحان کنید', 'خطا');
+            }
           }
         },
         (error) => {
-          console.log(error);
+          this.toast.error('لطفا مججدا امتحان کنید', 'خطا');
         }
       );
       this.isLoading = false;

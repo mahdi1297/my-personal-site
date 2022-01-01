@@ -1,0 +1,96 @@
+<section class="comments">
+  <div class="title">
+    <h3>دیدگاه های شما</h3>
+  </div>
+
+  <div *ngIf="commentsData; else loader">
+    <div *ngIf="commentLength !== 0; else emptyComments"></div>
+    <div class="comments-container w-100" *ngFor="let item of commentsData">
+      <figure class="comments_body flex">
+        <div class="user-data">
+          <img
+            src="http://localhost:5000/{{ item.profile }}"
+            alt=""
+            width="50"
+          />
+        </div>
+        <div class="comment-data">
+          <div class="comment-data_username w-100">{{ item.username }}</div>
+          <div class="comment-data_content">
+            <p>
+              {{ item.content }}
+            </p>
+          </div>
+          <div class="flex align-center">
+            <span
+              class="reply-icon flex align-center"
+              (click)="openModal(item._id)"
+            >
+              پاسخ
+              <i-feather name="corner-up-left"></i-feather>
+            </span>
+            <span class="date-icon flex align-center">
+              {{ item.createdAt }}
+              <i-feather name="edit"></i-feather>
+            </span>
+          </div>
+          <!-- write comment modal start -->
+          <div *ngIf="isOpen && id === item._id">
+            <shared-comment
+              [tokenData]="tokenData"
+              [_id]="_id"
+              [isReplyed]="true"
+              [replyedParentId]="item._id"
+              (close)="commentModalCloserHandler($event)"
+            ></shared-comment>
+          </div>
+          <!-- write comment modal end -->
+          <div *ngFor="let subitem of commentsData">
+            <div
+              *ngIf="
+                subitem.isReplyed === 'true' &&
+                subitem.replyedParentId === item._id
+              "
+            >
+              <figure
+                class="comments_body flex comment-reply"
+                style="margin-top: 20px"
+              >
+                <div class="user-data">
+                  <img
+                    src="http://localhost:5000/{{ subitem.profile }}"
+                    alt=""
+                    width="50"
+                  />
+                </div>
+                <div class="comment-data">
+                  <div class="comment-data_username w-100">
+                    {{ subitem.username }}
+                  </div>
+                  <div class="comment-data_content">
+                    <p>
+                      {{ subitem.content }}
+                    </p>
+                  </div>
+                  <div class="flex align-center">
+                    <span class="date-icon flex align-center">
+                      {{ subitem.createdAt }}
+                      <i-feather name="edit"></i-feather>
+                    </span>
+                  </div>
+                </div>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <!-- //////////// -->
+      </figure>
+    </div>
+  </div>
+</section>
+
+<ng-template #loader></ng-template>
+<ng-template #emptyComments>
+  <p>اولین دیدگاه را شما ثبت کنید</p>
+</ng-template>

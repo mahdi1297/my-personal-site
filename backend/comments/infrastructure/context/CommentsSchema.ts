@@ -16,6 +16,10 @@ class CommentSchema {
                     type: String,
                     default: "false",
                 },
+                replyedParentId: {
+                    type: String,
+                    default: "_",
+                },
                 username: {
                     type: String,
                 },

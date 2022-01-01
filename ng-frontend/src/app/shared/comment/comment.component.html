@@ -1,0 +1,37 @@
+<section class="write-comment">
+  <div *ngIf="tokenData; else notallowed">
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <div class="flex align-center justify-between">
+          <label for="">متن دیدگاه</label>
+          <button
+            class="cancel-comment-modal"
+            type="button"
+            (click)="closeModal()"
+          >
+            انصراف
+          </button>
+        </div>
+        <textarea rows="6" formControlName="content"></textarea>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="form-container">
+          <label for="">ایمیل</label>
+          <input type="text" formControlName="email" />
+        </div>
+      </div>
+
+      <button class="auth-btn comment-btn in_form-comment-btn" type="submit">
+        ثبت دیدگاه
+      </button>
+    </form>
+  </div>
+</section>
+
+<ng-template #notallowed>
+  <p class="notallowed-alert">
+    برای ثبت دیدگاه باید وارد <a [routerLink]="['/auth/login']">حساب</a> خود
+    شوید
+  </p>
+</ng-template>

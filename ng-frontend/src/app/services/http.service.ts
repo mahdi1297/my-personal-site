@@ -26,15 +26,14 @@ export class ApiService {
       .pipe(catchError(this.errorMgmt));
   }
 
-  //   getEmployee(id): Observable<any> {
-  //     let url = `${this.baseUri}/read/${id}`;
-  //     return this.http.get(url, { headers: this.headers }).pipe(
-  //       map((res: Response) => {
-  //         return res || {};
-  //       }),
-  //       catchError(this.errorMgmt)
-  //     );
-  //   }
+  getThis(url: any, dataObj: any): Observable<any> {
+    return this.http.post(`${this.baseUri}${url}`, dataObj).pipe(
+      map((res: any) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
 
   //   updateEmployee(id, data): Observable<any> {
   //     let url = `${this.baseUri}/update/${id}`;

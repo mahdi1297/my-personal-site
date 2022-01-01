@@ -96,7 +96,7 @@
   opacity: 0;
 }
 .sidebar-open {
-  width: 200px !important;
+  width: 290px !important;
   transform: translateX(30px);
 }
 .username {

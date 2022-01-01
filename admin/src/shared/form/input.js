@@ -18,6 +18,7 @@ const Input = ({ data, register, errors }) => {
               required: data.validation.required,
               minLength: data.validation.minLength,
               maxLength: data.validation.maxLength,
+              validate: data.validation.validate && data.validation.validate,
             })}
           />
         </div>
@@ -35,6 +36,9 @@ const Input = ({ data, register, errors }) => {
           <ErrorP>
             تعداد کاراکتر ها باید کمتر از {data.validation.maxLength} باشد
           </ErrorP>
+        )}
+        {errors && errors[data.name]?.type === "validate" && (
+          <ErrorP>مقدار ورودی صحیح نیست</ErrorP>
         )}
       </>
     </>

@@ -7,6 +7,7 @@ import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 import BaseRoutes from "./BaseRoutes";
 import path from "path";
+import morgan from "morgan";
 import * as dotenv from "dotenv";
 
 const app = express();
@@ -37,7 +38,8 @@ if (cluster.isPrimary) {
         .use(fileUpload())
         .use(cors())
         .use(helmet())
-        .use(cookieParser());
+        .use(cookieParser())
+        .use(morgan("tiny"));
 
     route.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*");

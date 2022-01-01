@@ -10,8 +10,10 @@ const InputBody = styled.input`
 `;
 
 const Label = styled.label`
-  font-size: 14px;
+  font-size: 16px;
   color: #9e9ea7;
+  width: 100%;
+  text-align: right;
 `;
 
 const TextAreaBody = styled.textarea`
