@@ -10,6 +10,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
 import { Toaster } from "react-hot-toast";
 import Auth from "./components/auth";
+import Cookies from "universal-cookie";
+
+const Cookie = new Cookies();
+const token = Cookie.get("i_v_c");
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
@@ -25,7 +29,7 @@ function App() {
   return (
     <>
       <Router>
-        {isAuth ? (
+        {!token ? (
           <Auth />
         ) : (
           <>

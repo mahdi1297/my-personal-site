@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import FormContainer from "./../../shared/form/form-container";
 import { Button, Container } from "reactstrap";
 import { authForm } from "./form-structure";
 import { AuthBody } from "./style";
 import { useForm } from "react-hook-form";
-import { Redirect } from "react-router-dom";
+import { getUser } from "./data";
+import Loader from "../../shared/loader";
 
 const Auth = () => {
   const {
@@ -13,8 +14,22 @@ const Auth = () => {
     formState: { errors },
   } = useForm();
 
-  const submitForm = (data) => {
-    localStorage.setItem("ss", "ss");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const submitForm = async (data) => {
+    setIsLoading(true);
+    const userFormData = {
+      email: data.email,
+      username: data.username,
+      password: data.password,
+      from: "admin",
+    };
+    await getUser(userFormData);
+
+    setTimeout(async () => {
+      setIsLoading(false);
+      window.location.href = "/";
+    }, 1200);
   };
 
   return (
@@ -31,11 +46,17 @@ const Auth = () => {
             />
           ))}
 
-          <Button color={"primary"} className={"mt-4"}>
-            ورود به سایت
-          </Button>
+          <div className="w-100 d-flex justify-content-center">
+            <Button
+              color={"primary"}
+              size="lg"
+              className={"mt-4 d-flex align-items-center"}
+              style={{ overflow: "hidden" }}
+            >
+              {isLoading === true ? <Loader /> : <>ورود به سایت</>}
+            </Button>
+          </div>
         </form>
-        {/* <Redirect from="/" to="/users" /> */}
       </AuthBody>
     </Container>
   );

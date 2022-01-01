@@ -127,13 +127,26 @@ class UserApplication {
     }
 
     async login(req: any, res: any) {
-        const { email, password } = req.body;
+        const { email, password, username, from } = req.body;
+
+        console.log(req.body);
 
         try {
-            //get user by email
-            const result = await this._repo.get({
-                email: email,
-            });
+            let result;
+            if (from && from === "admin" && username) {
+                //get user by email and username
+                result = await this._repo.get({
+                    email: email,
+                    username: username,
+                });
+                console.log(result);
+            } else {
+                //get user by email
+                result = await this._repo.get({
+                    email: email,
+                });
+            }
+
             if (result === null || result === undefined) {
                 return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
             }
@@ -160,7 +173,7 @@ class UserApplication {
 
             res.json({
                 status: 200,
-                messaeg: "ورود موفق",
+                message: "ورود موفق",
                 result: getUserToken.token,
             });
         } catch (err) {
@@ -234,7 +247,7 @@ class UserApplication {
 
             res.json({
                 status: 200,
-                messaeg: "حساب شما با موفقیت ساخته شد",
+                message: "حساب شما با موفقیت ساخته شد",
                 result,
             });
         } catch (err) {
