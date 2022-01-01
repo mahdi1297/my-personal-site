@@ -173,6 +173,25 @@ const Icons = ({ name, width, color }) => {
           />
         </svg>
       );
+    case "x":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          width={width || "20"}
+          color={color || "#e1e1e1"}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      );
     default:
       return "";
   }

@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Dashboard from "./components/dashborad";
 import Sidebar from "./components/sidebar";
+import Cookies from "universal-cookie";
 import NewBlog from "./components/new-blog";
 import Header from "./components/Header";
+import Auth from "./components/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container } from "reactstrap";
+import { Toaster } from "react-hot-toast";
 import { Body } from "./style";
 import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
-import { Toaster } from "react-hot-toast";
-import Auth from "./components/auth";
-import Cookies from "universal-cookie";
+import Comments from "./components/comments";
 
 const Cookie = new Cookies();
 const token = Cookie.get("i_v_c");
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const ls = localStorage.getItem("ssss");
-      console.log(ls);
-      if (ls) setIsAuth(false);
-    }, 3000);
-  }, []);
-
   return (
     <>
       <Router>
@@ -43,6 +34,9 @@ function App() {
                   </Route>
                   <Route path="/new-blog" exact>
                     <NewBlog />
+                  </Route>
+                  <Route path="/comments" exact>
+                    <Comments />
                   </Route>
                 </Switch>
               </Container>

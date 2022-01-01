@@ -1,0 +1,36 @@
+table tr th {
+  color: #9e9ea7;
+  border-bottom: 3px solid #d89661 !important;
+}
+
+table tr th:first-child {
+  width: 10px;
+  height: 40px;
+}
+table tr th {
+  min-width: 120px;
+}
+
+tr {
+  padding: 5px !important;
+}
+
+td,
+tr,
+th {
+  height: 35px;
+  text-align: center;
+}
+
+tbody tr {
+  padding: 10px !important;
+  height: 50px !important;
+  border-collapse: separate;
+  border-spacing: 0 000px;
+}
+
+tbody td {
+  color: #444444;
+  font-weight: 100;
+  font-size: 14px;
+}
