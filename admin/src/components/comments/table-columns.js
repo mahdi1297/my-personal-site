@@ -35,7 +35,19 @@ function tableColumns(data, removerFunction, responseFunction) {
           </div>,
           element.username,
           <div className="w-100">
-            <span className="c-pointer" onClick={responseFunction}>
+            <span
+              className="c-pointer"
+              onClick={() =>
+                responseFunction(
+                  element._id,
+                  element.content,
+                  element.username,
+                  element.profile,
+                  element.isReplyed,
+                  element.parentId
+                )
+              }
+            >
               <Icons name="edit" color={themeColor.BLUE} />
             </span>
           </div>,

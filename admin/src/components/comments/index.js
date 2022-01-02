@@ -1,16 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import TableContainer from "../../shared/table";
 import PageTitle from "../../shared/page-title";
 import { confirmComment, getCommentList, removeComment } from "./data";
+import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 import { tableColumns } from "./table-columns";
 import { heads } from "./table-heads";
+import Loader from "../../shared/loader";
 
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+const CommentDetail = lazy(() => {
+  return new Promise((resolve) => {
+    resolve(import("./comment-detail"));
+  });
+});
 
 const Comments = () => {
   const [columns, setColumns] = useState([]);
   const [modal, setModal] = useState(false);
+  const [choosedComment, setChoosedComment] = useState({});
 
   useEffect(() => {
     request();
@@ -24,7 +31,15 @@ const Comments = () => {
     }
   };
 
-  async function responseFunction() {
+  async function responseFunction(
+    _id,
+    content,
+    username,
+    profile,
+    isReplyed,
+    parentId
+  ) {
+    setChoosedComment({ _id, content, username, profile, isReplyed, parentId });
     toggle();
   }
 
@@ -59,20 +74,22 @@ const Comments = () => {
         </div>
       </div>
       {/* response modal */}
-      <Modal isOpen={modal} toggle={toggle} external={externalCloseBtn}>
-        <ModalHeader>Modal title</ModalHeader>
-        <ModalBody>
-          <b>Look at the top right of the page/viewport!</b>
-          <br />
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-        </ModalBody>
+      <Modal
+        isOpen={modal}
+        toggle={toggle}
+        external={externalCloseBtn}
+        size="lg"
+      >
+        <ModalHeader>پاسخ به دیدگاه</ModalHeader>
+        <Suspense fallback={<Loader />}>
+          <CommentDetail data={choosedComment} />
+        </Suspense>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Do Something
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
+          <div className="w-100">
+            <Button color="secondary" onClick={toggle}>
+              انصراف
+            </Button>
+          </div>
         </ModalFooter>
       </Modal>
     </>
