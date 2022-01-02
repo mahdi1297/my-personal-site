@@ -28,7 +28,9 @@ const Auth = () => {
 
     setTimeout(async () => {
       setIsLoading(false);
-      if (result.status === 200) window.location.href = "/";
+
+      if (result && result.status && result.status === 200)
+        window.location.href = "/";
     }, 1200);
   };
 

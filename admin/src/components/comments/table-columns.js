@@ -38,14 +38,7 @@ function tableColumns(data, removerFunction, responseFunction) {
             <span
               className="c-pointer"
               onClick={() =>
-                responseFunction(
-                  element._id,
-                  element.content,
-                  element.username,
-                  element.profile,
-                  element.isReplyed,
-                  element.parentId
-                )
+                responseFunction(element._id, element.content, element.parentId)
               }
             >
               <Icons name="edit" color={themeColor.BLUE} />

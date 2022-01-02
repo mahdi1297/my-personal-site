@@ -171,12 +171,20 @@ class BlogApplication {
     }
 
     async getById(req: any, res: any) {
-        const { _id } = req.body;
+        const { parentId } = req.body;
 
         try {
-            const result = await this._repo.getByID(_id);
+            const result = await this._repo.getByID(parentId);
+            if (result === null) {
+                return resError(res, 400, BLOG_NOT_FOUND);
+            }
+            return res.json({
+                status: 200,
+                message: OK,
+                result,
+            });
         } catch (err) {
-            return res.status(400).json({ err });
+            resError(res, 400, BLOG_NOT_FOUND);
         }
     }
 }

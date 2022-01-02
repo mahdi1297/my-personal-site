@@ -20,7 +20,7 @@ class BlogRoutes {
             .post("/", createBlogValidators(), validate, controller.create)
             .post("/get-by-slug", controller.getBySlug)
             .post("/image-upload", controller.imageUpload)
-            .post("/bet-by-id", controller.getById);
+            .post("/get-by-id", controller.getById);
         return route;
     }
 }

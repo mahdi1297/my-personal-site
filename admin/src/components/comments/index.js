@@ -20,8 +20,10 @@ const Comments = () => {
   const [choosedComment, setChoosedComment] = useState({});
 
   useEffect(() => {
-    request();
-  }, []);
+    if (modal === false) {
+      request();
+    }
+  }, [modal]);
 
   const request = async () => {
     const { data } = await getCommentList();
@@ -31,15 +33,8 @@ const Comments = () => {
     }
   };
 
-  async function responseFunction(
-    _id,
-    content,
-    username,
-    profile,
-    isReplyed,
-    parentId
-  ) {
-    setChoosedComment({ _id, content, username, profile, isReplyed, parentId });
+  async function responseFunction(_id, content, parentId) {
+    setChoosedComment({ _id, content, parentId });
     toggle();
   }
 
@@ -53,7 +48,9 @@ const Comments = () => {
     }
   }
 
-  const toggle = () => setModal(!modal);
+  const toggle = () => {
+    setModal(!modal);
+  };
 
   const externalCloseBtn = (
     <button

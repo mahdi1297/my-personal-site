@@ -5,7 +5,9 @@ const createCommentValidators = () => [
     body("username").notEmpty().withMessage("ورود username الزامیست"),
     body("userId").notEmpty().withMessage("ورود userId الزامیست"),
     body("profile").notEmpty().withMessage("ورود profile الزامیست"),
-    body("content").notEmpty().withMessage("ورود content الزامیست"),
+    body("content")
+        .isLength({ min: 5, max: 550 })
+        .withMessage("content را صحیح وارد کنید"),
 ];
 
 const getCommentListValidators = () => [

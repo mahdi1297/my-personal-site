@@ -15,8 +15,10 @@ class BlogRepository<T extends mongoose.Document>
             .skip(12 * (pageNumber - 1));
     }
 
-    async getByID(_id: string) {
-        return await this._model.find({ _id: _id }).select(["title", "slug"]);
+    async getByID(parentId: string) {
+        return await this._model
+            .findOne({ _id: parentId })
+            .select(["title", "slug"]);
     }
 
     async getBySlug(slug: string) {
