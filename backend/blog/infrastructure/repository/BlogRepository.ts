@@ -16,7 +16,7 @@ class BlogRepository<T extends mongoose.Document>
     }
 
     async getByID(_id: string) {
-        return await this._model.find({ _id: _id });
+        return await this._model.find({ _id: _id }).select(["title", "slug"]);
     }
 
     async getBySlug(slug: string) {

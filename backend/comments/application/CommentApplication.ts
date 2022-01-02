@@ -75,7 +75,7 @@ class CommentApplication {
 
             res.json({
                 status: 200,
-                message: "Ok",
+                message: "با موفقیت تایید شد",
                 result,
             });
         } catch (err) {
@@ -85,7 +85,6 @@ class CommentApplication {
 
     async remove(req: any, res: any) {
         const { _id } = req.body;
-        console.log(_id);
 
         try {
             const result = await this._repo.remove(_id);
@@ -94,7 +93,7 @@ class CommentApplication {
 
             res.json({
                 status: 200,
-                message: "Ok",
+                message: "با موفقیت حذف شد",
                 result,
             });
         } catch (err) {

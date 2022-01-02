@@ -169,6 +169,16 @@ class BlogApplication {
             return res.status(400).json({ err });
         }
     }
+
+    async getById(req: any, res: any) {
+        const { _id } = req.body;
+
+        try {
+            const result = await this._repo.getByID(_id);
+        } catch (err) {
+            return res.status(400).json({ err });
+        }
+    }
 }
 
 export default BlogApplication;

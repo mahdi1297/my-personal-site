@@ -15,12 +15,12 @@ class BlogRoutes {
     get routers() {
         var controller = this._controller;
 
-        route.get("/list/:pageNumber", controller.list);
-
-        route.post("/", createBlogValidators(), validate, controller.create);
-        route.post("/get-by-slug", controller.getBySlug);
-
-        route.post("/image-upload", controller.imageUpload);
+        route
+            .get("/list/:pageNumber", controller.list)
+            .post("/", createBlogValidators(), validate, controller.create)
+            .post("/get-by-slug", controller.getBySlug)
+            .post("/image-upload", controller.imageUpload)
+            .post("/bet-by-id", controller.getById);
         return route;
     }
 }
