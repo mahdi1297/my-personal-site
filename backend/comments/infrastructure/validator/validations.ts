@@ -8,8 +8,16 @@ const createCommentValidators = () => [
     body("content").notEmpty().withMessage("ورود content الزامیست"),
 ];
 
-const getCommentList = () => [
+const getCommentListValidators = () => [
     body("parentId").notEmpty().withMessage("parentId الزامیست"),
 ];
 
-export { createCommentValidators, getCommentList };
+const removeOrConfirmCommentValidator = () => [
+    body("_id").notEmpty().withMessage("field is required"),
+];
+
+export {
+    createCommentValidators,
+    getCommentListValidators,
+    removeOrConfirmCommentValidator,
+};

@@ -19,10 +19,22 @@ class CommentRepository<T extends mongoose.Document>
         return await this._model.find({ parentId, isConfirmed: "true" });
     }
 
-    editList: (item: any) => any;
+    async editList(item?: any) {
+        return await this._model.find({});
+    }
 
-    confirm: (_id: string) => any;
-    remove: (_id: string) => any;
+    async confirm(_id: string) {
+        return await this._model.findOneAndUpdate(
+            { _id: _id },
+            { isConfirmed: "true" }
+        );
+    }
+    async remove(_id: string) {
+        return await this._model.findOneAndUpdate(
+            { _id: _id },
+            { isConfirmed: "false" }
+        );
+    }
 }
 
 export default CommentRepository;

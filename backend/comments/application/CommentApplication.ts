@@ -47,6 +47,60 @@ class CommentApplication {
             return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
         }
     }
+
+    async editList(req: any, res: any) {
+        try {
+            const result = await this._repo.editList();
+            if (result === null)
+                return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+
+            res.json({
+                status: 200,
+                message: "Ok",
+                result,
+                count: result.length | 0,
+            });
+        } catch (err) {
+            return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+        }
+    }
+
+    async confirm(req: any, res: any) {
+        const { _id } = req.body;
+
+        try {
+            const result = await this._repo.confirm(_id);
+            if (result === null)
+                return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+
+            res.json({
+                status: 200,
+                message: "Ok",
+                result,
+            });
+        } catch (err) {
+            return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+        }
+    }
+
+    async remove(req: any, res: any) {
+        const { _id } = req.body;
+        console.log(_id);
+
+        try {
+            const result = await this._repo.remove(_id);
+            if (result === null)
+                return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+
+            res.json({
+                status: 200,
+                message: "Ok",
+                result,
+            });
+        } catch (err) {
+            return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+        }
+    }
 }
 
 export default CommentApplication;

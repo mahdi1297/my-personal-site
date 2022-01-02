@@ -1,7 +1,8 @@
 import React from "react";
 import Icons from "../../shared/icons";
+import { themeColor } from "../../theme/color";
 
-function tableColumns(data, removerFunction) {
+function tableColumns(data, removerFunction, responseFunction) {
   let cols = [];
 
   data &&
@@ -10,19 +11,34 @@ function tableColumns(data, removerFunction) {
         id: element._id,
         body: [
           element.content,
-          element.isConfirmed,
-          <div
-            className="w-100 c-pointer"
-            onClick={() => removerFunction(element.isConfirmed)}
-          >
+          new Date(element.createdAt).toLocaleDateString("fa-IR"),
+          <div>
             {element.isConfirmed === "true" ? (
-              <Icons name="check" color="green" />
+              <span
+                className="c-pointer"
+                onClick={() =>
+                  removerFunction(element.isConfirmed, element._id)
+                }
+              >
+                <Icons name="check" color="green" />
+              </span>
             ) : (
-              <Icons name="x" color="red" />
+              <span
+                className="c-pointer"
+                onClick={() =>
+                  removerFunction(element.isConfirmed, element._id)
+                }
+              >
+                <Icons name="x" color="red" />
+              </span>
             )}
           </div>,
-          new Date(element.createdAt).toLocaleDateString("fa-IR"),
           element.username,
+          <div className="w-100">
+            <span className="c-pointer" onClick={responseFunction}>
+              <Icons name="edit" color={themeColor.BLUE} />
+            </span>
+          </div>,
         ],
       };
       cols.push(newCol);

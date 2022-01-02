@@ -11,6 +11,20 @@ class CommentsController {
         const _app = new CommentApplication();
         await _app.list(req, res);
     }
+
+    async editList(req: any, res: any) {
+        const _app = new CommentApplication();
+        await _app.editList(req, res);
+    }
+
+    async confirm(req: any, res: any) {
+        const _app = new CommentApplication();
+        await _app.confirm(req, res);
+    }
+    async remove(req: any, res: any) {
+        const _app = new CommentApplication();
+        await _app.remove(req, res);
+    }
 }
 
 export default CommentsController;
