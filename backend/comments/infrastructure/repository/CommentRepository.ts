@@ -16,11 +16,13 @@ class CommentRepository<T extends mongoose.Document>
     }
 
     async list(parentId: string) {
-        return await this._model.find({ parentId, isConfirmed: "true" });
+        return await this._model
+            .find({ parentId, isConfirmed: "true" })
+            .sort({ createdAt: "-1" });
     }
 
     async editList(item?: any) {
-        return await this._model.find({});
+        return await this._model.find({}).sort({ createdAt: "-1" });
     }
 
     async confirm(_id: string) {

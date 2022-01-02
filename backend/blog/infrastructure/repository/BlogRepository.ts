@@ -12,7 +12,8 @@ class BlogRepository<T extends mongoose.Document>
         return await this._model
             .find({})
             .limit(12)
-            .skip(12 * (pageNumber - 1));
+            .skip(12 * (pageNumber - 1))
+            .sort({ createdAt: "-1" });
     }
 
     async getByID(parentId: string) {
