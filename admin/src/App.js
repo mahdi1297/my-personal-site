@@ -50,7 +50,7 @@ function App() {
                   <Route path="/new-blog" exact>
                     <NewBlog />
                   </Route>
-                  <Route path="/comments" exact>
+                  <Route path="/comments">
                     <Comments />
                   </Route>
                 </Switch>

@@ -6,8 +6,13 @@ const GET_COMMENT_LIST_URL = "http://localhost:5000/api/v1/comment/edit-list",
   CONFIRM_COMMENT_URL = "http://localhost:5000/api/v1/comment",
   REMOVE_COMMENT_URL = "http://localhost:5000/api/v1/comment";
 
-async function getCommentList() {
-  const { data } = await post(GET_COMMENT_LIST_URL, { x: "" }, false, true);
+async function getCommentList(pageParam) {
+  const { data } = await post(
+    `${GET_COMMENT_LIST_URL}/${pageParam}`,
+    { x: "" },
+    false,
+    true
+  );
   return { data };
 }
 

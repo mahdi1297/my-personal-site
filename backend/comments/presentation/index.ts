@@ -2,6 +2,7 @@ import express from "express";
 import validate from "../../0-framework/validators/validationResult";
 import {
     createCommentValidators,
+    getCommentEditListValidators,
     getCommentListValidators,
     removeOrConfirmCommentValidator,
 } from "../infrastructure/validator/validations";
@@ -27,7 +28,12 @@ class CommentsRoutes {
                 validate,
                 controller.list
             )
-            .post("/edit-list", controller.editList)
+            .post(
+                "/edit-list/:page",
+                getCommentEditListValidators(),
+                validate,
+                controller.editList
+            )
             .put(
                 "/",
                 removeOrConfirmCommentValidator(),

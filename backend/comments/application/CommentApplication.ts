@@ -49,9 +49,16 @@ class CommentApplication {
     }
 
     async editList(req: any, res: any) {
+        const { page } = req.params;
+        
         try {
-            const result = await this._repo.editList();
+            const result = await this._repo.editList(page);
             if (result === null)
+                return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
+
+            const commentsCount = await this._repo.count();
+
+            if (commentsCount === null)
                 return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
 
             res.json({
@@ -59,6 +66,7 @@ class CommentApplication {
                 message: "Ok",
                 result,
                 count: result.length | 0,
+                totalCount: commentsCount,
             });
         } catch (err) {
             return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);

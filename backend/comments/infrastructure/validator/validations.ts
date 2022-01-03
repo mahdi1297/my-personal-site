@@ -13,6 +13,9 @@ const createCommentValidators = () => [
 const getCommentListValidators = () => [
     body("parentId").notEmpty().withMessage("parentId الزامیست"),
 ];
+const getCommentEditListValidators = () => [
+    param("page").notEmpty().withMessage("ارسال دیتا الزامیست"),
+];
 
 const removeOrConfirmCommentValidator = () => [
     body("_id").notEmpty().withMessage("field is required"),
@@ -22,4 +25,5 @@ export {
     createCommentValidators,
     getCommentListValidators,
     removeOrConfirmCommentValidator,
+    getCommentEditListValidators,
 };

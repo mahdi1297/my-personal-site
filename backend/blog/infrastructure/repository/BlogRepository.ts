@@ -8,7 +8,6 @@ class BlogRepository<T extends mongoose.Document>
     private _model = BlogSchema;
 
     async list(pageNumber: number) {
-        console.log(pageNumber - 1);
         return await this._model
             .find({})
             .limit(12)
