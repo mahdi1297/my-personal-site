@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import TableContainer from "../../shared/table";
@@ -7,8 +8,8 @@ import Loader from "../../shared/loader";
 import { confirmComment, getCommentList, removeComment } from "./data";
 import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 import { tableColumns } from "./table-columns";
-import { heads } from "./table-heads";
 import { withRouter } from "react-router-dom";
+import { heads } from "./table-heads";
 
 const CommentDetail = lazy(() => {
   return new Promise((resolve) => {
@@ -17,20 +18,24 @@ const CommentDetail = lazy(() => {
 });
 
 const Comments = ({ history, location }) => {
-  const [columns, setColumns] = useState([]);
+  const [choosedComment, setChoosedComment] = useState({});
   const [columnsLength, setColumnsLength] = useState([]);
+  const [totalData, setTotalData] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [columns, setColumns] = useState([]);
   const [modal, setModal] = useState(false);
-  const [choosedComment, setChoosedComment] = useState({});
 
-  let pageParam = new URLSearchParams(location.search).get("page");
+  let pageParam = new URLSearchParams(location.search).get("page") || 1;
+  if (pageParam == 0) {
+    pageParam = 1;
+  }
 
   useEffect(() => {
-    if (modal === false) {
-      request();
-    }
+    modal === false && request();
   }, [modal, currentPage, choosedComment, pageParam]);
+
+  const toggle = () => setModal(!modal);
 
   const request = async () => {
     setIsLoading(true);
@@ -38,6 +43,7 @@ const Comments = ({ history, location }) => {
     const { data } = await getCommentList(pageParam);
     if (data.result) {
       setColumnsLength(data.count);
+      setTotalData(data.total);
       let cols = tableColumns(data.result, removerFunction, responseFunction);
       setColumns(cols);
       setTimeout(() => {
@@ -46,12 +52,12 @@ const Comments = ({ history, location }) => {
     }
   };
 
-  async function responseFunction(_id, content, parentId) {
+  const responseFunction = async (_id, content, parentId) => {
     setChoosedComment({ _id, content, parentId });
     toggle();
-  }
+  };
 
-  async function removerFunction(isConfirmed, _id) {
+  const removerFunction = async (isConfirmed, _id) => {
     if (isConfirmed === "false") {
       await confirmComment(_id);
       request();
@@ -59,32 +65,28 @@ const Comments = ({ history, location }) => {
       await removeComment(_id);
       request();
     }
-  }
+  };
 
   const nextBtnFunc = () => {
     setCurrentPage(currentPage + 1);
     history.push(`/comments?page=${currentPage + 1}`);
-
-    if (columnsLength !== 0) {
-      request();
-    }
-
+    columnsLength !== 0 && request();
     setChoosedComment({});
   };
+
   const prevBtnFunc = () => {
-    if (currentPage === 1 || currentPage < 2) {
+    if (currentPage === 1 || currentPage < 1) {
       setCurrentPage(1);
       history.push(`/comments?page=${currentPage}`);
-      setChoosedComment({});
-    } else {
+    }
+    if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      history.push(`/comments?page=${currentPage}`);
+      let prevPage = pageParam - 1;
+      history.push(`/comments?page=${prevPage}`);
       setChoosedComment({});
       request();
     }
   };
-
-  const toggle = () => setModal(!modal);
 
   return (
     <>
@@ -101,8 +103,9 @@ const Comments = ({ history, location }) => {
         <Pagination
           nextBtnFunc={nextBtnFunc}
           prevBtnFunc={prevBtnFunc}
-          currentPage={currentPage}
+          currentPage={pageParam}
           pageCount={columnsLength}
+          totalData={totalData}
         />
       </div>
       {/* response modal */}

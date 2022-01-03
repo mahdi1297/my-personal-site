@@ -2,7 +2,15 @@ import React from "react";
 import Icons from "../icons";
 import { PaginateBody, Btns } from "./style";
 
-const Pagination = ({ nextBtnFunc, prevBtnFunc, currentPage, pageCount }) => {
+const Pagination = ({
+  nextBtnFunc,
+  prevBtnFunc,
+  currentPage,
+  pageCount,
+  totalData,
+}) => {
+  currentPage = parseInt(currentPage);
+
   function nextTopBtn() {
     if (pageCount !== 0) {
       nextBtnFunc();
@@ -14,7 +22,7 @@ const Pagination = ({ nextBtnFunc, prevBtnFunc, currentPage, pageCount }) => {
     }
   }
   return (
-    <PaginateBody className="w-100 d-flex justify-content-between">
+    <PaginateBody className="w-100 d-flex justify-content-between align-items-center">
       <Btns>
         <div>
           <button
@@ -24,7 +32,7 @@ const Pagination = ({ nextBtnFunc, prevBtnFunc, currentPage, pageCount }) => {
             <Icons name="arrow-right" width="25" />
           </button>
           <button
-            className={currentPage && currentPage === 1 ? "disabled" : ""}
+            className={currentPage === 1 ? "disabled" : ""}
             onClick={prevTopBtn}
           >
             <Icons name="arrow-left" width="25" />
@@ -32,7 +40,7 @@ const Pagination = ({ nextBtnFunc, prevBtnFunc, currentPage, pageCount }) => {
         </div>
         <div></div>
       </Btns>
-      <div>5465</div>
+      <div>همه : {totalData}</div>
     </PaginateBody>
   );
 };

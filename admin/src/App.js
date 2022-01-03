@@ -1,9 +1,8 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Dashboard from "./components/dashborad";
-import Comments from "./components/comments";
 import Sidebar from "./components/sidebar";
 import Cookies from "universal-cookie";
-import NewBlog from "./components/new-blog";
+import Loader from "./shared/loader";
 import Header from "./components/Header";
 import Auth from "./components/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -15,6 +14,22 @@ import { useDispatch } from "react-redux";
 import { Body } from "./style";
 import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
+
+const Comments = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import("./components/comments"));
+    }, 1000);
+  });
+});
+
+const NewBlog = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import("./components/new-blog"));
+    }, 1000);
+  });
+});
 
 const Cookie = new Cookies();
 const token = Cookie.get("i_v_c");
@@ -48,10 +63,14 @@ function App() {
                     <Dashboard />
                   </Route>
                   <Route path="/new-blog" exact>
-                    <NewBlog />
+                    <Suspense fallback={<Loader />}>
+                      <NewBlog />
+                    </Suspense>
                   </Route>
                   <Route path="/comments">
-                    <Comments />
+                    <Suspense fallback={<Loader />}>
+                      <Comments />
+                    </Suspense>
                   </Route>
                 </Switch>
               </Container>

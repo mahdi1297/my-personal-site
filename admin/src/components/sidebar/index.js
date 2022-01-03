@@ -16,7 +16,13 @@ const Sidebar = ({ location }) => {
         {sidebarRoutes.map((route) => (
           <li
             key={route.id}
-            className={route.path === location.pathname ? "active" : ""}
+            className={
+              location.pathname !== "/"
+                ? route.path.includes(location.pathname)
+                  ? "active"
+                  : ""
+                : route.path === location.pathname && "active"
+            }
           >
             <Link
               to={route.path}

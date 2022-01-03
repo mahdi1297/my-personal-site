@@ -24,7 +24,7 @@ const TableContainer = ({ heads, columns, length, isLoading }) => {
             columns &&
             columns.map((x, n) => (
               <tr key={x.id} style={{ width: "35px" }}>
-                <td>{n}</td>
+                <td>{n + 1}</td>
                 {x.body.map((m, s) => (
                   <td key={uuidv4()}>{m}</td>
                 ))}

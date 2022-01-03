@@ -18,6 +18,7 @@ export const post = async (
       data.message = request.data.message || "";
       data.count = request.data.count || 0;
       data.result = request.data.result;
+      data.total = request.data.total;
 
       if (showSuccessToast) {
         toast.success(request.data.message);

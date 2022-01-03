@@ -19,7 +19,6 @@ const getCommentParent = async (parentId, setBloginfo) => {
 const replyComment = async (dataObj) => {
   const { data } = await post(REPLY_COMMENT, dataObj, true, true);
 
-  console.log(data);
 
   return { data };
 };
