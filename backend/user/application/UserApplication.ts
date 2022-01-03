@@ -129,8 +129,6 @@ class UserApplication {
     async login(req: any, res: any) {
         const { email, password, username, from } = req.body;
 
-        console.log(req.body);
-
         try {
             let result;
             if (from && from === "admin" && username) {
@@ -139,16 +137,17 @@ class UserApplication {
                     email: email,
                     username: username,
                 });
-                console.log(result);
+                if (result === null) {
+                    return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+                }
             } else {
                 //get user by email
                 result = await this._repo.get({
                     email: email,
                 });
-            }
-
-            if (result === null || result === undefined) {
-                return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+                if (result === null) {
+                    return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
+                }
             }
 
             //compare incoming password with Db password

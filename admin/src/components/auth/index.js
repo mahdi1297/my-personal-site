@@ -24,11 +24,13 @@ const Auth = () => {
       password: data.password,
       from: "admin",
     };
-    await getUser(userFormData);
+    const { data: result } = await getUser(userFormData);
 
     setTimeout(async () => {
       setIsLoading(false);
-      window.location.href = "/";
+
+      if (result && result.status && result.status === 200)
+        window.location.href = "/";
     }, 1200);
   };
 

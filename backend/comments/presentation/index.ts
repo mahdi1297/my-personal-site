@@ -2,7 +2,9 @@ import express from "express";
 import validate from "../../0-framework/validators/validationResult";
 import {
     createCommentValidators,
-    getCommentList,
+    getCommentEditListValidators,
+    getCommentListValidators,
+    removeOrConfirmCommentValidator,
 } from "../infrastructure/validator/validations";
 import CommentsController from "./controller";
 
@@ -20,7 +22,30 @@ class CommentsRoutes {
 
         route
             .post("/", createCommentValidators(), validate, controller.create)
-            .post("/list", getCommentList(), validate, controller.list);
+            .post(
+                "/list",
+                getCommentListValidators(),
+                validate,
+                controller.list
+            )
+            .post(
+                "/edit-list/:page",
+                getCommentEditListValidators(),
+                validate,
+                controller.editList
+            )
+            .put(
+                "/",
+                removeOrConfirmCommentValidator(),
+                validate,
+                controller.confirm
+            )
+            .delete(
+                "/",
+                removeOrConfirmCommentValidator(),
+                validate,
+                controller.remove
+            );
 
         return route;
     }

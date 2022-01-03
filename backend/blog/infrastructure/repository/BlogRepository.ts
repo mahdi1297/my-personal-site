@@ -8,15 +8,17 @@ class BlogRepository<T extends mongoose.Document>
     private _model = BlogSchema;
 
     async list(pageNumber: number) {
-        console.log(pageNumber - 1);
         return await this._model
             .find({})
             .limit(12)
-            .skip(12 * (pageNumber - 1));
+            .skip(12 * (pageNumber - 1))
+            .sort({ createdAt: "-1" });
     }
 
-    async getByID(_id: string) {
-        return await this._model.find({ _id: _id });
+    async getByID(parentId: string) {
+        return await this._model
+            .findOne({ _id: parentId })
+            .select(["title", "slug"]);
     }
 
     async getBySlug(slug: string) {

@@ -46,6 +46,7 @@ export class BlogListComponent implements OnInit {
   }
 
   openModal(id: string) {
+    console.log(id);
     this.isOpen = false;
     this.id = id;
     this.isOpen = !this.isOpen;

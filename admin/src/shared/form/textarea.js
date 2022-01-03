@@ -1,5 +1,5 @@
 import React from "react";
-import { Label, TextAreaBody } from "./style";
+import { ErrorP, Label, TextAreaBody } from "./style";
 import { Col } from "reactstrap";
 
 const TextArea = ({ data, register, errors }) => {
@@ -23,7 +23,24 @@ const TextArea = ({ data, register, errors }) => {
           />
         </div>
       </Col>
-      <>{errors && errors[data.name] && <h2>Error</h2>}</>
+      <>
+        {errors && errors[data.name]?.type === "required" && (
+          <ErrorP>ورود این فیلد الزامیست</ErrorP>
+        )}
+        {errors && errors[data.name]?.type === "minLength" && (
+          <ErrorP>
+            تعداد کاراکتر ها باید بیشتر از {data.validation.minLength} باشد
+          </ErrorP>
+        )}
+        {errors && errors[data.name]?.type === "maxLength" && (
+          <ErrorP>
+            تعداد کاراکتر ها باید کمتر از {data.validation.maxLength} باشد
+          </ErrorP>
+        )}
+        {errors && errors[data.name]?.type === "validate" && (
+          <ErrorP>مقدار ورودی صحیح نیست</ErrorP>
+        )}
+      </>
     </>
   );
 };

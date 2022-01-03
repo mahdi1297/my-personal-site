@@ -21,6 +21,11 @@ class BlogController {
         const _app = new BlogApplication();
         await _app.imageUpload(req, res);
     }
+
+    async getById(req: express.Request, res: express.Response) {
+        const _app = new BlogApplication();
+        await _app.getById(req, res);
+    }
 }
 
 export default BlogController;

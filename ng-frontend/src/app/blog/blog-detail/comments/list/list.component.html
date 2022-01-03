@@ -6,7 +6,7 @@
   <div *ngIf="commentsData; else loader">
     <div *ngIf="commentLength !== 0; else emptyComments"></div>
     <div class="comments-container w-100" *ngFor="let item of commentsData">
-      <figure class="comments_body flex">
+      <figure class="comments_body flex" *ngIf="item.isReplyed === 'false'">
         <div class="user-data">
           <img
             src="http://localhost:5000/{{ item.profile }}"
@@ -74,9 +74,64 @@
                   </div>
                   <div class="flex align-center">
                     <span class="date-icon flex align-center">
+                      <span
+                        class="reply-icon flex align-center"
+                        (click)="openModal(subitem._id)"
+                      >
+                        پاسخ
+                        <i-feather name="corner-up-left"></i-feather>
+                      </span>
                       {{ subitem.createdAt }}
                       <i-feather name="edit"></i-feather>
                     </span>
+                  </div>
+                  <!-- write comment modal start -->
+                  <div *ngIf="isOpen && id === subitem._id">
+                    <shared-comment
+                      [tokenData]="tokenData"
+                      [_id]="_id"
+                      [isReplyed]="true"
+                      [replyedParentId]="subitem._id"
+                      (close)="commentModalCloserHandler($event)"
+                    ></shared-comment>
+                  </div>
+
+                  <div *ngFor="let subSubitem of commentsData">
+                    <div
+                      *ngIf="
+                        subSubitem.isReplyed === 'true' &&
+                        subSubitem.replyedParentId === subitem._id
+                      "
+                    >
+                      <figure
+                        class="comments_body flex comment-reply"
+                        style="margin-top: 20px"
+                      >
+                        <div class="user-data">
+                          <img
+                            src="http://localhost:5000/{{ subSubitem.profile }}"
+                            alt=""
+                            width="50"
+                          />
+                        </div>
+                        <div class="comment-data">
+                          <div class="comment-data_username w-100">
+                            {{ subSubitem.username }}
+                          </div>
+                          <div class="comment-data_content">
+                            <p>
+                              {{ subSubitem.content }}
+                            </p>
+                          </div>
+                          <div class="flex align-center">
+                            <span class="date-icon flex align-center">
+                              {{ subSubitem.createdAt }}
+                              <i-feather name="edit"></i-feather>
+                            </span>
+                          </div>
+                        </div>
+                      </figure>
+                    </div>
                   </div>
                 </div>
               </figure>

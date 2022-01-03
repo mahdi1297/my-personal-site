@@ -5,11 +5,25 @@ const createCommentValidators = () => [
     body("username").notEmpty().withMessage("ورود username الزامیست"),
     body("userId").notEmpty().withMessage("ورود userId الزامیست"),
     body("profile").notEmpty().withMessage("ورود profile الزامیست"),
-    body("content").notEmpty().withMessage("ورود content الزامیست"),
+    body("content")
+        .isLength({ min: 5, max: 550 })
+        .withMessage("content را صحیح وارد کنید"),
 ];
 
-const getCommentList = () => [
+const getCommentListValidators = () => [
     body("parentId").notEmpty().withMessage("parentId الزامیست"),
 ];
+const getCommentEditListValidators = () => [
+    param("page").notEmpty().withMessage("ارسال دیتا الزامیست"),
+];
 
-export { createCommentValidators, getCommentList };
+const removeOrConfirmCommentValidator = () => [
+    body("_id").notEmpty().withMessage("field is required"),
+];
+
+export {
+    createCommentValidators,
+    getCommentListValidators,
+    removeOrConfirmCommentValidator,
+    getCommentEditListValidators,
+};
