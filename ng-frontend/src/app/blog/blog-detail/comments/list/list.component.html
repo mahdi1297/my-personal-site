@@ -142,6 +142,10 @@
         <!-- //////////// -->
       </figure>
     </div>
+
+    <button (click)="getMoreComments()" *ngIf="commentLength !== 0">
+      مشاهده دیدگاه بیشتر ...
+    </button>
   </div>
 </section>
 

@@ -61,7 +61,7 @@ section.comments {
 }
 
 .comment-reply {
-  width: 95% !important;
+  width: 98% !important;
   float: left;
 }
 .comment-reply .comment-data {
@@ -89,4 +89,10 @@ section.comments {
 .reply-icon:hover i-feather {
   color: blueviolet;
   cursor: pointer;
+}
+
+@media screen and (max-width: 440px) {
+  .user-data {
+    display: none !important;
+  }
 }

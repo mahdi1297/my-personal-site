@@ -24,7 +24,6 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tokenSub = this.tokenService.user.subscribe((data) => {
-      console.log(data);
       this.tokenData = data;
     });
 
