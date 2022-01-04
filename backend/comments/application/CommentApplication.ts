@@ -31,9 +31,9 @@ class CommentApplication {
 
     //GET LIST OF COMMENTS RELATED TO A POST OR A COURSE TO INDICATE IN FRONTEND UI
     async list(req: any, res: any) {
-        const { parentId } = req.body;
+        const { parentId, pageNumber } = req.body;
         try {
-            const result = await this._repo.list(parentId);
+            const result = await this._repo.list(parentId, pageNumber | 1);
             if (result === null)
                 return resError(res, 400, PROBLEM_IN_GETTING_COMMENTS);
 

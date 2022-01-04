@@ -1,7 +1,7 @@
 interface ICommentsRepository<T> {
     create: (item: T) => any;
     get: (_id: string) => any;
-    list: (parentId: string) => any;
+    list: (parentId: string, pageNumber: number) => any;
     count: () => any;
     editList: (pageNumber: number) => any;
     confirm: (_id: string) => any;

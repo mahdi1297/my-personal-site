@@ -10,12 +10,14 @@ import { TimeService } from 'src/app/services/time.service';
 export class BlogListComponent implements OnInit {
   @Input() _id!: any;
   @Input() tokenData!: any;
-  isOpen: boolean = false;
-  id: any;
 
   GET_COMMENTS_URL = 'comment/list';
+
+  isOpen: boolean = false;
+  id: any;
   commentLength: any;
-  commentsData: any;
+  commentsData: any = [];
+  commentPageNumber: number = 1;
 
   constructor(
     private apiServeice: ApiService,
@@ -28,14 +30,17 @@ export class BlogListComponent implements OnInit {
 
   getComments() {
     this.apiServeice
-      .post(this.GET_COMMENTS_URL, { parentId: this._id })
+      .post(this.GET_COMMENTS_URL, {
+        parentId: this._id,
+        pageNumber: this.commentPageNumber,
+      })
       .subscribe(
         (data: any) => {
           if (data) {
             data.result.forEach((item: any) => {
               item.createdAt = this.timeService.toShamsi(item.createdAt);
+              this.commentsData.push(item);
             });
-            this.commentsData = data.result;
             this.commentLength = data.count;
           }
         },
@@ -43,6 +48,11 @@ export class BlogListComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  getMoreComments() {
+    this.commentPageNumber += 1;
+    this.getComments();
   }
 
   openModal(id: string) {

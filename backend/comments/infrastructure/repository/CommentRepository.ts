@@ -15,9 +15,11 @@ class CommentRepository<T extends mongoose.Document>
         return await this._model.findOne({ _id: _id });
     }
 
-    async list(parentId: string) {
+    async list(parentId: string, pageNumber: number) {
         return await this._model
             .find({ parentId, isConfirmed: "true" })
+            .limit(10)
+            .skip(10 * (pageNumber - 1))
             .sort({ createdAt: "-1" });
     }
 
