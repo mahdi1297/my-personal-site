@@ -44,7 +44,7 @@ import { ItemsComponent } from './items/items.component';
     NewCommentComponent,
     CommentComponent,
   ],
-  schemas: [NO_ERRORS_SCHEMA],
+  // schemas: [NO_ERRORS_SCHEMA],
   exports: [BlogComponent],
   bootstrap: [BlogComponent],
 })
