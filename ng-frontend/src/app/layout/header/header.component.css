@@ -13,8 +13,6 @@
   display: flex;
 }
 
-.header_logo a {
-}
 .header_logo a:hover {
   color: #ecedff;
 }

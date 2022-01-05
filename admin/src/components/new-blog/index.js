@@ -8,9 +8,9 @@ import { Button, Col, Form } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../helper/slugger";
 import {
-  formStructure,
   textEditorStructure,
   typeheadStructure,
+  formStructure,
 } from "./form-structure";
 import toast from "react-hot-toast";
 
@@ -25,8 +25,6 @@ const NewBlog = () => {
   const [typehead, setTypeheades] = useState([]);
 
   const onSubmitHandler = async (data) => {
-    // console.log(JSON.parse(typehead));
-    // console.log(JSON.stringify(typehead));
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("slug", slugger(data.slug));

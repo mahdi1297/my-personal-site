@@ -6,6 +6,7 @@ import { HeroComponent } from './hero/hero.component';
 import { IconsModule } from '../icons/icons.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { PricingComponent } from './pricing/pricing.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { HomeComponent } from './home.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomeComponent, HeroComponent],
+  declarations: [HomeComponent, HeroComponent, PricingComponent],
   exports: [HomeComponent],
   bootstrap: [HomeComponent],
 })

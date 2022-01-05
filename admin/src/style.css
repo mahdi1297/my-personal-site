@@ -30,3 +30,18 @@ ul {
 .c-pointer {
   cursor: pointer;
 }
+
+.modal-header {
+  border: 1px solid #f3f3f4;
+  padding-bottom: 0;
+}
+.modal-header > h1,
+.modal-header > h2,
+.modal-header > h3,
+.modal-header > h4,
+.modal-header > h5,
+.modal-header > h6 {
+  display: inline;
+  border-bottom: 2px solid #d89661;
+  padding-bottom: 10px;
+}
