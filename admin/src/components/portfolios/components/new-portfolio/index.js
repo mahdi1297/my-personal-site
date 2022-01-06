@@ -8,10 +8,8 @@ const NewPortfolioModal = lazy(() => {
     return new Promise((resolve) => resolve(import("./modal")));
 });
 
-// import NewPortfolioModal from "./modal";
-
 const NewPortfolio = () => {
-    const [modal, setModal] = useState(true);
+    const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
 
@@ -26,8 +24,8 @@ const NewPortfolio = () => {
                     >
                         ساخت پورتفولیو جدید
                         <span>
-              <Icons name="new" width={25}/>
-            </span>
+                            <Icons name="new" width={25}/>
+                        </span>
                     </Button>
                 </div>
             </NewPortfolioBody>
@@ -40,7 +38,7 @@ const NewPortfolio = () => {
                 </ModalBody>
                 <ModalFooter>
                     <div className="w-100">
-                        <Button color="secondary" onClick={toggle}>
+                        <Button color="danger" onClick={toggle}>
                             انصراف
                         </Button>
                     </div>

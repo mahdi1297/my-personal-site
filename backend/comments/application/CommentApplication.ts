@@ -7,8 +7,6 @@ import {
     PROBLEM_IN_GETTING_COMMENTS,
 } from "./../infrastructure/constants/constant";
 
-const app = express();
-
 class CommentApplication {
     private _repo: CommentRepository<ICommentsDomain>;
 
