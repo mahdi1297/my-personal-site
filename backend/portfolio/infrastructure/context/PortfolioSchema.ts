@@ -17,6 +17,10 @@ class PortfolioSchema {
             link: {
                 type: String,
             },
+            isConfirmed: {
+                type: String,
+                default: "true",
+            },
             main_image: {
                 type: String,
             },

@@ -7,7 +7,7 @@ import { MUploade } from "./style";
 import { Label } from "./style";
 import { Col } from "reactstrap";
 
-const MultipleUpload = ({ data }) => {
+const MultipleUpload = ({ data, setFiles }) => {
   const [images, setImages] = React.useState([]);
 
   const maxNumber = 3;
@@ -18,8 +18,9 @@ const MultipleUpload = ({ data }) => {
   const resolutionHeight = 500;
 
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList);
+    setFiles(imageList);
+    // console.log(addUpdateIndex);
     setImages(imageList);
   };
 

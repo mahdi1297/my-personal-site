@@ -5,6 +5,7 @@ interface IPortfolioDomain extends mongoose.Document {
     link: string;
     main_image: string;
     slug: string;
+    isConfirmed: string;
     presentation_images: string[];
     description: string;
     technologies: string[];
