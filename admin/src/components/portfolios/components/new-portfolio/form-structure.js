@@ -17,6 +17,20 @@ const formStructure = [
     id: 2,
     size: 12,
     type: "text",
+    name: "slug",
+    placeholder: "slug",
+    label: "slug پروژه",
+    labelRequired: true,
+    validation: {
+      required: true,
+      minLength: 5,
+      maxLength: 250,
+    },
+  },
+  {
+    id: 3,
+    size: 12,
+    type: "text",
     name: "path",
     placeholder: "لینک پروژه ",
     label: "لینک پروژه",
@@ -28,10 +42,10 @@ const formStructure = [
     },
   },
   {
-    id: 3,
+    id: 4,
     size: 12,
     type: "textarea",
-    name: "details",
+    name: "description",
     placeholder: "پروژه سایت فروشگاهی با امکانات...",
     label: "جزییِات پروژه",
     labelRequired: true,
@@ -42,7 +56,7 @@ const formStructure = [
     },
   },
   {
-    id: 4,
+    id: 5,
     size: 12,
     type: "file",
     name: "main_image",
@@ -55,4 +69,11 @@ const formStructure = [
   },
 ];
 
-export { formStructure };
+const techs_form_structre = {
+  name: "technologies",
+  label: "تکنولوژی ها",
+  placeholder: "تگ ها را وارد کنید",
+  newSelectionPrefix: "اضافه کردن تگ :",
+};
+
+export { formStructure, techs_form_structre };

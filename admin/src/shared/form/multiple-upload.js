@@ -12,7 +12,7 @@ const MultipleUpload = ({ data, setFiles }) => {
 
   const maxNumber = 3;
   const acceptType = ["png", "jpg", "gif", "jfif"];
-  const maxFileSize = 1024 * 1024; // 1mb
+  const maxFileSize = 2024 * 2024; // 1mb
   const resolutionType = "absolute";
   const resolutionWidth = 500;
   const resolutionHeight = 500;

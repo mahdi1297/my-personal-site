@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import MultipleUpload from "../../../../shared/form/multiple-upload";
 import FormContainer from "../../../../shared/form/form-container";
 import { Button, Col, Form } from "reactstrap";
-import { formStructure } from "./form-structure";
+import { formStructure, techs_form_structre } from "./form-structure";
 import { themeColor } from "../../../../theme/color";
 import { useForm } from "react-hook-form";
 import { createPortfolio } from "./data";
+import { slugger } from "../../../../helper/slugger";
+import TypeaheadProvider from "../../../../shared/form/typehead";
 
-const NewPortfolioModal = () => {
+const NewPortfolioModal = ({ setModal }) => {
   const {
     register,
     handleSubmit,
@@ -15,6 +17,7 @@ const NewPortfolioModal = () => {
   } = useForm();
 
   const [images, setImages] = useState([]);
+  const [techs, setTechs] = useState([]);
 
   const createPortfolioSubmitHandler = async (data) => {
     let formData = new FormData();
@@ -25,12 +28,20 @@ const NewPortfolioModal = () => {
         formData.append(`present_image${newImageName++}`, img.file);
       });
     }
+
+    if (data.slug) {
+      formData.append("slug", slugger(data.slug));
+    } else {
+      return;
+    }
+    formData.append("description", data.description);
     formData.append("title", data.title);
     formData.append("main_image", data.main_image[0]);
-    formData.append("path", data.path);
-    formData.append("details", data.details);
+    formData.append("link", data.path);
+    formData.append("technologies", JSON.stringify(techs));
 
     await createPortfolio(formData);
+    setModal(false);
   };
 
   return (
@@ -46,6 +57,11 @@ const NewPortfolioModal = () => {
                 errors={errors}
               />
             ))}
+          <TypeaheadProvider
+            data={techs_form_structre}
+            setTypeheades={setTechs}
+          />
+
           <MultipleUpload setFiles={setImages} />
           <Button
             type="submit"
