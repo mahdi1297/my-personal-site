@@ -41,7 +41,7 @@ const NewPortfolioModal = ({ setModal }) => {
     formData.append("technologies", JSON.stringify(techs));
 
     await createPortfolio(formData);
-    setModal(false);
+    // setModal(false);
   };
 
   return (
