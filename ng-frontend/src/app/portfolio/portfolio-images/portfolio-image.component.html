@@ -1,0 +1,10 @@
+<div class="portfolio_image-container">
+  <div class="portfolio_image-main-image">
+    <img src="http://localhost:5000/{{ main_image }}" />
+  </div>
+  <div class="portfolio_image-images flex">
+    <figure *ngFor="let item of presentation_images">
+      <img src="http://localhost:5000/{{ item.path }}" />
+    </figure>
+  </div>
+</div>

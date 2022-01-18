@@ -1,0 +1,21 @@
+<section class="container">
+  <div *ngIf="portfolio">
+    <div class="flex justify-between w-100 portfolio_container">
+      <div class="content">
+        <portfolio-content
+          [title]="portfolio.title"
+          [link]="portfolio.link"
+          [description]="portfolio.description"
+          [technologies]="portfolio.technologies"
+        >
+        </portfolio-content>
+      </div>
+      <div class="images">
+        <portfolio-imagas
+          [main_image]="portfolio.main_image"
+          [presentation_images]="portfolio.presentation_images"
+        ></portfolio-imagas>
+      </div>
+    </div>
+  </div>
+</section>

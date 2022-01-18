@@ -1,0 +1,50 @@
+.portfolio_image-container {
+  width: 100%;
+  height: auto;
+  padding: 10%;
+}
+.portfolio_image-main-image img {
+  border-radius: 20px;
+  width: 100%;
+}
+.portfolio_image-images {
+  overflow-x: auto;
+  overflow-y: clip;
+  direction: ltr;
+  margin-top: 30px;
+  height: 170px;
+}
+.portfolio_image-images figure {
+  height: 150px;
+  margin: 0;
+  padding: 0;
+  margin-right: 30px;
+}
+.portfolio_image-images figure img {
+  height: 100%;
+  width: auto;
+  border-radius: 20px;
+}
+
+.portfolio_image-images::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.portfolio_image-images::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.portfolio_image-images::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 850px) {
+  .portfolio_image-container {
+    padding: 0;
+    padding-top: 20px;
+    padding-right: 20px;
+  }
+}

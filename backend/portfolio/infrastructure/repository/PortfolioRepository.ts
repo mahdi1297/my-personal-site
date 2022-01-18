@@ -15,6 +15,10 @@ class PortfolioRepository<T extends mongoose.Document>
         return await this._model.findOne({ _id: _id });
     }
 
+    async getBySlug(slug: string) {
+        return await this._model.findOne({ slug: slug });
+    }
+
     async list() {
         return await this._model
             .find({ isConfirmed: "true" }, ["title", "slug", "main_image"])

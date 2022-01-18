@@ -2,8 +2,10 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import PortfolioRepository from "../infrastructure/repository/PortfolioRepository";
 import {
+    OK,
     PORTFOLIO_NOT_FOUND,
     PROBLEM_IN_CREATE_BLOG,
+    PROBLEM_IN_GETTING_PORTFOLIO,
     PROBLEM_IN_GETTING_PORTFOLIOS,
     SUCCESS_IN_CREATE_PORTFOLIO,
 } from "../../blog/infrastructure/constants/constant";
@@ -104,7 +106,31 @@ class PortfolioApplication {
                 result,
             });
         } catch (err) {
-            return res.status(400).json({ message: PROBLEM_IN_GETTING_PORTFOLIOS });
+            return res
+                .status(400)
+                .json({ message: PROBLEM_IN_GETTING_PORTFOLIOS });
+        }
+    }
+
+    async getBySlug(req: any, res: any) {
+        const { slug } = req.params;
+
+        try {
+            const result = await this._repo.getBySlug(slug);
+            console.log(result);
+
+            if (!result) {
+                return res.status(404).json({ message: PORTFOLIO_NOT_FOUND });
+            }
+            return res.json({
+                status: 200,
+                message: OK,
+                result,
+            });
+        } catch (err) {
+            return res
+                .status(400)
+                .json({ message: PROBLEM_IN_GETTING_PORTFOLIO });
         }
     }
 }

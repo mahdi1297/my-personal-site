@@ -8,10 +8,11 @@ const PROBLEM_IN_GET_LIST_OF_BLOG = "مشکلی در گرفتن لیست بلا�
     PLEASE_INSERT_IMAGE = "لطفا تصویر را انتخاب کنید",
     REPEATED_TITLE = "عنوان تکراریست",
     SOME_PROBLEM_HAPPEND = "مشکلی پیش آمد",
-    PORTFOLIO_NOT_FOUND = "پورتفولیویی وجود ندارد",
+    PORTFOLIO_NOT_FOUND = "پورتفولیو یافت نشد",
     REPEATED_SLUG = "slug تکراریست",
     BLOG_NOT_FOUND = "بلاگی یافت نشد",
     PROBLEM_IN_GETTING_PORTFOLIOS = "مشکلی در دریافت پورتفولیو ها به وجود آمد",
+    PROBLEM_IN_GETTING_PORTFOLIO = "مشکلی در دریافت پورتفولیو  به وجود آمد",
     OK = "Ok";
 
 export {
@@ -28,6 +29,7 @@ export {
     SUCCESS_IN_CREATE_PORTFOLIO,
     REPEATED_SLUG,
     PROBLEM_IN_GETTING_PORTFOLIOS,
+    PROBLEM_IN_GETTING_PORTFOLIO,
     PORTFOLIO_NOT_FOUND,
     OK,
 };

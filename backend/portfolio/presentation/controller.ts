@@ -7,10 +7,14 @@ class PortfolioController {
         await _app.create(req, res);
     }
 
-    async list(req: any, res: any) {
-        console.log("skdfhskdfjdsf");
+    async list(req: express.Request, res: express.Response) {
         const _app = new PortfolioApplication();
         await _app.list(req, res);
+    }
+
+    async getBySlug(req: express.Request, res: express.Response) {
+        const _app = new PortfolioApplication();
+        _app.getBySlug(req, res);
     }
 }
 
