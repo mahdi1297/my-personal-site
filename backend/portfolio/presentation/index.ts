@@ -14,7 +14,7 @@ class CommentsRoutes {
     get routers() {
         var controller = this._controller;
 
-        route.post("/", controller.create).post("/list", controller.list);
+        route.post("/", controller.create).get("/", controller.list);
 
         return route;
     }

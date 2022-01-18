@@ -8,6 +8,7 @@ class PortfolioController {
     }
 
     async list(req: any, res: any) {
+        console.log("skdfhskdfjdsf");
         const _app = new PortfolioApplication();
         await _app.list(req, res);
     }

@@ -2,12 +2,16 @@ const PROBLEM_IN_GET_LIST_OF_BLOG = "مشکلی در گرفتن لیست بلا�
     PROBLEM_IN_GET_BLOG = "مشکل در ردیافت بلاگ",
     PROBLEM_IN_CREATE_BLOG = "مشکل در ساخت بلاگ",
     SUCCESS_IN_CREATE_BLOG = "بلاگ با موفقیت ساخته شد",
+    SUCCESS_IN_CREATE_PORTFOLIO = "پورتفولیو با موفقیت ساخته شد",
     SUCCESS_IN_UPLOAD_IMAGE = "تص.یر با وفقیت ذخیره شد",
     BLOG_LIST_NOT_FOUND = "لیست بلاگ پیدا نشد",
     PLEASE_INSERT_IMAGE = "لطفا تصویر را انتخاب کنید",
     REPEATED_TITLE = "عنوان تکراریست",
+    SOME_PROBLEM_HAPPEND = "مشکلی پیش آمد",
+    PORTFOLIO_NOT_FOUND = "پورتفولیویی وجود ندارد",
     REPEATED_SLUG = "slug تکراریست",
     BLOG_NOT_FOUND = "بلاگی یافت نشد",
+    PROBLEM_IN_GETTING_PORTFOLIOS = "مشکلی در دریافت پورتفولیو ها به وجود آمد",
     OK = "Ok";
 
 export {
@@ -19,7 +23,11 @@ export {
     BLOG_LIST_NOT_FOUND,
     PLEASE_INSERT_IMAGE,
     BLOG_NOT_FOUND,
+    SOME_PROBLEM_HAPPEND,
     REPEATED_TITLE,
+    SUCCESS_IN_CREATE_PORTFOLIO,
     REPEATED_SLUG,
+    PROBLEM_IN_GETTING_PORTFOLIOS,
+    PORTFOLIO_NOT_FOUND,
     OK,
 };

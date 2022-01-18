@@ -128,13 +128,14 @@ class BlogApplication {
             };
             const result = await this._repo.create(<IBlogDomain>dataToStore);
 
-            if (result !== null) {
-                return res.json({
-                    status: 200,
-                    message: SUCCESS_IN_CREATE_BLOG,
-                    result,
-                });
+            if (!result) {
+                return res.status(400).json({ message: "Bad Request" });
             }
+            return res.json({
+                status: 200,
+                message: SUCCESS_IN_CREATE_BLOG,
+                result,
+            });
         } catch (err) {}
     }
 

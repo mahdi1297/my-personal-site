@@ -17,8 +17,9 @@ class PortfolioRepository<T extends mongoose.Document>
 
     async list() {
         return await this._model
-            .find({ isConfirmed: "true" })
-            .sort({ createdAt: "-1" });
+            .find({ isConfirmed: "true" }, ["title", "slug", "main_image"])
+            .sort({ createdAt: "-1" })
+            .lean();
     }
 
     async editList(pageNumber: number) {

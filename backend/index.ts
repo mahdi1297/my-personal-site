@@ -18,9 +18,8 @@ dotenv.config();
 
 app.use("/favicon.png", express.static("uploads/static/favicon.png"));
 
-// Setting the app router and static folder
 app.use(express.static(path.resolve("./public")));
-app.use("/public", express.static(path.resolve("./public"))); //<--new line added
+app.use("/public", express.static(path.resolve("./public")));
 
 if (cluster.isPrimary) {
     for (let i = 0; i < totalCPUs.cpus().length; i++) {
@@ -39,7 +38,7 @@ if (cluster.isPrimary) {
         .use(cors())
         .use(helmet())
         .use(cookieParser())
-        .use(morgan("tiny"));
+        .use(morgan("dev"));
 
     route.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*");

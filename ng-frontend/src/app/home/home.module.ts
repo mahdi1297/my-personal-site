@@ -7,7 +7,7 @@ import { IconsModule } from '../icons/icons.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { PricingComponent } from './pricing/pricing.component';
-import { PortfoliosComponent } from './portfolio/portfolios.component';
+import { WorksComponent } from './works/works.component';
 
 @NgModule({
   imports: [
@@ -17,7 +17,12 @@ import { PortfoliosComponent } from './portfolio/portfolios.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomeComponent, HeroComponent, PricingComponent, PortfoliosComponent],
+  declarations: [
+    HomeComponent,
+    HeroComponent,
+    PricingComponent,
+    WorksComponent,
+  ],
   exports: [HomeComponent],
   bootstrap: [HomeComponent],
 })
