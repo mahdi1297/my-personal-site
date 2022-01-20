@@ -6,6 +6,7 @@ const PROBLEM_IN_GET_LIST_OF_BLOG = "مشکلی در گرفتن لیست بلا�
     SUCCESS_IN_UPLOAD_IMAGE = "تص.یر با وفقیت ذخیره شد",
     BLOG_LIST_NOT_FOUND = "لیست بلاگ پیدا نشد",
     PLEASE_INSERT_IMAGE = "لطفا تصویر را انتخاب کنید",
+    PROBLEM_IN_GETTING_BLOG = "مشکل در دریافت لیست مطالب",
     REPEATED_TITLE = "عنوان تکراریست",
     SOME_PROBLEM_HAPPEND = "مشکلی پیش آمد",
     PORTFOLIO_NOT_FOUND = "پورتفولیو یافت نشد",
@@ -31,5 +32,6 @@ export {
     PROBLEM_IN_GETTING_PORTFOLIOS,
     PROBLEM_IN_GETTING_PORTFOLIO,
     PORTFOLIO_NOT_FOUND,
+    PROBLEM_IN_GETTING_BLOG,
     OK,
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { Editor } from "@tinymce/tinymce-react";
-import { Col } from "reactstrap";
-import { Label } from "../form/style";
 import { TextEditorBody } from "./style";
+import { Editor } from "@tinymce/tinymce-react";
+import { Label } from "../form/style";
+import { Col } from "reactstrap";
 
-const TextEditor = ({ data, setContent }) => {
+const TextEditor = ({ data, setContent, defaultValue }) => {
   const handleEditorChange = (e) => {
     setContent(e.target.getContent());
   };
@@ -20,9 +20,15 @@ const TextEditor = ({ data, setContent }) => {
           <div style={{ background: "#ccc" }}>
             <Editor
               apiKey={"trtvhes2el6zikxr7d8cz07gx3y2q77cgw9dcmqsvv0ktlqu"}
-              initialValue="<p>This is the initial content of the editor</p>"
+              initialValue={
+                defaultValue
+                  ? defaultValue
+                  : "<p>This is the initial content of the editor</p>"
+              }
               init={{
-                height: 300,
+                selector: "textarea",
+                deprecation_warnings: false,
+                height: 800,
                 menubar: "insert",
                 paste_as_text: true,
                 plugins: [

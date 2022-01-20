@@ -15,10 +15,24 @@ class BlogRepository<T extends mongoose.Document>
             .sort({ createdAt: "-1" });
     }
 
-    async getByID(parentId: string) {
+    async editList(pageNumber: number) {
         return await this._model
-            .findOne({ _id: parentId })
-            .select(["title", "slug"]);
+            .find({}, ["_id", "title", "writer", "thumbnail", "createdAt"])
+            .limit(12)
+            .skip(12 * (pageNumber - 1))
+            .sort({ createdAt: "-1" });
+    }
+
+    async count() {
+        return await this._model.count({});
+    }
+
+    async getByID(parentId: string) {
+        return await this._model.findOne({ _id: parentId }, ["title", "slug"]);
+    }
+
+    async getDetailByID(_id: string) {
+        return await this._model.findOne({ _id: _id });
     }
 
     async getBySlug(slug: string) {
@@ -37,7 +51,9 @@ class BlogRepository<T extends mongoose.Document>
         return await this._model.exists({ title: title });
     }
 
-    update: (_id: string, data: object) => any;
+    async update(_id: string, data: object) {
+        return await this._model.findOneAndUpdate({ _id }, data);
+    }
     remove: (_id: string) => void;
 }
 

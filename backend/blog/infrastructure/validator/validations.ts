@@ -9,4 +9,10 @@ const createBlogValidators = () => {
     ];
 };
 
-export { createBlogValidators };
+const getEditListValidators = () => [
+    body("pageNumber")
+        .isLength({ min: 1, max: 20 })
+        .withMessage("pageNumber is required"),
+];
+
+export { createBlogValidators, getEditListValidators };

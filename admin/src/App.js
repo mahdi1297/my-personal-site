@@ -55,6 +55,11 @@ function App() {
                       <Portfolio />
                     </Suspense>
                   </Route>
+                  <Route path="/blog-list">
+                    <Suspense fallback={<Loader />}>
+                      <BlogList />
+                    </Suspense>
+                  </Route>
                   <Route path="/comments">
                     <Suspense fallback={<Loader />}>
                       <Comments />
@@ -75,6 +80,13 @@ const Comments = lazy(() => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(import("./components/comments"));
+    }, 1000);
+  });
+});
+const BlogList = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import("./components/blog-list"));
     }, 1000);
   });
 });

@@ -4,7 +4,12 @@ import { Label, ErrorP, TypeheadBody } from "./style";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Col } from "reactstrap";
 
-const TypeaheadProvider = ({ data, isSubmited, setTypeheades }) => {
+const TypeaheadProvider = ({
+  data,
+  isSubmited,
+  setTypeheades,
+  defaultValue,
+}) => {
   const typeHeadChangeHandler = (e) => setTypeheades(e);
   return (
     <>
@@ -16,6 +21,7 @@ const TypeaheadProvider = ({ data, isSubmited, setTypeheades }) => {
             </Label>
             <Typeahead
               id="custom-typeahead"
+              defaultSelected={data.default || defaultValue}
               allowNew
               multiple
               newSelectionPrefix={data.newSelectionPrefix}
