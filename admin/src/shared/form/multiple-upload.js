@@ -1,25 +1,39 @@
 /* eslint-disable */
-import React from "react";
+import React, { useEffect } from "react";
 import Icons from "../icons";
 import ImageUploading from "react-images-uploading";
 import { themeColor } from "../../theme/color";
-import { MUploade } from "./style";
+import { ErrorP, MUploade } from "./style";
 import { Label } from "./style";
 import { Col } from "reactstrap";
 
-const MultipleUpload = ({ data, setFiles }) => {
+const MultipleUpload = ({ data, setFiles, default_file, maxNumber }) => {
   const [images, setImages] = React.useState([]);
 
-  const maxNumber = 3;
   const acceptType = ["png", "jpg", "gif", "jfif"];
-  const maxFileSize = 2024 * 2024; // 1mb
+  const maxFileSize = 2024 * 2024;
   const resolutionType = "absolute";
   const resolutionWidth = 500;
   const resolutionHeight = 500;
 
+  useEffect(() => {
+    if (default_file) {
+      setImages([
+        {
+          data_url: `http://localhost:5000/${default_file}`,
+        },
+      ]);
+    }
+
+    return () => {
+      setImages([]);
+    };
+  }, []);
+
   const onChange = (imageList, addUpdateIndex) => {
     // console.log(imageList);
     setFiles(imageList);
+    console.log(imageList);
     // console.log(addUpdateIndex);
     setImages(imageList);
   };
@@ -31,10 +45,10 @@ const MultipleUpload = ({ data, setFiles }) => {
 
   return (
     <>
-      <Col sm="12" xl={12} className="mb-3">
+      <Col sm="12" xl={12} className="mt-3">
         <div className="form-group">
           <Label htmlFor={"test"} className="mb-3">
-            لیبل تستی
+            آپلود عکس
           </Label>
           <ImageUploading
             multiple
@@ -92,7 +106,7 @@ const MultipleUpload = ({ data, setFiles }) => {
                       {imageList.map((image, index) => (
                         <div key={index} className="image-item">
                           <img src={image["data_url"]} alt="" width="100" />
-                          <div className="image-item__btn-wrapper d-flex justify-content-evenly">
+                          <div className="image-item__btn-wrapper d-flex ">
                             <button
                               onClick={() => onImageUpdate(index)}
                               type="button"
@@ -113,18 +127,22 @@ const MultipleUpload = ({ data, setFiles }) => {
                 </MUploade>
 
                 {errors && (
-                  <div style={{ color: "red" }}>
+                  <div className="mt-3">
                     {errors.maxNumber && (
-                      <p>Number of selected images exceed maxNumber</p>
+                      <ErrorP>حد مجاز آپلود فایل، {maxNumber} مورد است</ErrorP>
                     )}
                     {errors.acceptType && (
-                      <p>Your selected file type is not allow</p>
+                      <ErrorP>
+                        فقط فرمت های png, jpg, gif, jfif قابل قبول اند
+                      </ErrorP>
                     )}
                     {errors.maxFileSize && (
-                      <p>Selected file size exceed maxFileSize</p>
+                      <ErrorP>حداکثر سایز عکس 2024 * 2024 است</ErrorP>
                     )}
                     {errors.resolution && (
-                      <p>Selected file is not match your desired resolution</p>
+                      <ErrorP>
+                        Selected file is not match your desired resolution
+                      </ErrorP>
                     )}
                   </div>
                 )}

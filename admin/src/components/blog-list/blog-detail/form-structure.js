@@ -28,34 +28,6 @@ const formStructure = [
     },
   },
   {
-    id: 3,
-    size: 12,
-    type: "text",
-    name: "keyword",
-    placeholder: "مثلا react, redux, nextjs, nodejs",
-    label: "کلمات کلیدی",
-    labelRequired: true,
-    validation: {
-      required: true,
-      minLength: 5,
-      maxLength: 250,
-    },
-  },
-  {
-    id: 4,
-    size: 12,
-    type: "file",
-    name: "image",
-    placeholder: "تصویر اصلی و بند انگشتی",
-    label: "تصویر اصلی و بند انگشتی",
-    labelRequired: true,
-    validation: {
-      required: true,
-      minLength: 5,
-      maxLength: 250,
-    },
-  },
-  {
     id: 5,
     size: 12,
     type: "textarea",
@@ -72,6 +44,20 @@ const formStructure = [
   },
 ];
 
+const imageUploadStructure = {
+  size: 12,
+  type: "file",
+  name: "image",
+  placeholder: "تصویر اصلی و بند انگشتی",
+  label: "تصویر اصلی و بند انگشتی",
+  labelRequired: true,
+  validation: {
+    required: true,
+    minLength: 5,
+    maxLength: 250,
+  },
+};
+
 const textEditorStructure = {
   name: "content",
   size: 12,
@@ -85,4 +71,9 @@ const typeheadStructure = {
   newSelectionPrefix: "اضافه کردن تگ :",
 };
 
-export { textEditorStructure, typeheadStructure, formStructure };
+export {
+  textEditorStructure,
+  typeheadStructure,
+  formStructure,
+  imageUploadStructure,
+};

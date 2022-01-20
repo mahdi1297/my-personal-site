@@ -62,7 +62,7 @@ const NewPortfolioModal = ({ setModal }) => {
             setTypeheades={setTechs}
           />
 
-          <MultipleUpload setFiles={setImages} />
+          <MultipleUpload setFiles={setImages} maxNumber={5} />
           <Button
             type="submit"
             className=" c-white"
