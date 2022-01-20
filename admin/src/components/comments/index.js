@@ -39,7 +39,6 @@ const Comments = ({ history, location }) => {
 
   const request = async () => {
     setIsLoading(true);
-
     const { data } = await getCommentList(pageParam);
     if (data.result) {
       setColumnsLength(data.count);

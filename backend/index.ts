@@ -1,7 +1,6 @@
 import express from "express";
 import cluster from "cluster";
 import helmet from "helmet";
-import cors from "cors";
 import totalCPUs from "os";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
@@ -9,18 +8,17 @@ import BaseRoutes from "./BaseRoutes";
 import path from "path";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
+const cors = require("cors");
 
 const app = express();
-const route = express.Router();
 
 dotenv.config({ path: __dirname + "/.env" });
 dotenv.config();
 
 app.use("/favicon.png", express.static("uploads/static/favicon.png"));
 
-// Setting the app router and static folder
 app.use(express.static(path.resolve("./public")));
-app.use("/public", express.static(path.resolve("./public"))); //<--new line added
+app.use("/public", express.static(path.resolve("./public")));
 
 if (cluster.isPrimary) {
     for (let i = 0; i < totalCPUs.cpus().length; i++) {
@@ -33,13 +31,20 @@ if (cluster.isPrimary) {
         cluster.fork();
     });
 } else {
-    app.use(express.json({ limit: "50mb" }))
+    app.use(
+        cors({
+            origin: ["http://localhost:3006", "http://localhost:4200"],
+            optionsSuccessStatus: 200,
+        })
+    )
+        .use(express.json({ limit: "50mb" }))
         .use(express.urlencoded({ limit: "50mb" }))
         .use(fileUpload())
-        .use(cors())
         .use(helmet())
         .use(cookieParser())
-        .use(morgan("tiny"));
+        .use(morgan("dev"));
+
+    const route = express.Router();
 
     route.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*");

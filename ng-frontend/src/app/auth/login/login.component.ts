@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       this.apiService.post(this.LOGIN_API_ADDRESS, userData).subscribe(
         (data: any) => {
           if (data && data.status === 200) {
-            this.cookieService.set('u_t', data.result, 100000);
+            this.cookieService.set('u_t', data.result, 100000, '/');
             if (this.cookieService.check('u_t')) {
               this.toast.success(
                 'بعد از 5 ثانیه به خانه منتقل میشوید',

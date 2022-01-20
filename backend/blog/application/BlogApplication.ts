@@ -16,6 +16,7 @@ import {
     BLOG_NOT_FOUND,
     REPEATED_SLUG,
     OK,
+    PROBLEM_IN_GETTING_BLOG,
 } from "../infrastructure/constants/constant";
 
 const app = express();
@@ -47,6 +48,32 @@ class BlogApplication {
             return res
                 .status(400)
                 .json({ status: 400, message: PROBLEM_IN_GET_LIST_OF_BLOG });
+        }
+    }
+
+    async editList(req: any, res: any) {
+        const { page } = req.params;
+
+        try {
+            const commentsCount = await this._repo.count();
+
+            if (commentsCount === null) {
+                return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
+            }
+
+            const result = await this._repo.editList(page);
+            if (result === null)
+                return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
+
+            res.json({
+                status: 200,
+                total: commentsCount,
+                message: "Ok",
+                result,
+                count: result.length | 0,
+            });
+        } catch (err) {
+            return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
         }
     }
 
@@ -128,13 +155,14 @@ class BlogApplication {
             };
             const result = await this._repo.create(<IBlogDomain>dataToStore);
 
-            if (result !== null) {
-                return res.json({
-                    status: 200,
-                    message: SUCCESS_IN_CREATE_BLOG,
-                    result,
-                });
+            if (!result) {
+                return res.status(400).json({ message: "Bad Request" });
             }
+            return res.json({
+                status: 200,
+                message: SUCCESS_IN_CREATE_BLOG,
+                result,
+            });
         } catch (err) {}
     }
 
@@ -172,7 +200,6 @@ class BlogApplication {
 
     async getById(req: any, res: any) {
         const { parentId } = req.body;
-
         try {
             const result = await this._repo.getByID(parentId);
             if (result === null) {
@@ -186,6 +213,39 @@ class BlogApplication {
         } catch (err) {
             resError(res, 400, BLOG_NOT_FOUND);
         }
+    }
+
+    async getDetailById(req: any, res: any) {
+        const { _id } = req.body;
+        try {
+            const result = await this._repo.getDetailByID(_id);
+            if (result === null) {
+                return resError(res, 400, BLOG_NOT_FOUND);
+            }
+            return res.json({
+                status: 200,
+                message: OK,
+                result,
+            });
+        } catch (err) {
+            resError(res, 400, BLOG_NOT_FOUND);
+        }
+    }
+
+    async update(req: any, res: any) {
+        const { _id } = req.body;
+
+        const blogData = {
+            _id,
+            title: req.body.title,
+            slug: req.body.slug,
+            main_image: req.body.main_image,
+            description: req.body.description,
+            tags: req.body.tags,
+            content: req.body.content,
+            thumbnail: req.body.thumbnail,
+        };
+        console.log(blogData);
     }
 }
 

@@ -4,11 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CookieService } from 'ngx-cookie-service';
 import { IconsModule } from '../icons/icons.module';
-import { ApiService } from '../services/http.service';
-import { TimeService } from '../services/time.service';
-import { TokenService } from '../services/token.service';
 import { CommentComponent } from '../shared/comment/comment.component';
 
 import { LoadingComponent } from '../shared/loading/loading.component';
@@ -48,7 +44,7 @@ import { ItemsComponent } from './items/items.component';
     NewCommentComponent,
     CommentComponent,
   ],
-  schemas: [NO_ERRORS_SCHEMA],
+  // schemas: [NO_ERRORS_SCHEMA],
   exports: [BlogComponent],
   bootstrap: [BlogComponent],
 })

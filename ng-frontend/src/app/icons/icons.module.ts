@@ -9,8 +9,10 @@ import {
   Twitter,
   Link,
   Menu,
+  Activity,
   Edit,
   CornerUpLeft,
+  Tag,
   X,
 } from 'angular-feather/icons';
 
@@ -18,8 +20,10 @@ const icons = {
   ChevronRight,
   ChevronLeft,
   CornerUpLeft,
+  Activity,
   PenTool,
   Edit,
+  Tag,
   Instagram,
   Linkedin,
   Twitter,

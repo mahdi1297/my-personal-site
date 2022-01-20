@@ -100,4 +100,98 @@ const ErrorP = styled.p`
   font-size: 13px;
 `;
 
-export { Label, InputBody, TextAreaBody, FileInput, TypeheadBody, ErrorP };
+const MUploade = styled.div`
+  background: ${themeColor.LIGHT}!important;
+  border: none !important;
+  border-right: 4px solid ${themeColor.ORANGE}!important;
+  padding: 8px !important;
+  border-radius: 0;
+
+  & button.bn-uploader,
+  & div.image-upload-body {
+    padding: 0 100px;
+    border: none;
+    background: none;
+    border-radius: 10px;
+    position: relative;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    height: 300px !important;
+    width: 90%;
+    height: 90%;
+  }
+  & button.bn-uploader {
+    border: 1px solid #eee;
+    & button.image-remover {
+      color: ${themeColor.BLACK};
+    }
+    & svg {
+      margin-right: 10px;
+    }
+  }
+  & button.bn-uploader:hover {
+    background: #fff;
+  }
+  & div.image-upload-body {
+    overflow-x: clip;
+    overflow-y: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    display: flex;
+    // flex-direction: column !important;
+    padding: 5px;
+    flex-wrap: wrap;
+    margin: 0;
+
+    & div.image-item {
+      width: 100%;
+      height: 150px;
+      min-height: 130px;
+      padding: 10px;
+      display: inline;
+      margin-bottom: 15px;
+      background: #fff;
+      box-shadow: 1px 3px 5px #eee;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+
+      & img {
+        width: auto;
+        height: 100%;
+        border-radius: 5px;
+        box-shadow: 1px 3px 5px #eee;
+      }
+
+      & div.image-item__btn-wrapper {
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start !important;
+        & button {
+          width: 30px;
+          height: 30px;
+          border: 1px solid black;
+          border: none;
+          background: none;
+        }
+        & button:hover {
+          opacity: 20%;
+        }
+      }
+    }
+  }
+`;
+
+export {
+  Label,
+  InputBody,
+  TextAreaBody,
+  FileInput,
+  TypeheadBody,
+  ErrorP,
+  MUploade,
+};

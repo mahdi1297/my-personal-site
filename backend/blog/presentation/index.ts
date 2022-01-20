@@ -17,10 +17,13 @@ class BlogRoutes {
 
         route
             .get("/list/:pageNumber", controller.list)
+            .post("/edit-list/:pageNumber", controller.editList)
             .post("/", createBlogValidators(), validate, controller.create)
+            .put("/", createBlogValidators(), validate, controller.update)
             .post("/get-by-slug", controller.getBySlug)
             .post("/image-upload", controller.imageUpload)
-            .post("/get-by-id", controller.getById);
+            .post("/get-by-id", controller.getById)
+            .post("/get-detail", controller.getDetailById);
         return route;
     }
 }

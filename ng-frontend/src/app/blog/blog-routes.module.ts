@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
-import {
-  RouterModule,
-  Routes,
-  PreloadingStrategy,
-  PreloadAllModules,
-} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { BlogComponent } from './blog.component';
 
