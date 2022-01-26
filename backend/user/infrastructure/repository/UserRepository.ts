@@ -8,7 +8,20 @@ class UserRepository<T extends mongoose.Document>
     private _model = UserSchema;
 
     async list(pageNumber: number) {
-        return await this._model.find({});
+        return await this._model
+            .find({}, [
+                "_id",
+                "username",
+                "email",
+                "iSRegistered",
+                "role",
+                "profile",
+                "createdAt",
+                "updatedAt",
+            ])
+            .limit(12)
+            .skip(12 * (pageNumber - 1))
+            .sort({ createdAt: "-1" });
     }
 
     async create(item: T) {
@@ -34,15 +47,23 @@ class UserRepository<T extends mongoose.Document>
     async remove(_id: string) {
         return await this._model.findOneAndUpdate(
             { _id: _id },
-            { isRegistered: false }
+            {
+                iSRegistered: "false",
+            }
         );
     }
 
     async refactor(_id: string) {
         return await this._model.findOneAndUpdate(
             { _id: _id },
-            { isRegistered: true }
+            {
+                iSRegistered: "true",
+            }
         );
+    }
+
+    async check(_id: string) {
+        return await this._model.exists({ _id });
     }
 }
 

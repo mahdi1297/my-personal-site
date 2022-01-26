@@ -6,6 +6,7 @@ interface IUserRpository<T> {
     remove: (_id: string) => any;
     refactor: (_id: string) => any;
     count: () => any;
+    check: (_id: string) => any;
 }
 
 export default IUserRpository;

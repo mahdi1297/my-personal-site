@@ -1,8 +1,5 @@
-import mongoose from "mongoose";
-
-interface IUserDomain extends mongoose.Document {
+interface IUserModel {
     username: string;
-    password: string;
     email: string;
     phone: string;
     isRegistered: string;
@@ -11,4 +8,4 @@ interface IUserDomain extends mongoose.Document {
     profile: string;
 }
 
-export default IUserDomain;
+export default IUserModel;

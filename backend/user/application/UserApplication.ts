@@ -1,17 +1,18 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import TokenRepository from "../../token/infrastructure/repository/TokenRepository";
 import UserRepository from "../infrastructure/repository/UserRepository";
 import ITokenDomain from "../../token/domain/ITokenDomain";
 import IUserDomain from "../domain/IUserDomain";
 import fileUpload from "express-fileupload";
+import IUserModel from "../domain/IUserMode";
 import jwt_decode from "jwt-decode";
 import jwt from "jsonwebtoken";
-import { resError } from "../../0-framework/error-handler/errors";
-import { Signjwt } from "../../0-framework/middlewares/jwt";
 import {
     comparePassword,
     hashPassword,
 } from "../../0-framework/middlewares/bcrypt";
+import { resError } from "../../0-framework/error-handler/errors";
+import { Signjwt } from "../../0-framework/middlewares/jwt";
 
 const app = express();
 
@@ -26,29 +27,145 @@ class UserApplication {
         this._tokenRepo = new TokenRepository();
     }
 
-    async list(req: any, res: any) {
+    async list(req: Request, res: Response) {
         const { pageNumber } = req.body;
+        // const { role } = req.body.role;
 
+        // if (role !== "admin") {
+        //     return res
+        //         .status(403)
+        //         .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
+        // }
         try {
-            const result = await this._repo.list(parseInt(pageNumber) || 0);
+            const result: IUserModel[] = await this._repo.list(
+                parseInt(pageNumber) || 1
+            );
+            if (!result) {
+                return resError(res, 404, "کاربری وجود ندارد");
+            }
             const resultLength = await this._repo.count();
-            console.log(result);
-            // if (!result) {
-            //     return resError(res, 404, "کاربری وجود ندارد");
-            // }
+            if (!resultLength) {
+                return resError(res, 404, "کاربری وجود ندارد");
+            }
             return res.json({
                 status: 200,
                 message: "Ok",
-                // result,
-                // total: resultLength,
-                // count: result.length | 0,
+                result,
+                total: resultLength,
+                count: result.length | 0,
             });
         } catch (err) {
             return resError(res, 404, "کاربری وجود ندارد");
         }
     }
 
-    async getByToken(req: any, res: any, next: any) {
+    async update(req: Request, res: Response) {
+        const { _id, editorRole } = req.body;
+        const requestBody = req.body;
+        delete requestBody._id;
+        delete requestBody.editorRole;
+
+        if (editorRole !== "admin") {
+            return res
+                .status(403)
+                .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
+        }
+
+        try {
+            const isExistsUser = await this._repo.check(_id);
+            if (!isExistsUser) return resError(res, 404, "کاربری وجود ندارد");
+
+            const result = await this._repo.update(_id, requestBody);
+            if (!result) {
+                return resError(res, 400, "خطای ناخواسته ای رخ داد");
+            }
+            result.password = "";
+            return res.json({
+                status: 200,
+                message: "کاربر با موفقیت ویرایش شد",
+                result,
+            });
+        } catch (err) {
+            return resError(res, 400, "خطای ناخواسته ای رخ داد");
+        }
+    }
+
+    async remove(req: Request, res: Response) {
+        const { _id, role } = req.body;
+
+        if (role !== "admin") {
+            return res
+                .status(403)
+                .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
+        }
+        try {
+            const result = await this._repo.remove(_id);
+            console.log(result);
+            if (!result) {
+                return resError(res, 404, "کاربری یافت نشد");
+            }
+            result.password = "";
+            return res.json({
+                status: 200,
+                message: "کاربر با موفقیت ویرایش شد",
+                result,
+            });
+        } catch (err) {
+            return resError(res, 404, "کاربری یافت نشد");
+        }
+    }
+
+    async refactor(req: Request, res: Response) {
+        const { _id, role } = req.body;
+
+        if (role !== "admin") {
+            return res
+                .status(403)
+                .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
+        }
+        try {
+            const result = await this._repo.refactor(_id);
+            console.log(result);
+            if (!result) {
+                return resError(res, 404, "کاربری یافت نشد");
+            }
+            result.password = "";
+            return res.json({
+                status: 200,
+                message: "کاربر با موفقیت ویرایش شد",
+                result,
+            });
+        } catch (err) {
+            return resError(res, 404, "کاربری یافت نشد");
+        }
+    }
+
+    async getById(req: Request, res: Response) {
+        const { _id, role } = req.body;
+
+        if (role !== "admin") {
+            return res
+                .status(403)
+                .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
+        }
+
+        try {
+            const result = await this._repo.get({ _id: _id });
+            result.password = "";
+            if (!result) {
+                return resError(res, 404, "کاربری یافت نشد");
+            }
+            return res.json({
+                status: 200,
+                message: "Ok",
+                result,
+            });
+        } catch (err) {
+            return resError(res, 404, "کاربری یافت نشد");
+        }
+    }
+
+    async getByToken(req: Request, res: Response, next: any) {
         const { token } = req.body;
         if (token === "") {
             return resError(res, 400, "درخواست اشتباه");
@@ -146,7 +263,7 @@ class UserApplication {
         }
     }
 
-    async login(req: any, res: any) {
+    async login(req: Request, res: Response) {
         const { email, password, username, from } = req.body;
 
         try {
@@ -200,7 +317,7 @@ class UserApplication {
         }
     }
 
-    async register(req: any, res: any) {
+    async register(req: Request, res: Response) {
         const isExistsUser = await this._repo.checkUser({
             $or: [
                 {

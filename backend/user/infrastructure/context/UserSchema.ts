@@ -22,8 +22,8 @@ class UserSchema {
                     type: String,
                 },
                 iSRegistered: {
-                    type: Boolean,
-                    default: true,
+                    type: String,
+                    default: "true",
                 },
                 token_id: {
                     type: String,

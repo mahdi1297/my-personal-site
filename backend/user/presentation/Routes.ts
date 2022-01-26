@@ -4,6 +4,8 @@ import {
     createUserValidators,
     loginUserValidations,
     getByTokenValidations,
+    updateUserValidators,
+    getUserValidations,
 } from "../infrastructure/validator/validations";
 import UserController from "./Controller";
 
@@ -21,7 +23,16 @@ class UserRoutes {
 
         route
             .post("/", createUserValidators(), validate, controller.register)
-            .post("/list", controller.list)
+            .post("/list", updateUserValidators(), validate, controller.list)
+            .post(
+                "/get-by-id",
+                getUserValidations(),
+                validate,
+                controller.getById
+            )
+            .delete("/", controller.remove)
+            .put("/refactor", controller.refactor)
+            .put("/", controller.update)
             .post("/login", loginUserValidations(), validate, controller.login)
             .post(
                 "/get-user",
