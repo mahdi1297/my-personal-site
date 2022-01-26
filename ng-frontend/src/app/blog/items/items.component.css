@@ -49,6 +49,7 @@
 }
 .blog_items-card_header img {
   border-radius: 2px;
+  box-shadow: 1px 14px 13px #27244336;
 }
 .blog_items-card_header img:hover {
   opacity: 60%;

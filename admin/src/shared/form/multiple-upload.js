@@ -7,7 +7,7 @@ import { ErrorP, MUploade } from "./style";
 import { Label } from "./style";
 import { Col } from "reactstrap";
 
-const MultipleUpload = ({ data, setFiles, default_file, maxNumber }) => {
+const MultipleUpload = ({ setFiles, default_file, maxNumber }) => {
   const [images, setImages] = React.useState([]);
 
   const acceptType = ["png", "jpg", "gif", "jfif"];
@@ -28,7 +28,7 @@ const MultipleUpload = ({ data, setFiles, default_file, maxNumber }) => {
     return () => {
       setImages([]);
     };
-  }, []);
+  }, [default_file]);
 
   const onChange = (imageList, addUpdateIndex) => {
     // console.log(imageList);

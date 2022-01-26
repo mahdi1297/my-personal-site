@@ -1,8 +1,8 @@
 import React from "react";
 import Icons from "../../shared/icons";
 import { SidebarBody, SidebarHeader } from "./style";
-import { sidebarRoutes } from "./routes";
 import { Link, withRouter } from "react-router-dom";
+import { sidebarRoutes } from "./routes";
 
 const Sidebar = ({ location }) => {
   return (
@@ -17,11 +17,13 @@ const Sidebar = ({ location }) => {
           <li
             key={route.id}
             className={
-              location.pathname !== "/"
-                ? route.path.includes(location.pathname)
+              location.pathname === "/"
+                ? route.path === location.pathname
                   ? "active"
-                  : ""
-                : route.path === location.pathname && "active"
+                  : undefined
+                : route.path.includes(location.pathname)
+                ? "active"
+                : undefined
             }
           >
             <Link

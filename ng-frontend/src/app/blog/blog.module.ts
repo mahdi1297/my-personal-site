@@ -20,6 +20,7 @@ import { BlogComponent } from './blog.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { HeroComponent } from './hero/hero.component';
 import { ItemsComponent } from './items/items.component';
+import { SafeHtml } from '../pipes/safehtml.pipe';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { ItemsComponent } from './items/items.component';
     BlogListComponent,
     NewCommentComponent,
     CommentComponent,
+    SafeHtml,
   ],
   // schemas: [NO_ERRORS_SCHEMA],
   exports: [BlogComponent],

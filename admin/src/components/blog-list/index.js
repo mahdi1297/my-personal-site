@@ -5,11 +5,12 @@ import TableContainer from "../../shared/table";
 import Pagination from "../../shared/pagination";
 import PageTitle from "../../shared/page-title";
 import Loader from "../../shared/loader";
-import { getBlogList } from "./data";
 import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
-import { tableColumns } from "./table-columns";
 import { withRouter } from "react-router-dom";
 import { heads } from "./table-heads";
+import { tableColumns } from "./table-columns";
+import { getBlogList } from "./data";
+import { CSSTransition } from "react-transition-group";
 
 const BlogDetail = lazy(() => {
   return new Promise((resolve) => {
@@ -20,8 +21,8 @@ const BlogDetail = lazy(() => {
 const BlogList = ({ history, location }) => {
   const [choosedComment, setChoosedComment] = useState("");
   const [columnsLength, setColumnsLength] = useState([]);
-  const [totalData, setTotalData] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalData, setTotalData] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [columns, setColumns] = useState([]);
   const [modal, setModal] = useState(false);
@@ -56,10 +57,10 @@ const BlogList = ({ history, location }) => {
     toggle();
   };
 
-  const nextBtnFunc = () => {
+  const nextBtnFunc = async () => {
     setCurrentPage(currentPage + 1);
     history.push(`/blog-list?page=${currentPage + 1}`);
-    columnsLength !== 0 && request();
+    columnsLength !== 0 && (await request());
     setChoosedComment("");
   };
 
@@ -98,19 +99,27 @@ const BlogList = ({ history, location }) => {
         />
       </div>
       {/* response modal */}
-      <Modal isOpen={modal} toggle={toggle} size="xl">
-        <ModalHeader>پاسخ به دیدگاه</ModalHeader>
-        <Suspense fallback={<Loader />}>
-          <BlogDetail _id={choosedComment} />
-        </Suspense>
-        <ModalFooter>
-          <div className="w-100">
-            <Button color="secondary" onClick={toggle}>
-              انصراف
-            </Button>
-          </div>
-        </ModalFooter>
-      </Modal>
+      <CSSTransition
+        in={true}
+        timeout={400}
+        classNames="list-transition"
+        unmountOnExit
+        appear
+      >
+        <Modal isOpen={modal} toggle={toggle} size="xl">
+          <ModalHeader>پاسخ به دیدگاه</ModalHeader>
+          <Suspense fallback={<Loader />}>
+            <BlogDetail _id={choosedComment} />
+          </Suspense>
+          <ModalFooter>
+            <div className="w-100">
+              <Button color="secondary" onClick={toggle}>
+                انصراف
+              </Button>
+            </div>
+          </ModalFooter>
+        </Modal>
+      </CSSTransition>
     </>
   );
 };

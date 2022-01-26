@@ -1,18 +1,13 @@
 import React, { useState } from "react";
-import TypeaheadProvider from "../../shared/form/typehead";
 import FormContainer from "../../shared/form/form-container";
 import TextEditor from "../../shared/text-editor";
 import PageTitle from "../../shared/page-title";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { textEditorStructure, formStructure } from "./form-structure";
 import { Button, Col, Form } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../helper/slugger";
-import {
-  textEditorStructure,
-  typeheadStructure,
-  formStructure,
-} from "./form-structure";
-import toast from "react-hot-toast";
 
 const NewBlog = () => {
   const {
@@ -22,7 +17,6 @@ const NewBlog = () => {
   } = useForm();
 
   const [content, setContent] = useState("");
-  const [typehead, setTypeheades] = useState([]);
 
   const onSubmitHandler = async (data) => {
     const formData = new FormData();
@@ -32,7 +26,7 @@ const NewBlog = () => {
     formData.append("keyword", data.keyword);
     formData.append("content", content);
     formData.append("image", data.image[0]);
-    formData.append("tags", JSON.stringify(typehead));
+    formData.append("tags", "");
     formData.append("writer", "مهدی علی پور");
     const req = await axios.post("http://localhost:5000/api/v1/blog", formData);
     if (req) {
@@ -56,11 +50,6 @@ const NewBlog = () => {
             errors={errors}
           />
         ))}
-
-        <TypeaheadProvider
-          data={typeheadStructure}
-          setTypeheades={setTypeheades}
-        />
 
         <Col xl={12} className={"mt-5"}>
           <TextEditor data={textEditorStructure} setContent={setContent} />

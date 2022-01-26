@@ -1,86 +1,122 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactQuill, { Quill } from "react-quill";
+import ImageUploader from "quill-image-uploader";
+import Preview from "./preview";
 import axios from "axios";
-import { TextEditorBody } from "./style";
-import { Editor } from "@tinymce/tinymce-react";
-import { Label } from "../form/style";
-import { Col } from "reactstrap";
+import { ImageResize } from "./image-resize";
+import { Video } from "./quill-video-resize";
+import "react-quill/dist/quill.snow.css";
+import "./quill-video-resize.css";
 
-const TextEditor = ({ data, setContent, defaultValue }) => {
-  const handleEditorChange = (e) => {
-    setContent(e.target.getContent());
+Quill.register("modules/imageUploader", ImageUploader);
+Quill.register("modules/imageResize", ImageResize);
+Quill.register({ "formats/video": Video });
+
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
+    [{ color: [] }, { background: [] }],
+    [{ align: [] }],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    [{ direction: "rtl" }],
+    ["link", "image", "video", "image-resize"],
+    ["clean"],
+    [{ font: [] }],
+  ],
+
+  clipboard: {
+    matchVisual: false,
+  },
+  history: {
+    delay: 1000,
+    maxStack: 50,
+    userOnly: false,
+  },
+
+  imageUploader: {
+    upload: async (file, data) => {
+      console.log(file);
+      console.log(data);
+      const bodyFormData = new FormData();
+
+      bodyFormData.append("image", file);
+      if (/^image\//.test(file.type)) {
+        const response = await axios({
+          method: "post",
+          url: "http://localhost:5000/api/v1/blog/image-upload",
+          data: bodyFormData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        return `http://localhost:5000/${response.data.url}`;
+      } else {
+        alert("please choose just image");
+      }
+    },
+  },
+  imageResize: {
+    displayStyles: {
+      backgroundColor: "black",
+      border: "none",
+      color: "white",
+    },
+    modules: ["Resize", "DisplaySize", "Toolbar"],
+  },
+};
+const formats = [
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "code-block",
+  "color",
+  "background",
+  "font",
+  "align",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+  "clean",
+  "code",
+  "imageResize",
+];
+
+const TextEditor = ({ defaultValue, setContent }) => {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
+  const handleChange = (data) => {
+    setValue(data);
+    setContent(data);
   };
 
   return (
-    <TextEditorBody>
-      <Col sm="12" xl={data.size} className="mb-3">
-        <div className="form-group">
-          <Label htmlFor={data.name} className="mb-3">
-            {data.label}
-          </Label>
-          <div style={{ background: "#ccc" }}>
-            <Editor
-              apiKey={"trtvhes2el6zikxr7d8cz07gx3y2q77cgw9dcmqsvv0ktlqu"}
-              initialValue={
-                defaultValue
-                  ? defaultValue
-                  : "<p>This is the initial content of the editor</p>"
-              }
-              init={{
-                selector: "textarea",
-                deprecation_warnings: false,
-                height: 800,
-                menubar: "insert",
-                paste_as_text: true,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                  "advlist autolink lists link anchor paste image",
-                  "code",
-                  "autosave",
-                  "image imagetools",
-                  "insertdatetime",
-                  "visualblocks",
-                  "toc",
-                ],
-                toolbar:
-                  "undo redo | formatselect | " +
-                  "bold italic backcolor | alignleft aligncenter " +
-                  "alignright alignjustify | bullist numlist outdent indent | " +
-                  "removeformat | help | code | restoredraft | toc | image | insertdatetime | visualblocks",
-                br_in_pre: true,
-                mobile: {
-                  toolbar_drawer: "floating",
-                },
-                file_picker_types: "file image media",
+    <>
+      <ReactQuill
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        value={value}
+        onChange={handleChange}
+      />
 
-                images_upload_handler: async function (
-                  blobInfo,
-                  success,
-                  failure
-                ) {
-                  console.log(blobInfo.blob());
-                  const formData = new FormData();
-                  formData.append("image", blobInfo.blob());
-                  const req = await axios.post(
-                    "http://localhost:5000/api/v1/blog/image-upload",
-                    formData
-                  );
-                  if (req.status !== 200) {
-                    failure("something bad happend");
-                  }
-                  if (req.data) {
-                    const imageUrl = `http://localhost:5000/${req.data.url}`;
-                    success(imageUrl);
-                  }
-                },
-              }}
-              onChange={handleEditorChange}
-            />
-          </div>
-        </div>
-      </Col>
-    </TextEditorBody>
+      <Preview value={value} />
+    </>
   );
 };
 

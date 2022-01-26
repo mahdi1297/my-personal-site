@@ -52,7 +52,7 @@ class BlogRepository<T extends mongoose.Document>
     }
 
     async update(_id: string, data: object) {
-        return await this._model.findOneAndUpdate({ _id }, data);
+        return await this._model.findOneAndUpdate({ _id: _id }, data);
     }
     remove: (_id: string) => void;
 }

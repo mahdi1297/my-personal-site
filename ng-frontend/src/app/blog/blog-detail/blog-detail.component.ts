@@ -34,10 +34,10 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       this.apiService
         .post('blog/get-by-slug', { slug: param.slug })
         .subscribe((data: any) => {
+          console.log(data);
           data.result.createdAt = this.timeService.toShamsi(
             data.result.createdAt
           );
-          data.result.tags = JSON.parse(data.result.tags[0]);
           this.blogDetail = data;
         });
     });

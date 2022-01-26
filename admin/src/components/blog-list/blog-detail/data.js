@@ -1,8 +1,8 @@
 import { post } from "./../../../utils/httpRequest/post";
 import { put } from "./../../../utils/httpRequest/put";
 
-const GET_BLOG = "http://localhost:5000/api/v1/blog/get-detail",
-  UPDATE_BLOG = "http://localhost:5000/api/v1/blog";
+const GET_BLOG = `${process.env.REACT_APP_API}blog/get-detail`,
+  UPDATE_BLOG = `${process.env.REACT_APP_API}blog/`;
 
 const getBlog = async (_id, setBloginfo) => {
     const { data } = await post(GET_BLOG, { _id: _id }, false, true);
@@ -11,8 +11,8 @@ const getBlog = async (_id, setBloginfo) => {
 
     return { data };
   },
-  updateBlog = async (dataObj) => {
-    const { data } = await put(UPDATE_BLOG, dataObj, true, true);
+  updateBlog = async (formData) => {
+    const { data } = await put(UPDATE_BLOG, formData, true, true);
 
     return { data };
   };

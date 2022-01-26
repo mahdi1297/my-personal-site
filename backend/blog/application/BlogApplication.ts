@@ -17,7 +17,9 @@ import {
     REPEATED_SLUG,
     OK,
     PROBLEM_IN_GETTING_BLOG,
+    PROBLEM_IN_UPDATING_BLOG,
 } from "../infrastructure/constants/constant";
+import { FileUploaderHelper } from "../../0-framework/helper/file-uploader/FileUploader";
 
 const app = express();
 
@@ -202,6 +204,7 @@ class BlogApplication {
         const { parentId } = req.body;
         try {
             const result = await this._repo.getByID(parentId);
+            console.log(result);
             if (result === null) {
                 return resError(res, 400, BLOG_NOT_FOUND);
             }
@@ -219,6 +222,7 @@ class BlogApplication {
         const { _id } = req.body;
         try {
             const result = await this._repo.getDetailByID(_id);
+            console.log(result);
             if (result === null) {
                 return resError(res, 400, BLOG_NOT_FOUND);
             }
@@ -235,17 +239,78 @@ class BlogApplication {
     async update(req: any, res: any) {
         const { _id } = req.body;
 
-        const blogData = {
-            _id,
-            title: req.body.title,
-            slug: req.body.slug,
-            main_image: req.body.main_image,
-            description: req.body.description,
-            tags: req.body.tags,
-            content: req.body.content,
-            thumbnail: req.body.thumbnail,
-        };
-        console.log(blogData);
+        if (req.files && req.files.main_image !== null) {
+            try {
+                const imageStorageId = uuidv4();
+                await FileUploaderHelper(
+                    imageStorageId,
+                    req.files.main_image,
+                    "public/uploads/blog/mahdi-alipour-blog",
+                    res
+                );
+
+                const dataToStore = {
+                    title: req.body.title,
+                    slug: req.body.slug,
+                    main_image: `public/uploads/blog/mahdi-alipour-blog-${
+                        imageStorageId + "-" + req.files.main_image.name
+                    }`,
+                    thumbnail: `public/uploads/blog/mahdi-alipour-blog-${
+                        imageStorageId + "-" + req.files.main_image.name
+                    }`,
+                    description: req.body.description,
+                    keyword: req.body.keyword,
+                    content: req.body.content,
+                    tags: req.body.tags,
+                    writer: req.body.writer,
+                    comments_length: 0,
+                };
+
+                const result = await this._repo.update(_id, dataToStore);
+                console.log(result);
+
+                if (!result) {
+                    return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
+                }
+                return res.json({
+                    status: 200,
+                    message: OK,
+                    result,
+                });
+            } catch (err) {
+                return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
+            }
+        }
+
+        if (req.body && req.body.main_image !== null) {
+            try {
+                const dataToStore = {
+                    title: req.body.title,
+                    slug: req.body.slug,
+                    main_image: req.body.main_image,
+                    thumbnail: req.body.main_image,
+                    description: req.body.description,
+                    keyword: req.body.keyword,
+                    content: req.body.content,
+                    tags: req.body.tags,
+                    writer: req.body.writer,
+                    comments_length: 0,
+                };
+
+                const result = await this._repo.update(_id, dataToStore);
+                console.log(result);
+                if (!result) {
+                    return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
+                }
+                return res.json({
+                    status: 200,
+                    message: OK,
+                    result,
+                });
+            } catch (err) {
+                return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
+            }
+        }
     }
 }
 

@@ -19,7 +19,7 @@ class BlogRoutes {
             .get("/list/:pageNumber", controller.list)
             .post("/edit-list/:pageNumber", controller.editList)
             .post("/", createBlogValidators(), validate, controller.create)
-            .put("/", createBlogValidators(), validate, controller.update)
+            .put("/", controller.update)
             .post("/get-by-slug", controller.getBySlug)
             .post("/image-upload", controller.imageUpload)
             .post("/get-by-id", controller.getById)

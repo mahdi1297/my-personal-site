@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import TextArea from "../../../shared/form/textarea";
-import { Button, ModalBody } from "reactstrap";
 import { getCommentParent, replyComment } from "./data";
+import { Button, ModalBody } from "reactstrap";
 import { formStructure } from "./form-structure";
-import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import { Body } from "./style";
 
 const CommentDetail = ({ data }) => {

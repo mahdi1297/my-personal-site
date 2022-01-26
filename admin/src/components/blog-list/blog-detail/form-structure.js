@@ -27,6 +27,20 @@ const formStructure = [
       maxLength: 250,
     },
   },
+  // {
+  //   id: 3,
+  //   size: 12,
+  //   type: "text",
+  //   name: "keyword",
+  //   placeholder: "برنامه نویسی, جاوااسکریپت...",
+  //   label: "keyword",
+  //   labelRequired: true,
+  //   validation: {
+  //     required: true,
+  //     minLength: 5,
+  //     maxLength: 250,
+  //   },
+  // },
   {
     id: 5,
     size: 12,

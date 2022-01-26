@@ -1,16 +1,16 @@
-import React, { lazy, Suspense } from "react";
-import Dashboard from "./components/dashborad";
+/* eslint-disable array-callback-return */
+import React from "react";
 import Sidebar from "./layout/sidebar";
 import Cookies from "universal-cookie";
-import Loader from "./shared/loader";
 import Header from "./layout/Header";
 import Auth from "./components/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { addTokenAction } from "./actions/tokenActions";
 import { getUserByToken } from "./data";
+import { useDispatch } from "react-redux";
+import { appRoutes } from "./routes";
 import { Container } from "reactstrap";
 import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import { Body } from "./style";
 import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
@@ -20,6 +20,7 @@ const token = Cookie.get("i_v_c");
 
 function App() {
   const dispatch = useDispatch();
+
   async function handleToken() {
     if (token) {
       const { data } = await getUserByToken(token);
@@ -28,6 +29,7 @@ function App() {
       }
     }
   }
+
   handleToken();
 
   return (
@@ -42,29 +44,20 @@ function App() {
             <Body>
               <Container>
                 <Switch>
-                  <Route path="/" exact>
-                    <Dashboard />
-                  </Route>
-                  <Route path="/new-blog" exact>
-                    <Suspense fallback={<Loader />}>
-                      <NewBlog />
-                    </Suspense>
-                  </Route>
-                  <Route path="/portfolio" exact>
-                    <Suspense fallback={<Loader />}>
-                      <Portfolio />
-                    </Suspense>
-                  </Route>
-                  <Route path="/blog-list">
-                    <Suspense fallback={<Loader />}>
-                      <BlogList />
-                    </Suspense>
-                  </Route>
-                  <Route path="/comments">
-                    <Suspense fallback={<Loader />}>
-                      <Comments />
-                    </Suspense>
-                  </Route>
+                  {appRoutes.map((route) => {
+                    if (route.isExact)
+                      return (
+                        <Route key={route.id} path={route.path} exact>
+                          {route.component}
+                        </Route>
+                      );
+                    else if (!route.isExact)
+                      return (
+                        <Route key={route.id} path={route.path}>
+                          {route.component}
+                        </Route>
+                      );
+                  })}
                 </Switch>
               </Container>
             </Body>
@@ -75,36 +68,5 @@ function App() {
     </>
   );
 }
-
-const Comments = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import("./components/comments"));
-    }, 1000);
-  });
-});
-const BlogList = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import("./components/blog-list"));
-    }, 1000);
-  });
-});
-
-const NewBlog = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import("./components/new-blog"));
-    }, 1000);
-  });
-});
-
-const Portfolio = lazy(() => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import("./components/portfolios"));
-    }, 1000);
-  });
-});
 
 export default App;
