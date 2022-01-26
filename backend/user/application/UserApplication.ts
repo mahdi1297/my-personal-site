@@ -26,7 +26,27 @@ class UserApplication {
         this._tokenRepo = new TokenRepository();
     }
 
-    async list(req: any, res: any) {}
+    async list(req: any, res: any) {
+        const { pageNumber } = req.body;
+
+        try {
+            const result = await this._repo.list(parseInt(pageNumber) || 0);
+            const resultLength = await this._repo.count();
+            console.log(result);
+            // if (!result) {
+            //     return resError(res, 404, "کاربری وجود ندارد");
+            // }
+            return res.json({
+                status: 200,
+                message: "Ok",
+                // result,
+                // total: resultLength,
+                // count: result.length | 0,
+            });
+        } catch (err) {
+            return resError(res, 404, "کاربری وجود ندارد");
+        }
+    }
 
     async getByToken(req: any, res: any, next: any) {
         const { token } = req.body;

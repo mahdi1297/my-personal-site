@@ -21,6 +21,7 @@ class UserRoutes {
 
         route
             .post("/", createUserValidators(), validate, controller.register)
+            .post("/list", controller.list)
             .post("/login", loginUserValidations(), validate, controller.login)
             .post(
                 "/get-user",

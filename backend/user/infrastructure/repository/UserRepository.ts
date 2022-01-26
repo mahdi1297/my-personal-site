@@ -7,12 +7,16 @@ class UserRepository<T extends mongoose.Document>
 {
     private _model = UserSchema;
 
-    async list() {
+    async list(pageNumber: number) {
         return await this._model.find({});
     }
 
     async create(item: T) {
         return await this._model.create(item);
+    }
+
+    async count() {
+        return await this._model.count();
     }
 
     async get(item: any) {

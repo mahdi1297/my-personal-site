@@ -2,6 +2,11 @@ import UserApplication from "../application/UserApplication";
 import express from "express";
 
 class UserController {
+    async list(req: express.Request, res: express.Response) {
+        const _app = new UserApplication();
+        await _app.list(req, res);
+    }
+
     async register(req: express.Request, res: express.Response) {
         const _app = new UserApplication();
         await _app.register(req, res);
