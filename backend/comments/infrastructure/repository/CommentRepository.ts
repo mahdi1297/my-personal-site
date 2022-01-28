@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { ICommentsRepository } from "../../domain/ICommentsRepository";
 import CommentSchema from "../context/CommentsSchema";
+import { ICommentsRepository } from "../../domain/ICommentsRepository";
 
 class CommentRepository<T extends mongoose.Document>
     implements ICommentsRepository<T>
@@ -34,6 +34,13 @@ class CommentRepository<T extends mongoose.Document>
 
     async count() {
         return await this._model.count({});
+    }
+
+    async update(username: string, data: any) {
+        return await this._model.updateMany(
+            { username: username },
+            { $set: { username: username } }
+        );
     }
 
     async confirm(_id: string) {

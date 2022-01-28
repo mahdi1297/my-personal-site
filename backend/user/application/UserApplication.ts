@@ -13,6 +13,7 @@ import {
 } from "../../0-framework/middlewares/bcrypt";
 import { resError } from "../../0-framework/error-handler/errors";
 import { Signjwt } from "../../0-framework/middlewares/jwt";
+import CommentRepository from "../../comments/infrastructure/repository/CommentRepository";
 
 const app = express();
 
@@ -60,7 +61,7 @@ class UserApplication {
     }
 
     async update(req: Request, res: Response) {
-        const { _id, editorRole } = req.body;
+        const { _id, editorRole, username } = req.body;
         const requestBody = req.body;
         delete requestBody._id;
         delete requestBody.editorRole;
@@ -71,6 +72,8 @@ class UserApplication {
                 .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
         }
 
+        const _commentRepo = new CommentRepository();
+
         try {
             const isExistsUser = await this._repo.check(_id);
             if (!isExistsUser) return resError(res, 404, "کاربری وجود ندارد");
@@ -79,6 +82,18 @@ class UserApplication {
             if (!result) {
                 return resError(res, 400, "خطای ناخواسته ای رخ داد");
             }
+
+            const updateComments = await _commentRepo.update(
+                username,
+                username
+            );
+
+            console.log(updateComments);
+
+            if (!updateComments) {
+                return resError(res, 400, "خطای ناخواسته ای رخ داد");
+            }
+
             result.password = "";
             return res.json({
                 status: 200,
@@ -91,16 +106,9 @@ class UserApplication {
     }
 
     async remove(req: Request, res: Response) {
-        const { _id, role } = req.body;
-
-        if (role !== "admin") {
-            return res
-                .status(403)
-                .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
-        }
+        const { _id } = req.body;
         try {
             const result = await this._repo.remove(_id);
-            console.log(result);
             if (!result) {
                 return resError(res, 404, "کاربری یافت نشد");
             }
@@ -116,13 +124,8 @@ class UserApplication {
     }
 
     async refactor(req: Request, res: Response) {
-        const { _id, role } = req.body;
+        const { _id } = req.body;
 
-        if (role !== "admin") {
-            return res
-                .status(403)
-                .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
-        }
         try {
             const result = await this._repo.refactor(_id);
             console.log(result);

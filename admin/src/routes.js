@@ -17,6 +17,14 @@ const Comments = lazy(() => {
   });
 });
 
+const Users = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import("./components/users"));
+    }, 1000);
+  });
+});
+
 const BlogList = lazy(() => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -89,6 +97,16 @@ export const appRoutes = [
     component: (
       <Suspense fallback={<Loader />}>
         <Comments />
+      </Suspense>
+    ),
+  },
+  {
+    id: 5,
+    path: "/users",
+    isExact: false,
+    component: (
+      <Suspense fallback={<Loader />}>
+        <Users />
       </Suspense>
     ),
   },

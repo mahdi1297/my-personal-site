@@ -23,7 +23,7 @@ class UserRoutes {
 
         route
             .post("/", createUserValidators(), validate, controller.register)
-            .post("/list", updateUserValidators(), validate, controller.list)
+            .post("/list", controller.list)
             .post(
                 "/get-by-id",
                 getUserValidations(),
@@ -32,7 +32,7 @@ class UserRoutes {
             )
             .delete("/", controller.remove)
             .put("/refactor", controller.refactor)
-            .put("/", controller.update)
+            .put("/", updateUserValidators(), validate, controller.update)
             .post("/login", loginUserValidations(), validate, controller.login)
             .post(
                 "/get-user",
