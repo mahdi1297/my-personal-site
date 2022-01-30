@@ -1,9 +1,7 @@
 import React from "react";
 import Icons from "../../shared/icons";
-import { themeColor } from "../../theme/color";
 
 function tableColumns(data, removerFunction, responseFunction) {
-  console.log(data);
   let cols = [];
 
   data &&
@@ -35,14 +33,6 @@ function tableColumns(data, removerFunction, responseFunction) {
                 <Icons name="x" color="red" />
               </span>
             )}
-          </div>,
-          <div className="w-100">
-            <span
-              className="c-pointer"
-              onClick={() => responseFunction(element)}
-            >
-              <Icons name="edit" color={themeColor.BLUE} />
-            </span>
           </div>,
         ],
       };

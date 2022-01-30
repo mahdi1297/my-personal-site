@@ -9,7 +9,7 @@ const NewPortfolioModal = lazy(() => {
 });
 
 const NewPortfolio = () => {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 

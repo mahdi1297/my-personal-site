@@ -101,7 +101,7 @@ export const appRoutes = [
     ),
   },
   {
-    id: 5,
+    id: 6,
     path: "/users",
     isExact: false,
     component: (
@@ -110,5 +110,4 @@ export const appRoutes = [
       </Suspense>
     ),
   },
-  //   { id: 6, path: "x", isExact: false },
 ];

@@ -4,7 +4,6 @@ const heads = [
   { id: 2, name: "ایمیل" },
   { id: 4, name: "سطح دسترسی" },
   { id: 5, name: "تایید شده" },
-  { id: 5, name: "ویرایش" },
 ];
 
 export { heads };

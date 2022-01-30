@@ -1,21 +1,13 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import TableContainer from "../../shared/table";
 import Pagination from "../../shared/pagination";
 import PageTitle from "../../shared/page-title";
-import Loader from "../../shared/loader";
 import { confirmUser, removeUser, getUserList } from "./data";
-import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 import { tableColumns } from "./table-columns";
 import { withRouter } from "react-router-dom";
 import { heads } from "./table-heads";
-
-const UserDetail = lazy(() => {
-  return new Promise((resolve) => {
-    resolve(import("./user-detail"));
-  });
-});
 
 const Users = ({ history, location }) => {
   const [choosedUser, setChoosedUser] = useState({});
@@ -108,19 +100,6 @@ const Users = ({ history, location }) => {
         />
       </div>
       {/* response modal */}
-      <Modal isOpen={modal} toggle={toggle} size="lg">
-        <ModalHeader>پاسخ به دیدگاه</ModalHeader>
-        <Suspense fallback={<Loader />}>
-          <UserDetail data={choosedUser} />
-        </Suspense>
-        <ModalFooter>
-          <div className="w-100">
-            <Button color="secondary" onClick={toggle}>
-              انصراف
-            </Button>
-          </div>
-        </ModalFooter>
-      </Modal>
     </>
   );
 };

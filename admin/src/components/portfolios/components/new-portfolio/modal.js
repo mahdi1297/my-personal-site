@@ -65,7 +65,7 @@ const NewPortfolioModal = ({ setModal }) => {
           <MultipleUpload setFiles={setImages} maxNumber={5} />
           <Button
             type="submit"
-            className=" c-white"
+            className=" c-white mt-5"
             style={{ background: themeColor.BLUE }}
           >
             ساخت portfolio
