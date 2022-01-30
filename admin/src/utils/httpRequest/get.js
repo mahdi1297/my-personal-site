@@ -14,7 +14,7 @@ export const get = async (path, showSuccessToast, showErrorToast) => {
       data.count = request.data.count || 0;
       data.result = request.data.result;
 
-      if (showSuccessToast) {
+      if (showSuccessToast === true) {
         toast.success(request.data.message);
       }
     }
@@ -25,7 +25,7 @@ export const get = async (path, showSuccessToast, showErrorToast) => {
         if (err.response.status === 403) redirector("with-load", "/403");
         error.status = err.response.status | 500;
         error.data = err.response;
-        if (showErrorToast) {
+        if (showErrorToast === true) {
           toast.error(err.response.data.message);
         }
       }

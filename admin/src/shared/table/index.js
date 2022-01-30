@@ -1,7 +1,7 @@
 import React from "react";
-import { Table } from "reactstrap";
-import { v4 as uuidv4 } from "uuid";
 import Loader from "../loader";
+import { v4 as uuidv4 } from "uuid";
+import { Table } from "reactstrap";
 import "./style.css";
 
 const TableContainer = ({ heads, columns, length, isLoading }) => {
