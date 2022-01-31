@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import SignOut from "./components/sing-out";
 import Loader from "./shared/loader";
 
 const Dashboard = lazy(() => {
@@ -109,5 +110,11 @@ export const appRoutes = [
         <Users />
       </Suspense>
     ),
+  },
+  {
+    id: 6,
+    path: "/sign-out",
+    isExact: false,
+    component: <SignOut />,
   },
 ];
