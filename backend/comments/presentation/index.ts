@@ -1,12 +1,12 @@
 import express from "express";
+import CommentsController from "./controller";
 import validate from "../../0-framework/validators/validationResult";
 import {
-    createCommentValidators,
+    removeOrConfirmCommentValidator,
     getCommentEditListValidators,
     getCommentListValidators,
-    removeOrConfirmCommentValidator,
+    createCommentValidators,
 } from "../infrastructure/validator/validations";
-import CommentsController from "./controller";
 
 const route = express.Router();
 

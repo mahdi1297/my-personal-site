@@ -5,7 +5,7 @@ import PortfolioController from "./controller";
 
 const route = express.Router();
 
-class CommentsRoutes {
+class PortfolioRoutes {
     private _controller: PortfolioController;
 
     constructor() {
@@ -29,4 +29,4 @@ class CommentsRoutes {
     }
 }
 
-export default CommentsRoutes;
+export default PortfolioRoutes;

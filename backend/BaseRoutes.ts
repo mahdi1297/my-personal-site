@@ -1,5 +1,5 @@
 import express from "express";
-import UserRoutes from "./user/presentation/Routes";
+import UserRoutes from "./user/presentation";
 import BlogRoutes from "./blog/presentation";
 import CommentsRoutes from "./comments/presentation";
 import PortfolioRoute from "./portfolio/presentation";
