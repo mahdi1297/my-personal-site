@@ -30,13 +30,6 @@ class UserApplication {
 
     async list(req: Request, res: Response) {
         const { pageNumber } = req.body;
-        // const { role } = req.body.role;
-
-        // if (role !== "admin") {
-        //     return res
-        //         .status(403)
-        //         .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
-        // }
         try {
             const result: IUserModel[] = await this._repo.list(
                 parseInt(pageNumber) || 1
@@ -321,34 +314,42 @@ class UserApplication {
     }
 
     async register(req: Request, res: Response) {
-        const isExistsUser = await this._repo.checkUser({
-            $or: [
-                {
-                    username: req.body.username,
-                },
-                {
-                    email: req.body.email,
-                },
-            ],
-        });
-
-        if (isExistsUser)
-            return resError(res, 400, "نام کاربری یا ایمیل قبلا ثبت شده است.");
-
-        const passwordHashed = await hashPassword(req.body.password);
-
-        if (!passwordHashed) return resError(res, 400, "مشکلی پیش آمد");
-
-        const requestBodyData = {
-            username: req.body.username,
-            email: req.body.email,
-            password: passwordHashed,
-        };
-
         try {
-            const result = await this._repo.create(
-                <IUserDomain>requestBodyData
-            );
+            const isExistsUser = await this._repo.checkUser({
+                $or: [
+                    {
+                        username: req.body.username,
+                    },
+                    {
+                        email: req.body.email,
+                    },
+                ],
+            });
+
+            if (isExistsUser)
+                return resError(
+                    res,
+                    400,
+                    "نام کاربری یا ایمیل قبلا ثبت شده است"
+                );
+
+            const passwordHashed = await hashPassword(req.body.password);
+
+            if (!passwordHashed) return resError(res, 400, "مشکلی پیش آمد");
+
+            const requestBodyData = {
+                username: req.body.username,
+                email: req.body.email,
+                password: passwordHashed,
+                phone: "0",
+            };
+
+            const result = await this._repo.create({
+                username: req.body.username,
+                email: req.body.email,
+                password: passwordHashed,
+                phone: "0",
+            });
             if (result === null || result === undefined) {
                 return resError(res, 400, "مشکلی پیش آمد");
             }
@@ -390,6 +391,7 @@ class UserApplication {
                 result,
             });
         } catch (err) {
+            console.log(err);
             return resError(res, 400, "مشکلی پیش آمد");
         }
     }

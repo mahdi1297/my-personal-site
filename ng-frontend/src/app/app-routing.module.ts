@@ -21,6 +21,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./../app/auth/login/login.module').then((m) => m.LoginModule),
   },
+  {
+    path: 'auth/register',
+    loadChildren: () =>
+      import('./../app/auth/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
+  },
   { path: 'cv', component: CvComponent },
 ];
 

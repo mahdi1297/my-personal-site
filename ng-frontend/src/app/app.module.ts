@@ -10,14 +10,12 @@ import { HeaderComponent } from './layout/header/header.component';
 import { SidebarComponent } from './layout/header/sidebar/sidebar.component';
 import { CvComponent } from './cv/cv.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    RegisterComponent,
     HeaderComponent,
     FooterComponent,
     CvComponent,

@@ -18,9 +18,6 @@ class UserSchema {
                 email: {
                     type: String,
                 },
-                phone: {
-                    type: String,
-                },
                 iSRegistered: {
                     type: String,
                     default: "true",
