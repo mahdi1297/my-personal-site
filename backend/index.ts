@@ -15,7 +15,7 @@ const app = express();
 dotenv.config({ path: __dirname + "/.env" });
 dotenv.config();
 
-app.use("/favicon.png", express.static("uploads/static/favicon.png"));
+// app.use("/favicon.png", express.static("uploads/static/favicon.png"));
 
 app.use(express.static(path.resolve("./public")));
 app.use("/public", express.static(path.resolve("./public")));
@@ -31,6 +31,8 @@ if (cluster.isPrimary) {
         cluster.fork();
     });
 } else {
+    app.use(express.static("public"));
+
     app.use(
         cors({
             origin: ["http://localhost:3006", "http://localhost:4200"],

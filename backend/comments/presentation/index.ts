@@ -7,6 +7,7 @@ import {
     getCommentListValidators,
     createCommentValidators,
 } from "../infrastructure/validator/validations";
+import { AuthTokenMiddleware } from "../../0-framework/middlewares/auth";
 
 const route = express.Router();
 
@@ -30,18 +31,21 @@ class CommentsRoutes {
             )
             .post(
                 "/edit-list/:page",
+                // AuthTokenMiddleware,
                 getCommentEditListValidators(),
                 validate,
                 controller.editList
             )
             .put(
                 "/",
+                AuthTokenMiddleware,
                 removeOrConfirmCommentValidator(),
                 validate,
                 controller.confirm
             )
             .delete(
                 "/",
+                AuthTokenMiddleware,
                 removeOrConfirmCommentValidator(),
                 validate,
                 controller.remove

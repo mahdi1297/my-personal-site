@@ -8,6 +8,11 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Body } from "./style";
 
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
+
 const CommentDetail = ({ data }) => {
   const {
     register,
@@ -23,7 +28,7 @@ const CommentDetail = ({ data }) => {
   useEffect(() => {
     async function gett() {
       if (parentId) {
-        await getCommentParent(parentId, setBloginfo);
+        await getCommentParent(parentId, setBloginfo, Token);
       }
     }
     gett();
@@ -42,7 +47,7 @@ const CommentDetail = ({ data }) => {
         isConfirmed: "true",
       };
 
-      await replyComment(commentData);
+      await replyComment(commentData, Token);
     }
   };
 

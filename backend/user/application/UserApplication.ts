@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
+import CommentRepository from "../../comments/infrastructure/repository/CommentRepository";
 import TokenRepository from "../../token/infrastructure/repository/TokenRepository";
 import UserRepository from "../infrastructure/repository/UserRepository";
 import ITokenDomain from "../../token/domain/ITokenDomain";
 import IUserDomain from "../domain/IUserDomain";
-import fileUpload from "express-fileupload";
 import IUserModel from "../domain/IUserMode";
+import fileUpload from "express-fileupload";
 import jwt_decode from "jwt-decode";
 import jwt from "jsonwebtoken";
 import {
@@ -13,7 +14,6 @@ import {
 } from "../../0-framework/middlewares/bcrypt";
 import { resError } from "../../0-framework/error-handler/errors";
 import { Signjwt } from "../../0-framework/middlewares/jwt";
-import CommentRepository from "../../comments/infrastructure/repository/CommentRepository";
 
 const app = express();
 
@@ -81,8 +81,6 @@ class UserApplication {
                 username
             );
 
-            console.log(updateComments);
-
             if (!updateComments) {
                 return resError(res, 400, "خطای ناخواسته ای رخ داد");
             }
@@ -121,7 +119,6 @@ class UserApplication {
 
         try {
             const result = await this._repo.refactor(_id);
-            console.log(result);
             if (!result) {
                 return resError(res, 404, "کاربری یافت نشد");
             }
@@ -185,7 +182,6 @@ class UserApplication {
                 async (err: any, data: any) => {
                     // renew token
                     if (err === null) {
-                        console.log("error");
                         try {
                             const result: any = await this._repo.get({
                                 _id: token_id,
@@ -250,7 +246,6 @@ class UserApplication {
                 }
             );
         } catch (err) {
-            // console.log(err);
             return res.status(403).json({
                 message: "1شما دسترسی لازم را ندارید",
                 status: 403,
@@ -341,14 +336,12 @@ class UserApplication {
                 username: req.body.username,
                 email: req.body.email,
                 password: passwordHashed,
-                phone: "0",
             };
 
             const result = await this._repo.create({
                 username: req.body.username,
                 email: req.body.email,
                 password: passwordHashed,
-                phone: "0",
             });
             if (result === null || result === undefined) {
                 return resError(res, 400, "مشکلی پیش آمد");
@@ -391,7 +384,6 @@ class UserApplication {
                 result,
             });
         } catch (err) {
-            console.log(err);
             return resError(res, 400, "مشکلی پیش آمد");
         }
     }

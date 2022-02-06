@@ -1,5 +1,10 @@
 import express from "express";
+import UserController from "./Controller";
 import validate from "../../0-framework/validators/validationResult";
+import {
+    AuthMiddleware,
+    AuthTokenMiddleware,
+} from "../../0-framework/middlewares/auth";
 import {
     createUserValidators,
     loginUserValidations,
@@ -7,7 +12,6 @@ import {
     updateUserValidators,
     getUserValidations,
 } from "../infrastructure/validator/validations";
-import UserController from "./Controller";
 
 const route = express.Router();
 
@@ -23,17 +27,24 @@ class UserRoutes {
 
         route
             .post("/", createUserValidators(), validate, controller.register)
-            .post("/list", controller.list)
+            .post("/list", AuthTokenMiddleware, controller.list)
             .post(
                 "/get-by-id",
                 getUserValidations(),
                 validate,
                 controller.getById
             )
-            .delete("/", controller.remove)
-            .put("/refactor", controller.refactor)
+            .delete("/", AuthTokenMiddleware, controller.remove)
+            .put("/refactor", AuthTokenMiddleware, controller.refactor)
             .put("/", updateUserValidators(), validate, controller.update)
             .post("/login", loginUserValidations(), validate, controller.login)
+            .post(
+                "/login-admin",
+                AuthMiddleware,
+                loginUserValidations(),
+                validate,
+                controller.login
+            )
             .post(
                 "/get-user",
                 getByTokenValidations(),

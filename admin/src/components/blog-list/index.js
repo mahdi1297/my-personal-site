@@ -12,6 +12,11 @@ import { tableColumns } from "./table-columns";
 import { getBlogList } from "./data";
 import { CSSTransition } from "react-transition-group";
 
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
+
 const BlogDetail = lazy(() => {
   return new Promise((resolve) => {
     resolve(import("./blog-detail"));
@@ -40,7 +45,7 @@ const BlogList = ({ history, location }) => {
 
   const request = async () => {
     setIsLoading(true);
-    const { data } = await getBlogList(pageParam);
+    const { data } = await getBlogList(pageParam, Token);
     if (data.result) {
       setColumnsLength(data.count);
       setTotalData(data.total);

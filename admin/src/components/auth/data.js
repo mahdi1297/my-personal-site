@@ -6,7 +6,7 @@ const cookies = new Cookies();
 
 async function getUser(obj) {
   const { data, error } = await post(
-    "http://localhost:5000/api/v1/user/login",
+    "http://localhost:5000/api/v1/user/login-admin",
     obj
   );
   if (error && error.status) return toast.error(error.data.data.message);

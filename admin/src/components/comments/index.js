@@ -4,12 +4,16 @@ import React, { useEffect, useState, lazy, Suspense } from "react";
 import TableContainer from "../../shared/table";
 import Pagination from "../../shared/pagination";
 import PageTitle from "../../shared/page-title";
+import Cookies from "universal-cookie";
 import Loader from "../../shared/loader";
 import { confirmComment, getCommentList, removeComment } from "./data";
 import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 import { tableColumns } from "./table-columns";
 import { withRouter } from "react-router-dom";
 import { heads } from "./table-heads";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
 
 const CommentDetail = lazy(() => {
   return new Promise((resolve) => {
@@ -39,7 +43,7 @@ const Comments = ({ history, location }) => {
 
   const request = async () => {
     setIsLoading(true);
-    const { data } = await getCommentList(pageParam);
+    const { data } = await getCommentList(pageParam, Token);
     if (data.result) {
       setColumnsLength(data.count);
       setTotalData(data.total);
@@ -58,10 +62,10 @@ const Comments = ({ history, location }) => {
 
   const removerFunction = async (isConfirmed, _id) => {
     if (isConfirmed === "false") {
-      await confirmComment(_id);
+      await confirmComment(_id, Token);
       request();
     } else if (isConfirmed === "true") {
-      await removeComment(_id);
+      await removeComment(_id, Token);
       request();
     }
   };

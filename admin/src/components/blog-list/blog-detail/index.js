@@ -11,6 +11,10 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../../helper/slugger";
 import { Body } from "./style";
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
 
 const BlogDetail = ({ _id }) => {
   const [blogInfo, setBloginfo] = useState({});
@@ -29,10 +33,9 @@ const BlogDetail = ({ _id }) => {
   useEffect(() => {
     const getData = async () => {
       if (_id) {
-        const { data } = await getBlog(_id, setBloginfo);
+        const { data } = await getBlog(_id, setBloginfo, Token);
         console.log(data);
         if (data.status === 200) {
-          console.log(data.result.content);
           setContent(data.result.content);
         }
       }
@@ -64,7 +67,7 @@ const BlogDetail = ({ _id }) => {
       formData.append("main_image", image);
     }
 
-    await updateBlog(formData);
+    await updateBlog(formData, Token);
   };
   valueDispatcher();
 

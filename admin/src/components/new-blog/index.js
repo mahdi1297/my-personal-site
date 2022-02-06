@@ -9,6 +9,11 @@ import { Button, Col, Form } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../helper/slugger";
 
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
+
 const NewBlog = () => {
   const {
     register,
@@ -28,7 +33,13 @@ const NewBlog = () => {
     formData.append("image", data.image[0]);
     formData.append("tags", "");
     formData.append("writer", "مهدی علی پور");
-    const req = await axios.post("http://localhost:5000/api/v1/blog", formData);
+    const req = await axios.post(
+      "http://localhost:5000/api/v1/blog",
+      formData,
+      {
+        headers: { Authorization: `${Token}` },
+      }
+    );
     if (req) {
       if (req.status === 200) {
         console.log(req);
