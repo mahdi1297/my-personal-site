@@ -35,7 +35,11 @@ if (cluster.isPrimary) {
 
     app.use(
         cors({
-            origin: ["http://localhost:3006", "http://localhost:4200"],
+            origin: [
+                "http://localhost:3006",
+                "http://localhost:4200",
+                "http://localhost:4000",
+            ],
             optionsSuccessStatus: 200,
         })
     )
