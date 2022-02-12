@@ -23,36 +23,6 @@
 .header-sm-wrapper i-feather:hover {
   color: #7a76ff !important;
 }
-
-.auth-btn {
-  padding: 0px 25px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: 13px;
-  height: 40px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 5px;
-}
-.register-btn {
-  background: #7a76ff;
-  border: 1px solid #7a76ff;
-  color: #fff;
-}
-.login-btn {
-  border: 2px solid #ecedff;
-  color: #7a76ff;
-  margin-left: 10px;
-  background: none;
-}
 .header-nav {
   height: 83px;
   margin-left: 20px;

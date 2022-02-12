@@ -8,6 +8,7 @@ import BaseRoutes from "./BaseRoutes";
 import path from "path";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
+import { SeedUser } from "./Seeder";
 const cors = require("cors");
 
 const app = express();
@@ -39,6 +40,7 @@ if (cluster.isPrimary) {
                 "http://localhost:3006",
                 "http://localhost:4200",
                 "http://localhost:4000",
+                "http://localhost:9000",
             ],
             optionsSuccessStatus: 200,
         })
@@ -49,6 +51,8 @@ if (cluster.isPrimary) {
         .use(helmet())
         .use(cookieParser())
         .use(morgan("dev"));
+
+    //SeedUser();
 
     const route = express.Router();
 

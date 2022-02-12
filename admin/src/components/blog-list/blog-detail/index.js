@@ -20,6 +20,8 @@ const BlogDetail = ({ _id }) => {
   const [blogInfo, setBloginfo] = useState({});
   const [content, setContent] = useState("");
   const [image, setImage] = useState([]);
+  const [editorLengthErr, setEditorLengthErr] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
 
   const {
     formState: { errors },
@@ -51,6 +53,13 @@ const BlogDetail = ({ _id }) => {
     setInputsValues(setValue, blogInfo, setBloginfo, setImage);
 
   const onSubmitHandler = async (data) => {
+    setIsSubmited(true);
+    if (content.length < 100) {
+      setEditorLengthErr(true);
+    } else {
+      setEditorLengthErr(false);
+    }
+
     const formData = new FormData();
     formData.append("_id", _id);
     formData.append("title", data.title);
@@ -97,6 +106,8 @@ const BlogDetail = ({ _id }) => {
                   data={textEditorStructure}
                   setContent={setContent}
                   defaultValue={content}
+                  editorLengthErr={editorLengthErr}
+                  isSubmited={isSubmited}
                 />
               </Col>
 

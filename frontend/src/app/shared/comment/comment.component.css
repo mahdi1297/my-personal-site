@@ -1,4 +1,7 @@
-/* //new COmment */
+button {
+  height: 62px !important;
+}
+
 .write-comment {
   width: 100%;
   height: auto;
@@ -39,7 +42,7 @@
   opacity: 80%;
 }
 .notallowed-alert {
-  background: #7a76ff;
+  /* background: #7a76ff; */
   padding: 20px;
   color: #fff;
   border-radius: 5px;

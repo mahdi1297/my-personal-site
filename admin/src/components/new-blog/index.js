@@ -21,9 +21,18 @@ const NewBlog = () => {
     formState: { errors },
   } = useForm();
 
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState();
+  const [editorLengthErr, setEditorLengthErr] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
 
   const onSubmitHandler = async (data) => {
+    setIsSubmited(true);
+    if (content.length < 100) {
+      setEditorLengthErr(true);
+    } else {
+      setEditorLengthErr(false);
+    }
+
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("slug", slugger(data.slug));
@@ -63,7 +72,12 @@ const NewBlog = () => {
         ))}
 
         <Col xl={12} className={"mt-5"}>
-          <TextEditor data={textEditorStructure} setContent={setContent} />
+          <TextEditor
+            data={textEditorStructure}
+            setContent={setContent}
+            editorLengthErr={editorLengthErr}
+            isSubmited={isSubmited}
+          />
         </Col>
 
         <Button color={"primary"} className={"mt-5"}>

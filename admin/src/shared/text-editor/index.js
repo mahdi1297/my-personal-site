@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import ImageUploader from "quill-image-uploader";
-import Preview from "./preview";
+// import Preview from "./preview";
 import axios from "axios";
 import { ImageResize } from "./image-resize";
 import { Video } from "./quill-video-resize";
+import { Col } from "reactstrap";
+import { ErrorP, Label } from "../form/style";
 import "react-quill/dist/quill.snow.css";
 import "./quill-video-resize.css";
 
@@ -93,8 +95,16 @@ const formats = [
   "imageResize",
 ];
 
-const TextEditor = ({ defaultValue, setContent }) => {
-  const [value, setValue] = useState("");
+const TextEditor = ({
+  defaultValue,
+  setContent,
+  editorLengthErr,
+  isSubmited,
+}) => {
+  const [value, setValue] = useState("متن خود را وارد کنید");
+
+  console.log(isSubmited);
+  console.log(editorLengthErr);
 
   useEffect(() => {
     setValue(defaultValue);
@@ -107,15 +117,21 @@ const TextEditor = ({ defaultValue, setContent }) => {
 
   return (
     <>
-      <ReactQuill
-        theme="snow"
-        modules={modules}
-        formats={formats}
-        value={value}
-        onChange={handleChange}
-      />
-
-      <Preview value={value} />
+      <Col sm="12" xl={12} className="mb-3 ">
+        <div className="form-group">
+          <Label className="mb-3">متن</Label>
+          {isSubmited && editorLengthErr && (
+            <ErrorP>متن باید بیشتر از 100 کاراکتر باشد</ErrorP>
+          )}
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={value}
+            onChange={handleChange}
+          />
+        </div>
+      </Col>
     </>
   );
 };

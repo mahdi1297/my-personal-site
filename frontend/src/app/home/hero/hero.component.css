@@ -6,7 +6,7 @@
 .home_hero h1 {
   margin: auto;
   margin-top: 90px;
-  font-size: 38px;
+  font-size: 30px;
   width: 90%;
   font-weight: 900;
   text-align: center;
@@ -48,7 +48,7 @@
 @media screen and (min-width: 1000px) {
   .home_hero h1 {
     width: 60%;
-    font-size: 45px;
+    font-size: 35px;
   }
 }
 

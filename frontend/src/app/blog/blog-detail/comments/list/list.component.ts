@@ -45,7 +45,6 @@ export class BlogListComponent implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
         }
       );
   }
@@ -56,14 +55,12 @@ export class BlogListComponent implements OnInit {
   }
 
   openModal(id: string) {
-    console.log(id);
     this.isOpen = false;
     this.id = id;
     this.isOpen = !this.isOpen;
   }
 
   commentModalCloserHandler(event: any) {
-    console.log('x');
     this.isOpen = false;
   }
 }

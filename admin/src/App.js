@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <Router>
+      <Router basename="/">
         {!token ? (
           <Auth />
         ) : (
