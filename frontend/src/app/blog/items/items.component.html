@@ -6,20 +6,16 @@
       <div *ngFor="let item of blogs.result" class="blog_items-item">
         <div class="blog_items-card_header">
           <a routerLink="/blog/{{ item.slug }}">
-            <img
-              src="http://localhost:5000/{{ item.thumbnail }}"
-              alt=""
-              width="100%"
-            />
+            <img src="{{ imageUrl }}{{ item.thumbnail }}" alt="" width="100%" />
           </a>
         </div>
         <div class="blog_items-card_body">
           <h2>
-            <a routerLink="/blog/{{ item.slug }}" class="c-black">{{
-              item.title
-            }}</a>
+            <a routerLink="/blog/{{ item.slug }}" class="c-black">
+              {{ item.title }}
+            </a>
           </h2>
-          <p class="w-100">
+          <p class="item-description w-100">
             {{ item.description }}
           </p>
         </div>

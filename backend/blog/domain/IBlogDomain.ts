@@ -7,8 +7,10 @@ interface IBlogDomain extends mongoose.Document {
     thumbnail: string;
     description: string;
     keyword: string;
+    main_keywork: string;
     content: string;
     writer: string;
+    isPublished: string;
     comments_length: number;
     tags: string[];
     isRemoved: boolean;

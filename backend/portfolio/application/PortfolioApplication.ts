@@ -117,7 +117,6 @@ class PortfolioApplication {
 
         try {
             const result = await this._repo.getBySlug(slug);
-            console.log(result);
 
             if (!result) {
                 return res.status(404).json({ message: PORTFOLIO_NOT_FOUND });

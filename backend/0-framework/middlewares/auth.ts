@@ -48,7 +48,7 @@ async function AuthMiddleware(
             }
         }
     } catch (err) {
-        console.log(err);
+        return resError(res, 401, "کاربری یافت نشد");
     }
 }
 

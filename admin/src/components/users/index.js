@@ -30,6 +30,7 @@ const Users = ({ history, location }) => {
 
   useEffect(() => {
     modal === false && request();
+    return () => {};
   }, [modal, currentPage, choosedUser, pageParam]);
 
   const toggle = () => setModal(!modal);

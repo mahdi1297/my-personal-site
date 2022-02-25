@@ -1,18 +1,17 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, lazy, Suspense } from "react";
+import { withRouter } from "react-router-dom";
+import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
+import { CSSTransition } from "react-transition-group";
+import Cookies from "universal-cookie";
 import TableContainer from "../../shared/table";
+import { getBlogList, publishBlog } from "./data";
 import Pagination from "../../shared/pagination";
 import PageTitle from "../../shared/page-title";
 import Loader from "../../shared/loader";
-import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
-import { withRouter } from "react-router-dom";
 import { heads } from "./table-heads";
 import { tableColumns } from "./table-columns";
-import { getBlogList } from "./data";
-import { CSSTransition } from "react-transition-group";
-
-import Cookies from "universal-cookie";
 
 const cookie = new Cookies();
 const Token = cookie.get("i_v_c");
@@ -39,6 +38,8 @@ const BlogList = ({ history, location }) => {
 
   useEffect(() => {
     modal === false && request();
+
+    return () => {};
   }, [modal, currentPage, choosedComment, pageParam]);
 
   const toggle = () => setModal(!modal);
@@ -49,7 +50,7 @@ const BlogList = ({ history, location }) => {
     if (data.result) {
       setColumnsLength(data.count);
       setTotalData(data.total);
-      let cols = tableColumns(data.result, responseFunction);
+      let cols = tableColumns(data.result, responseFunction, publishHandler);
       setColumns(cols);
       setTimeout(() => {
         setIsLoading(false);
@@ -60,6 +61,10 @@ const BlogList = ({ history, location }) => {
   const responseFunction = async (_id) => {
     setChoosedComment(_id);
     toggle();
+  };
+  const publishHandler = async (status, _id) => {
+    await publishBlog({ _id: _id, isPublished: status }, Token);
+    request();
   };
 
   const nextBtnFunc = async () => {

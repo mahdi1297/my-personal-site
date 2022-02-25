@@ -12,6 +12,11 @@ class BlogController {
         await _app.editList(req, res);
     }
 
+    async publish(req: express.Request, res: express.Response) {
+        const _app = new BlogApplication();
+        await _app.publish(req, res);
+    }
+
     async getBySlug(req: express.Request, res: express.Response) {
         const _app = new BlogApplication();
         await _app.getBySlug(req, res);

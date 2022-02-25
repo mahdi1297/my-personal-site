@@ -15,7 +15,7 @@ export class BlogListComponent implements OnInit {
 
   isOpen: boolean = false;
   id: any;
-  commentLength: any;
+  commentLength: number = 0;
   commentsData: any = [];
   commentPageNumber: number = 1;
 
@@ -44,8 +44,7 @@ export class BlogListComponent implements OnInit {
             this.commentLength = data.count;
           }
         },
-        (error) => {
-        }
+        (error) => {}
       );
   }
 

@@ -1,7 +1,7 @@
 // portfolio
 import { get } from "./../../../../utils/httpRequest/get";
 
-const GET_COMMENT_LIST_URL = "http://localhost:5000/api/v1/portfolio";
+const GET_COMMENT_LIST_URL = `${process.env.REACT_APP_DEV_API}portfolio`;
 
 async function getPortfolioList() {
   const { data } = await get(

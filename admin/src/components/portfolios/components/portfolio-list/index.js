@@ -24,6 +24,7 @@ const PortfolioList = () => {
       }
     };
     request();
+    return () => {};
   }, []);
 
   function removerFunction() {}
@@ -34,7 +35,7 @@ const PortfolioList = () => {
       <PageTitle title="لیست پورتفولیوها" />
       <div className="w-100 mt-5">
         {columns.length === 0 ? (
-          <h1>Loading...</h1>
+          <span>آیتمی وجود ندارد</span>
         ) : (
           <TableContainer
             heads={heads}

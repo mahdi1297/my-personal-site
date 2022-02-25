@@ -6,11 +6,12 @@
 .home_hero h1 {
   margin: auto;
   margin-top: 90px;
-  font-size: 30px;
+  font-size: 30px !important;
   width: 90%;
   font-weight: 900;
   text-align: center;
   color: #141c3a;
+  line-height: 50px !important;
 }
 
 .home_hero p {

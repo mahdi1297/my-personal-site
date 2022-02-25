@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'home-works',
@@ -12,6 +13,7 @@ export class WorksComponent implements OnInit {
   pageNumber: number = 1;
   isFirst: boolean = true;
   isEnd: boolean = false;
+  imageUrl: string = environment.api_image_url;
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     this.readEmployee(this.pageNumber);

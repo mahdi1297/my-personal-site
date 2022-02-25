@@ -4,7 +4,7 @@
 }
 
 .inner_sidebar-container {
-  padding: 20px;
+  padding-right: 20px;
   box-sizing: border-box;
 }
 .inner_sidebar-container ul,
@@ -43,4 +43,17 @@
 .sidebar-container a:hover {
   background: #7a76ff;
   color: #fff;
+}
+.user-data {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 10px;
+}
+.user-data img {
+  border: 1px solid #46afb2;
+  padding: 2px;
+  margin-left: 10px;
+  border-radius: 10px;
 }

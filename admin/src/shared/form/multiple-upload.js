@@ -20,7 +20,7 @@ const MultipleUpload = ({ setFiles, default_file, maxNumber }) => {
     if (default_file) {
       setImages([
         {
-          data_url: `http://localhost:5000/${default_file}`,
+          data_url: `${process.env.REACT_APP_DEV_API_IMAGE}${default_file}`,
         },
       ]);
     }

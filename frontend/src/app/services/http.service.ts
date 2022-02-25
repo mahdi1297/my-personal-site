@@ -6,12 +6,13 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  baseUri: string = 'http://localhost:5000/api/v1/';
+  baseUri: string = `${environment.api_url}`;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {}

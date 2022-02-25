@@ -4,11 +4,7 @@
     <div class="portfolio-container">
       <div *ngFor="let item of blogs.result" class="blog_items-item">
         <a routerLink="/portfolio/{{ item.slug }}">
-          <img
-            src="http://localhost:5000/{{ item.main_image }}"
-            alt=""
-            width="100%"
-          />
+          <img src="{{ imageUrl }}{{ item.main_image }}" alt="" width="100%" />
         </a>
       </div>
     </div>

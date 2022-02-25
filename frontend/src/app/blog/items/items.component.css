@@ -7,10 +7,10 @@
   overflow-y: hidden;
   overflow-x: clip;
 }
-.blog_items-title h2 {
-  display: inline;
-  font-size: 23px;
-  border-bottom: 2px solid #272443;
+h2 {
+  font-size: 20px !important;
+  padding: 20px 0;
+  height: auto !important;
 }
 .blog_items-container {
   margin: auto;
@@ -32,7 +32,7 @@
 
 .blog_items-item {
   width: 100%;
-  height: 420px;
+  height: auto !important;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -54,6 +54,10 @@
 .blog_items-card_header img:hover {
   opacity: 60%;
   /* height: 100%; */
+}
+.item-description {
+  height: auto !important;
+  /* border: 1px solid black !important; */
 }
 .blog_items-card_body {
   padding: 5px;

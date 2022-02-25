@@ -1,8 +1,9 @@
 import React from "react";
+import { Button } from "reactstrap";
 import Icons from "../../shared/icons";
 import { themeColor } from "../../theme/color";
 
-function tableColumns(data, responseFunction) {
+function tableColumns(data, responseFunction, publishHandler) {
   let cols = [];
 
   data &&
@@ -15,11 +16,29 @@ function tableColumns(data, responseFunction) {
           element.writer,
           <div className="w-100">
             <img
-              src={`http://localhost:5000/${element.thumbnail}`}
+              src={`${process.env.REACT_APP_DEV_API_IMAGE}${element.thumbnail}`}
               alt=""
               width="100"
               style={{ borderRadius: "5px" }}
             />
+          </div>,
+          <div>
+            {element.isPublished === "true" && (
+              <Button
+                color="success"
+                onClick={() => publishHandler("false", element._id)}
+              >
+                منتشر شده
+              </Button>
+            )}
+            {element.isPublished === "false" && (
+              <Button
+                color="danger"
+                onClick={() => publishHandler("true", element._id)}
+              >
+                منتشر نشده
+              </Button>
+            )}
           </div>,
           <div className="w-100">
             <span

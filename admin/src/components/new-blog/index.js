@@ -42,19 +42,26 @@ const NewBlog = () => {
     formData.append("image", data.image[0]);
     formData.append("tags", "");
     formData.append("writer", "مهدی علی پور");
-    const req = await axios.post(
-      "http://localhost:5000/api/v1/blog",
-      formData,
-      {
-        headers: { Authorization: `${Token}` },
+    formData.append("main_keywork", data.main_keywork);
+    formData.append("isPublished", "flase");
+
+    try {
+      const req = await axios.post(
+        `${process.env.REACT_APP_DEV_API}blog`,
+        formData,
+        {
+          headers: { Authorization: `${Token}` },
+        }
+      );
+      if (!req || (req && req.status !== 200)) {
+        toast.error("مشکلی در انجام عملیات به وجود آمد");
+        return;
       }
-    );
-    if (req) {
-      if (req.status === 200) {
-        console.log(req);
-        console.log(req.message);
-        toast.success("با موفقیت دخیره شد");
-      }
+
+      toast.success("با موفقیت دخیره شد");
+    } catch (err) {
+      console.log(err);
+      toast.error("مشکلی در انجام عملیات به وجود آمد");
     }
   };
 
@@ -81,7 +88,7 @@ const NewBlog = () => {
         </Col>
 
         <Button color={"primary"} className={"mt-5"}>
-          Submit
+          ساخت بلاگ
         </Button>
       </Form>
     </>

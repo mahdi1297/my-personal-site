@@ -23,6 +23,7 @@ class BlogRoutes {
                 AuthTokenMiddleware,
                 controller.editList
             )
+            .put("/publish", controller.publish)
             .post(
                 "/",
                 AuthTokenMiddleware,

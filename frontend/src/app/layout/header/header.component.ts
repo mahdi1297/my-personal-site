@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
+import { environment } from 'src/environments/environment';
 import { routes } from './header.routes';
 
 @Component({
@@ -13,6 +14,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sidebarStatus: boolean = false;
   headerRoutes = routes;
   userData: any;
+
+  imageUrl: string = environment.api_image_url;
 
   constructor(private tokenService: TokenService) {}
 

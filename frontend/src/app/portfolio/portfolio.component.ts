@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ApiService } from '../services/http.service';
 
@@ -11,7 +12,12 @@ export class PortfolioCompoent implements OnInit {
   GET_PORTFOLIO_URL = 'portfolio';
   portfolio: any;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private metaTagService: Meta,
+    private titleService: Title
+  ) {}
 
   ngOnInit() {
     this.getPortfolio();
@@ -25,7 +31,18 @@ export class PortfolioCompoent implements OnInit {
       this.apiService.get(`portfolio/${param.slug}`).subscribe(
         (data: any) => {
           this.portfolio = data.result;
-          console.log(data.result);
+          this.titleService.setTitle(`Mahdi Alipoor | ${data.result.title} `);
+          this.metaTagService.addTags([
+            { name: 'robots', content: 'index, follow' },
+            { name: 'author', content: 'Mahdi Alipoor' },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1',
+            },
+            // { rel: 'canonical', href: `${window.location.href}` },
+            { charset: 'UTF-8' },
+            { name: 'theme-color', content: '#46afb2' },
+          ]);
         },
         (error) => {
           console.log(error);

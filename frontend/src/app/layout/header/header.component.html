@@ -7,9 +7,9 @@
   <div class="container">
     <div class="header-wrapper flex justify-between">
       <div class="flex align-center">
-        <h1 class="header_logo">
-          <a href="/" class="c-theme">Mahdi Alipour</a>
-        </h1>
+        <div class="header_logo">
+          <a routerLink="/" class="c-theme">Mahdi Alipour</a>
+        </div>
       </div>
 
       <div class="header-sm-wrapper flex align-center">
@@ -32,20 +32,15 @@
           class="header-auth-btns w-100 flex align-center"
         >
           <button style="margin-left: 20px">
-            <a routerLink="/auth/login"> ورود </a>
+            <a routerLink="/auth/login" class="c-black"> ورود </a>
           </button>
           <button class="btn-primary">
             <a routerLink="/auth/register"> ثبت نام </a>
           </button>
         </section>
-        <section *ngIf="userData" class="flex align-center">
+        <section *ngIf="userData" class="user-data-herader flex align-center">
           <p class="username">{{ userData.username }}</p>
-          <img
-            src="http://localhost:5000/{{ userData.profile }}"
-            style="border-radius: 50%; margin-top: 7px"
-            width="40"
-            alt=""
-          />
+          <img src="{{ imageUrl }}{{ userData.profile }}" width="40" alt=""/>
         </section>
       </div>
     </div>
@@ -55,4 +50,5 @@
   class="sidebar-container"
   [ngClass]="sidebarStatus ? 'sidebar-open' : 'sidebar-close'"
   (closeSidebarHandler)="sidebarCloser()"
+  [userData]="userData"
 ></app-sidebar>

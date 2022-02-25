@@ -37,6 +37,7 @@ const Comments = ({ history, location }) => {
 
   useEffect(() => {
     modal === false && request();
+    return () => {};
   }, [modal, currentPage, choosedComment, pageParam]);
 
   const toggle = () => setModal(!modal);

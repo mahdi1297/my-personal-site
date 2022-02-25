@@ -32,6 +32,7 @@ const CommentDetail = ({ data }) => {
       }
     }
     gett();
+    return () => {};
   }, [parentId]);
 
   const submitResponse = async (data) => {

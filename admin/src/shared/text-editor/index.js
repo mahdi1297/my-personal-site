@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import ImageUploader from "quill-image-uploader";
-// import Preview from "./preview";
 import axios from "axios";
 import { ImageResize } from "./image-resize";
 import { Video } from "./quill-video-resize";
-import { Col } from "reactstrap";
-import { ErrorP, Label } from "../form/style";
 import "react-quill/dist/quill.snow.css";
 import "./quill-video-resize.css";
 
@@ -51,13 +48,13 @@ const modules = {
       if (/^image\//.test(file.type)) {
         const response = await axios({
           method: "post",
-          url: "http://localhost:5000/api/v1/blog/image-upload",
+          url: `${process.env.REACT_APP_DEV_API}blog/image-upload`,
           data: bodyFormData,
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        return `http://localhost:5000/${response.data.url}`;
+        return `${process.env.REACT_APP_DEV_API_IMAGE}${response.data.url}`;
       } else {
         alert("please choose just image");
       }
@@ -95,16 +92,8 @@ const formats = [
   "imageResize",
 ];
 
-const TextEditor = ({
-  defaultValue,
-  setContent,
-  editorLengthErr,
-  isSubmited,
-}) => {
-  const [value, setValue] = useState("متن خود را وارد کنید");
-
-  console.log(isSubmited);
-  console.log(editorLengthErr);
+const TextEditor = ({ defaultValue, setContent }) => {
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     setValue(defaultValue);
@@ -117,21 +106,13 @@ const TextEditor = ({
 
   return (
     <>
-      <Col sm="12" xl={12} className="mb-3 ">
-        <div className="form-group">
-          <Label className="mb-3">متن</Label>
-          {isSubmited && editorLengthErr && (
-            <ErrorP>متن باید بیشتر از 100 کاراکتر باشد</ErrorP>
-          )}
-          <ReactQuill
-            theme="snow"
-            modules={modules}
-            formats={formats}
-            value={value}
-            onChange={handleChange}
-          />
-        </div>
-      </Col>
+      <ReactQuill
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        value={value}
+        onChange={handleChange}
+      />
     </>
   );
 };

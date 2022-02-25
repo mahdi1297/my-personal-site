@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MultipleUpload from "../../../../shared/form/multiple-upload";
 import FormContainer from "../../../../shared/form/form-container";
 import { Button, Col, Form } from "reactstrap";
@@ -22,6 +22,10 @@ const NewPortfolioModal = ({ setModal }) => {
 
   const [images, setImages] = useState([]);
   const [techs, setTechs] = useState([]);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   const createPortfolioSubmitHandler = async (data) => {
     let formData = new FormData();

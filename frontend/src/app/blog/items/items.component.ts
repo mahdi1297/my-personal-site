@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-blog-items',
   templateUrl: './items.component.html',
-  styleUrls: ['./items.component.css'],
+  styleUrls: ['/items.component.css'],
 })
 export class ItemsComponent implements OnInit {
   blogs: any = [];
   pageNumber: number = 1;
   isFirst: boolean = true;
   isEnd: boolean = false;
+
+  imageUrl: string = environment.api_image_url;
+
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     this.readEmployee(this.pageNumber);

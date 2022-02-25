@@ -22,7 +22,7 @@ function App() {
   const dispatch = useDispatch();
 
   async function handleToken() {
-    if (token) {
+    if (token !== undefined) {
       const { data } = await getUserByToken(token);
       if (data && data.status === 200) {
         dispatch(addTokenAction(data.result));

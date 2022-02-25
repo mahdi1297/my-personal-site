@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { routes } from '../header.routes';
 
 @Component({
@@ -10,6 +11,10 @@ import { routes } from '../header.routes';
 export class SidebarComponent implements OnInit {
   sidebarRoutes = routes;
   @Output() closeSidebarHandler = new EventEmitter();
+  @Input() userData: any;
+
+  imageUrl: string = environment.api_image_url;
+
   constructor() {}
 
   ngOnInit(): void {}

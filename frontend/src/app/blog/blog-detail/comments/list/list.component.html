@@ -9,7 +9,7 @@
       <figure class="comments_body flex" *ngIf="item.isReplyed === 'false'">
         <div class="user-data">
           <img
-            src="http://localhost:5000/{{ item.profile }}"
+            src="http://api.mahdialipoor.ir/{{ item.profile }}"
             alt=""
             width="50"
           />
@@ -58,7 +58,7 @@
               >
                 <div class="user-data">
                   <img
-                    src="http://localhost:5000/{{ subitem.profile }}"
+                    src="http://api.mahdialipoor.ir/{{ subitem.profile }}"
                     alt=""
                     width="50"
                   />
@@ -109,7 +109,7 @@
                       >
                         <div class="user-data">
                           <img
-                            src="http://localhost:5000/{{ subSubitem.profile }}"
+                            src="http://api.mahdialipoor.ir/{{ subSubitem.profile }}"
                             alt=""
                             width="50"
                           />
@@ -151,5 +151,5 @@
 
 <ng-template #loader></ng-template>
 <ng-template #emptyComments>
-  <p>اولین دیدگاه را شما ثبت کنید</p>
+  <p class="first-comment">اولین دیدگاه را شما ثبت کنید</p>
 </ng-template>

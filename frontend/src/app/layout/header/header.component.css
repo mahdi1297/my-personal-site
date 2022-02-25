@@ -67,11 +67,20 @@
   width: 290px !important;
   transform: translateX(30px);
 }
+.user-data-herader {
+  padding-bottom: 5px;
+}
 .username {
   font-size: 12px;
   margin-top: 17px;
   margin-left: 10px;
   color: #9d9d9d;
+}
+.username ~ img {
+  border: 1px solid #46afb2;
+  padding: 2px;
+  margin-left: 10px;
+  border-radius: 50%;
 }
 
 @media screen and (min-width: 800px) {

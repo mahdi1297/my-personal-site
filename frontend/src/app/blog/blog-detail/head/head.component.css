@@ -13,10 +13,11 @@
 }
 .blog_detail-head h1 {
   display: block;
-  font-size: 35px;
   font-weight: bold;
   color: #272443;
   display: inline;
+  line-height: 60px !important;
+  font-size: 31px !important;
 }
 .blog_detail-head-info {
   font-size: 15px;

@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/http.service';
 import { TimeService } from 'src/app/services/time.service';
 import { TokenService } from 'src/app/services/token.service';
+import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-blog-detail',
@@ -19,7 +21,9 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private timeService: TimeService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private metaTagService: Meta,
+    private titleService: Title
   ) {}
 
   ngOnInit() {
@@ -37,7 +41,48 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
           data.result.createdAt = this.timeService.toShamsi(
             data.result.createdAt
           );
+          let description = data.result.description;
           this.blogDetail = data;
+          this.titleService.setTitle(`Mahdi Alipoor | ${data.result.title} `);
+          this.metaTagService.updateTag({
+            name: 'description',
+            content: 'description',
+          });
+          this.metaTagService.addTags([
+            {
+              name: 'description',
+              content: 'description',
+            },
+            { name: 'robots', content: 'index, follow' },
+            { name: 'author', content: 'Mahdi Alipoor' },
+            {
+              name: 'viewport',
+              content: 'width=device-width, initial-scale=1',
+            },
+            // { rel: 'canonical', href: `${window.location.href}` },
+            { charset: 'UTF-8' },
+            { name: 'theme-color', content: '#46afb2' },
+            {
+              property: 'og:title',
+              content: `Mahdi Alipoor | ${data.result.title} `,
+            },
+            {
+              property: 'og:site_name',
+              content: `Mahdi Alipoor`,
+            },
+            {
+              property: 'og:description',
+              content: `${data.result.description}`,
+            },
+            // {
+            //   property: 'og:url',
+            //   content: `${window.location.href}`,
+            // },
+            {
+              property: 'og:image',
+              content: `${environment.api_image_url}${data.result.main_image}`,
+            },
+          ]);
         });
     });
   }

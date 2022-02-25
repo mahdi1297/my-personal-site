@@ -1,7 +1,7 @@
 import { post } from "./../../../utils/httpRequest/post";
 
-const GET_COMMENT_PARENT = "http://localhost:5000/api/v1/blog/get-by-id";
-const REPLY_COMMENT = "http://localhost:5000/api/v1/comment";
+const GET_COMMENT_PARENT = `${process.env.REACT_APP_DEV_API}blog/get-by-id`;
+const REPLY_COMMENT = `${process.env.REACT_APP_DEV_API}comment`;
 
 const getCommentParent = async (parentId, setBloginfo, Token) => {
   const { data } = await post(

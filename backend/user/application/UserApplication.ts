@@ -265,7 +265,7 @@ class UserApplication {
                     email: email,
                     username: username,
                 });
-                if (result === null) {
+                if (!result) {
                     return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
                 }
             } else {
@@ -273,7 +273,7 @@ class UserApplication {
                 result = await this._repo.get({
                     email: email,
                 });
-                if (result === null) {
+                if (!result) {
                     return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
                 }
             }

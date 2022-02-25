@@ -91,6 +91,11 @@ section.comments {
   cursor: pointer;
 }
 
+.first-comment {
+  font-size: 15px !important;
+  padding: 10px !important;
+}
+
 @media screen and (max-width: 440px) {
   .user-data {
     display: none !important;
