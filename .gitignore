@@ -53,6 +53,7 @@ yarn-error.log*
 .env.production.local
 
 /frontend/.env
+/frontend/node_modules
 /backend/.env
 /admin/.env
 

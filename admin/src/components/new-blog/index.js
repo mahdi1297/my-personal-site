@@ -9,6 +9,11 @@ import { Button, Col, Form } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../helper/slugger";
 
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
+
 const NewBlog = () => {
   const {
     register,
@@ -16,9 +21,18 @@ const NewBlog = () => {
     formState: { errors },
   } = useForm();
 
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState();
+  const [editorLengthErr, setEditorLengthErr] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
 
   const onSubmitHandler = async (data) => {
+    setIsSubmited(true);
+    if (content.length < 100) {
+      setEditorLengthErr(true);
+    } else {
+      setEditorLengthErr(false);
+    }
+
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("slug", slugger(data.slug));
@@ -28,13 +42,26 @@ const NewBlog = () => {
     formData.append("image", data.image[0]);
     formData.append("tags", "");
     formData.append("writer", "مهدی علی پور");
-    const req = await axios.post("http://localhost:5000/api/v1/blog", formData);
-    if (req) {
-      if (req.status === 200) {
-        console.log(req);
-        console.log(req.message);
-        toast.success("با موفقیت دخیره شد");
+    formData.append("main_keywork", data.main_keywork);
+    formData.append("isPublished", "flase");
+
+    try {
+      const req = await axios.post(
+        `${process.env.REACT_APP_DEV_API}blog`,
+        formData,
+        {
+          headers: { Authorization: `${Token}` },
+        }
+      );
+      if (!req || (req && req.status !== 200)) {
+        toast.error("مشکلی در انجام عملیات به وجود آمد");
+        return;
       }
+
+      toast.success("با موفقیت دخیره شد");
+    } catch (err) {
+      console.log(err);
+      toast.error("مشکلی در انجام عملیات به وجود آمد");
     }
   };
 
@@ -52,11 +79,16 @@ const NewBlog = () => {
         ))}
 
         <Col xl={12} className={"mt-5"}>
-          <TextEditor data={textEditorStructure} setContent={setContent} />
+          <TextEditor
+            data={textEditorStructure}
+            setContent={setContent}
+            editorLengthErr={editorLengthErr}
+            isSubmited={isSubmited}
+          />
         </Col>
 
         <Button color={"primary"} className={"mt-5"}>
-          Submit
+          ساخت بلاگ
         </Button>
       </Form>
     </>

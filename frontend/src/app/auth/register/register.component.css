@@ -1,0 +1,39 @@
+h2 {
+  font-size: 22px !important;
+  margin-bottom: 20px;
+}
+
+.auth_body {
+  height: auto;
+  box-sizing: border-box;
+  margin-top: 50px;
+}
+
+.auth {
+  padding-bottom: 50px;
+  width: 90%;
+  margin: auto;
+}
+
+button {
+  padding: 25px 55px !important;
+  margin-top: 20px;
+}
+
+form.ng-submitted input.ng-invalid.ng-untouched,
+form.ng-submitted input.ng-invalid.ng-touched {
+  border: 2px solid #ff7a76 !important;
+  transition: border ease-in 0.2s;
+}
+
+@media screen and (min-width: 600px) {
+  .auth {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .auth {
+    width: 30%;
+  }
+}

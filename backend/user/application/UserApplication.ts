@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
+import CommentRepository from "../../comments/infrastructure/repository/CommentRepository";
 import TokenRepository from "../../token/infrastructure/repository/TokenRepository";
 import UserRepository from "../infrastructure/repository/UserRepository";
 import ITokenDomain from "../../token/domain/ITokenDomain";
 import IUserDomain from "../domain/IUserDomain";
-import fileUpload from "express-fileupload";
 import IUserModel from "../domain/IUserMode";
+import fileUpload from "express-fileupload";
 import jwt_decode from "jwt-decode";
 import jwt from "jsonwebtoken";
 import {
@@ -13,7 +14,6 @@ import {
 } from "../../0-framework/middlewares/bcrypt";
 import { resError } from "../../0-framework/error-handler/errors";
 import { Signjwt } from "../../0-framework/middlewares/jwt";
-import CommentRepository from "../../comments/infrastructure/repository/CommentRepository";
 
 const app = express();
 
@@ -30,13 +30,6 @@ class UserApplication {
 
     async list(req: Request, res: Response) {
         const { pageNumber } = req.body;
-        // const { role } = req.body.role;
-
-        // if (role !== "admin") {
-        //     return res
-        //         .status(403)
-        //         .json({ status: 403, message: "شما دسترسی لازم را ندارید" });
-        // }
         try {
             const result: IUserModel[] = await this._repo.list(
                 parseInt(pageNumber) || 1
@@ -88,8 +81,6 @@ class UserApplication {
                 username
             );
 
-            console.log(updateComments);
-
             if (!updateComments) {
                 return resError(res, 400, "خطای ناخواسته ای رخ داد");
             }
@@ -128,7 +119,6 @@ class UserApplication {
 
         try {
             const result = await this._repo.refactor(_id);
-            console.log(result);
             if (!result) {
                 return resError(res, 404, "کاربری یافت نشد");
             }
@@ -192,7 +182,6 @@ class UserApplication {
                 async (err: any, data: any) => {
                     // renew token
                     if (err === null) {
-                        console.log("error");
                         try {
                             const result: any = await this._repo.get({
                                 _id: token_id,
@@ -257,7 +246,6 @@ class UserApplication {
                 }
             );
         } catch (err) {
-            // console.log(err);
             return res.status(403).json({
                 message: "1شما دسترسی لازم را ندارید",
                 status: 403,
@@ -277,7 +265,7 @@ class UserApplication {
                     email: email,
                     username: username,
                 });
-                if (result === null) {
+                if (!result) {
                     return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
                 }
             } else {
@@ -285,7 +273,7 @@ class UserApplication {
                 result = await this._repo.get({
                     email: email,
                 });
-                if (result === null) {
+                if (!result) {
                     return resError(res, 404, "ایمیل یا رمز عبور اشتباه است");
                 }
             }
@@ -321,34 +309,40 @@ class UserApplication {
     }
 
     async register(req: Request, res: Response) {
-        const isExistsUser = await this._repo.checkUser({
-            $or: [
-                {
-                    username: req.body.username,
-                },
-                {
-                    email: req.body.email,
-                },
-            ],
-        });
-
-        if (isExistsUser)
-            return resError(res, 400, "نام کاربری یا ایمیل قبلا ثبت شده است.");
-
-        const passwordHashed = await hashPassword(req.body.password);
-
-        if (!passwordHashed) return resError(res, 400, "مشکلی پیش آمد");
-
-        const requestBodyData = {
-            username: req.body.username,
-            email: req.body.email,
-            password: passwordHashed,
-        };
-
         try {
-            const result = await this._repo.create(
-                <IUserDomain>requestBodyData
-            );
+            const isExistsUser = await this._repo.checkUser({
+                $or: [
+                    {
+                        username: req.body.username,
+                    },
+                    {
+                        email: req.body.email,
+                    },
+                ],
+            });
+
+            if (isExistsUser)
+                return resError(
+                    res,
+                    400,
+                    "نام کاربری یا ایمیل قبلا ثبت شده است"
+                );
+
+            const passwordHashed = await hashPassword(req.body.password);
+
+            if (!passwordHashed) return resError(res, 400, "مشکلی پیش آمد");
+
+            const requestBodyData = {
+                username: req.body.username,
+                email: req.body.email,
+                password: passwordHashed,
+            };
+
+            const result = await this._repo.create({
+                username: req.body.username,
+                email: req.body.email,
+                password: passwordHashed,
+            });
             if (result === null || result === undefined) {
                 return resError(res, 400, "مشکلی پیش آمد");
             }

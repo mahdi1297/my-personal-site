@@ -1,0 +1,16 @@
+<div class="portfolio-wrapper w-100" id="portfolio">
+  <h3>نمونه کار ها</h3>
+  <div *ngIf="blogs.result; else loading">
+    <div class="portfolio-container">
+      <div *ngFor="let item of blogs.result" class="blog_items-item">
+        <a routerLink="/portfolio/{{ item.slug }}">
+          <img src="{{ imageUrl }}{{ item.main_image }}" alt="" width="100%" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <!-- <app-loading></app-loading> -->
+</ng-template>

@@ -24,7 +24,7 @@ class UserRepository<T extends mongoose.Document>
             .sort({ createdAt: "-1" });
     }
 
-    async create(item: T) {
+    async create(item: any) {
         return await this._model.create(item);
     }
 

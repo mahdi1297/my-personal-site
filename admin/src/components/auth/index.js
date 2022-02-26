@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import FormContainer from "./../../shared/form/form-container";
 import { Button, Container } from "reactstrap";
-import { authForm } from "./form-structure";
-import { AuthBody } from "./style";
 import { useForm } from "react-hook-form";
-import { getUser } from "./data";
+import FormContainer from "./../../shared/form/form-container";
 import Loader from "../../shared/loader";
+import { authForm } from "./form-structure";
+import { getUser } from "./data";
+import { AuthBody } from "./style";
 
 const Auth = () => {
   const {
@@ -24,13 +24,12 @@ const Auth = () => {
       password: data.password,
       from: "admin",
     };
-    const { data: result } = await getUser(userFormData);
 
-    setTimeout(async () => {
+    await getUser(userFormData);
+
+    setTimeout(() => {
       setIsLoading(false);
-
-      if (result && result.status && result.status === 200)
-        window.location.href = "/";
+      window.location.href = "/";
     }, 1200);
   };
 

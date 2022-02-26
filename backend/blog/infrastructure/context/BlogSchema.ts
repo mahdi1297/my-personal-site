@@ -32,11 +32,18 @@ class BlogSchema {
                 keywords: {
                     type: String,
                 },
+                main_keywork: {
+                    type: String,
+                },
                 content: {
                     type: String,
                 },
                 writer: {
                     type: String,
+                },
+                isPublished: {
+                    type: String,
+                    default: "false",
                 },
                 comments_length: {
                     type: String,

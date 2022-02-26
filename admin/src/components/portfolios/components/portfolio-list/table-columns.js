@@ -1,6 +1,6 @@
 import React from "react";
 
-function tableColumns(data, removerFunction, responseFunction) {
+function tableColumns(data) {
   let cols = [];
 
   data &&
@@ -11,7 +11,7 @@ function tableColumns(data, removerFunction, responseFunction) {
           element.title,
           <div>
             <img
-              src={`http://localhost:5000/${element.main_image}`}
+              src={`${process.env.REACT_APP_DEV_API_IMAGE}${element.main_image}`}
               width="200"
               alt="x"
             />

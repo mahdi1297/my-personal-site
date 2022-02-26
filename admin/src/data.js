@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 
 const cookie = new Cookies();
 
-const URL = "http://localhost:5000/api/v1/user/get-user";
+const URL = `${process.env.REACT_APP_DEV_API}user/get-user`;
 
 async function getUserByToken(token) {
   //   const decoded = jwt_decode(token);

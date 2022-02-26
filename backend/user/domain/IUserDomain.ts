@@ -4,7 +4,6 @@ interface IUserDomain extends mongoose.Document {
     username: string;
     password: string;
     email: string;
-    phone: string;
     isRegistered: string;
     token_id: string;
     role: string;

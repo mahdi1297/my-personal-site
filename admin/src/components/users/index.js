@@ -8,6 +8,11 @@ import { confirmUser, removeUser, getUserList } from "./data";
 import { tableColumns } from "./table-columns";
 import { withRouter } from "react-router-dom";
 import { heads } from "./table-heads";
+import Cookie from "universal-cookie";
+
+const cookies = new Cookie();
+
+const Token = cookies.get("i_v_c");
 
 const Users = ({ history, location }) => {
   const [choosedUser, setChoosedUser] = useState({});
@@ -25,13 +30,14 @@ const Users = ({ history, location }) => {
 
   useEffect(() => {
     modal === false && request();
+    return () => {};
   }, [modal, currentPage, choosedUser, pageParam]);
 
   const toggle = () => setModal(!modal);
 
   const request = async () => {
     setIsLoading(true);
-    const { data } = await getUserList(pageParam);
+    const { data } = await getUserList(pageParam, Token);
     if (data.result) {
       setColumnsLength(data.count);
       setTotalData(data.total);
@@ -50,10 +56,10 @@ const Users = ({ history, location }) => {
 
   const removerFunction = async (isConfirmed, _id) => {
     if (isConfirmed === "false") {
-      await confirmUser(_id);
+      await confirmUser(_id, Token);
       request();
     } else if (isConfirmed === "true") {
-      await removeUser(_id);
+      await removeUser(_id, Token);
       request();
     }
   };

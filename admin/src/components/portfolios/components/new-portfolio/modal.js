@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MultipleUpload from "../../../../shared/form/multiple-upload";
 import FormContainer from "../../../../shared/form/form-container";
 import { Button, Col, Form } from "reactstrap";
@@ -8,6 +8,10 @@ import { useForm } from "react-hook-form";
 import { createPortfolio } from "./data";
 import { slugger } from "../../../../helper/slugger";
 import TypeaheadProvider from "../../../../shared/form/typehead";
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+const Token = cookie.get("i_v_c");
 
 const NewPortfolioModal = ({ setModal }) => {
   const {
@@ -18,6 +22,10 @@ const NewPortfolioModal = ({ setModal }) => {
 
   const [images, setImages] = useState([]);
   const [techs, setTechs] = useState([]);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   const createPortfolioSubmitHandler = async (data) => {
     let formData = new FormData();
@@ -40,7 +48,7 @@ const NewPortfolioModal = ({ setModal }) => {
     formData.append("link", data.path);
     formData.append("technologies", JSON.stringify(techs));
 
-    await createPortfolio(formData);
+    await createPortfolio(formData, Token);
     // setModal(false);
   };
 

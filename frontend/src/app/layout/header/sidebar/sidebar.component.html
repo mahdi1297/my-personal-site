@@ -1,0 +1,36 @@
+<div class="inner_sidebar-container w-100">
+  <div class="w-100">
+    <i-feather
+      name="x"
+      style="color: red"
+      (click)="closeSidebarClick()"
+      class="c-pointer"
+    ></i-feather>
+  </div>
+
+  <div class="user-data" *ngIf="userData">
+    <img
+      src="{{ imageUrl }}{{ userData.profile }}"
+      style="border-radius: 50%; margin-top: 7px"
+      width="40"
+      alt=""
+    />
+    <p class="username">{{ userData.username }}</p>
+  </div>
+
+  <ul class="sidebar-nav w-100">
+    <li *ngFor="let route of sidebarRoutes">
+      <a routerLink="{{ route.path }}" class="c-black">{{ route.title }}</a>
+    </li>
+  </ul>
+
+  <section class="header-auth-btns w-100">
+    <button>
+      <a [routerLink]="['/auth/login']" class="c-black"> ورود </a>
+    </button>
+    <br />
+    <button class="btn-primary">
+      <a [routerLink]="['/auth/register']"> ثبت نام </a>
+    </button>
+  </section>
+</div>

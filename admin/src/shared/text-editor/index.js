@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import ImageUploader from "quill-image-uploader";
-import Preview from "./preview";
 import axios from "axios";
 import { ImageResize } from "./image-resize";
 import { Video } from "./quill-video-resize";
@@ -49,13 +48,13 @@ const modules = {
       if (/^image\//.test(file.type)) {
         const response = await axios({
           method: "post",
-          url: "http://localhost:5000/api/v1/blog/image-upload",
+          url: `${process.env.REACT_APP_DEV_API}blog/image-upload`,
           data: bodyFormData,
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        return `http://localhost:5000/${response.data.url}`;
+        return `${process.env.REACT_APP_DEV_API_IMAGE}${response.data.url}`;
       } else {
         alert("please choose just image");
       }
@@ -114,8 +113,6 @@ const TextEditor = ({ defaultValue, setContent }) => {
         value={value}
         onChange={handleChange}
       />
-
-      <Preview value={value} />
     </>
   );
 };

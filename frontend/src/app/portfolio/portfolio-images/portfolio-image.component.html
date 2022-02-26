@@ -1,0 +1,10 @@
+<div class="portfolio_image-container">
+  <div class="portfolio_image-main-image">
+    <img src="{{ imageUrl }}{{ main_image }}" />
+  </div>
+  <div class="portfolio_image-images flex">
+    <figure *ngFor="let item of presentation_images">
+      <img src="{{ imageUrl }}{{ item.path }}" />
+    </figure>
+  </div>
+</div>

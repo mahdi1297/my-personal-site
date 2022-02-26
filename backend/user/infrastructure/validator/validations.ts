@@ -4,8 +4,9 @@ const createUserValidators = () => [
     body("username")
         .isLength({ min: 5, max: 255 })
         .withMessage("طول نام کاربری مجاز نیست"),
-    body("email").isEmail().withMessage("فرمت ایمیل صحیح نیست"),
     body("email")
+        .isEmail()
+        .withMessage("فرمت ایمیل صحیح نیست")
         .isLength({ min: 5, max: 255 })
         .withMessage("طول ایمیل مجاز نیست"),
     body("password")

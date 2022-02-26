@@ -1,15 +1,24 @@
 import { post } from "../../utils/httpRequest/post";
+import { put } from "./../../utils/httpRequest/put";
 
-const GET_BLOG_LIST_URL = "http://localhost:5000/api/v1/blog/edit-list";
+const GET_BLOG_LIST_URL = `${process.env.REACT_APP_DEV_API}blog/edit-list`;
+const PUBLISH_BLOG = `${process.env.REACT_APP_DEV_API}blog/publish`;
 
-async function getBlogList(pageParam) {
+async function getBlogList(pageParam, Token) {
   const { data } = await post(
     `${GET_BLOG_LIST_URL}/${pageParam}`,
-    { x: "" },
+    { pageNumber: pageParam },
     false,
-    true
+    true,
+    Token
   );
   return { data };
 }
 
-export { getBlogList };
+const publishBlog = (dataPack, Token) => {
+  const { data } = put(PUBLISH_BLOG, dataPack, true, true, Token);
+
+  return { data };
+};
+
+export { getBlogList, publishBlog };

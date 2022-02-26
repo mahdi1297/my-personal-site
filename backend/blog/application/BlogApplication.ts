@@ -59,13 +59,12 @@ class BlogApplication {
         try {
             const commentsCount = await this._repo.count();
 
-            if (commentsCount === null) {
+            if (!commentsCount) {
                 return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
             }
 
             const result = await this._repo.editList(page);
-            if (result === null)
-                return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
+            if (!result) return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
 
             res.json({
                 status: 200,
@@ -84,8 +83,9 @@ class BlogApplication {
         const { slug } = req.body;
         try {
             const result = await this._repo.getBySlug(slug);
-            result === undefined ||
-                (result === null && resError(res, 400, BLOG_NOT_FOUND));
+            if (!result) {
+                resError(res, 400, BLOG_NOT_FOUND);
+            }
             res.json({
                 status: 200,
                 message: "blogs list endpoint",
@@ -154,6 +154,7 @@ class BlogApplication {
                 tags: req.body.tags,
                 writer: req.body.writer,
                 comments_length: 0,
+                isPublished: "false",
             };
             const result = await this._repo.create(<IBlogDomain>dataToStore);
 
@@ -168,7 +169,27 @@ class BlogApplication {
         } catch (err) {}
     }
 
-    //IMAGE UPLOAD SECTION FOR CREATE BLOG PROCCESS
+    // PUBLISH NEW BLOG
+    async publish(req: any, res: any) {
+        const { _id, isPublished } = req.body;
+
+        try {
+            const result = await this._repo.publish(_id, isPublished);
+            if (!result) {
+                return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
+            }
+            console.log(result);
+            res.json({
+                status: 200,
+                message: "با موفقیت ویرایش شد",
+                result: "Ok",
+            });
+        } catch (err) {
+            return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
+        }
+    }
+
+    // IMAGE UPLOAD SECTION FOR CREATE BLOG PROCCESS
     async imageUpload(req: any, res: any) {
         const image = req.files.image;
         if (!image) {
@@ -204,7 +225,6 @@ class BlogApplication {
         const { parentId } = req.body;
         try {
             const result = await this._repo.getByID(parentId);
-            console.log(result);
             if (result === null) {
                 return resError(res, 400, BLOG_NOT_FOUND);
             }
@@ -222,7 +242,6 @@ class BlogApplication {
         const { _id } = req.body;
         try {
             const result = await this._repo.getDetailByID(_id);
-            console.log(result);
             if (result === null) {
                 return resError(res, 400, BLOG_NOT_FOUND);
             }
@@ -267,7 +286,6 @@ class BlogApplication {
                 };
 
                 const result = await this._repo.update(_id, dataToStore);
-                console.log(result);
 
                 if (!result) {
                     return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
@@ -298,7 +316,6 @@ class BlogApplication {
                 };
 
                 const result = await this._repo.update(_id, dataToStore);
-                console.log(result);
                 if (!result) {
                     return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
                 }

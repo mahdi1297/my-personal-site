@@ -38,7 +38,21 @@ const formStructure = [
     validation: {
       required: true,
       minLength: 5,
-      maxLength: 250,
+      maxLength: 160,
+    },
+  },
+  {
+    id: 6,
+    size: 12,
+    type: "text",
+    name: "main_keywork",
+    placeholder: "مثلا react.js",
+    label: "کلمه اصلی",
+    labelRequired: true,
+    validation: {
+      required: true,
+      minLength: 5,
+      maxLength: 160,
     },
   },
   {
@@ -67,7 +81,7 @@ const formStructure = [
     validation: {
       required: true,
       minLength: 5,
-      maxLength: 250,
+      maxLength: 160,
     },
   },
 ];

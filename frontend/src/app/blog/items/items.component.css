@@ -1,0 +1,140 @@
+.blog_items {
+  margin: auto;
+  margin-top: 30px;
+  margin-top: -300px;
+  width: 100%;
+  margin-bottom: 200px;
+  overflow-y: hidden;
+  overflow-x: clip;
+}
+h2 {
+  font-size: 20px !important;
+  padding: 20px 0;
+  height: auto !important;
+}
+.blog_items-container {
+  margin: auto;
+  width: 80%;
+  height: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 50px;
+}
+
+.blog_items-item {
+  width: 100%;
+  height: auto !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+.blog_items-card_header img {
+  border-radius: 2px;
+  box-shadow: 1px 14px 13px #27244336;
+}
+.blog_items-card_header img:hover {
+  opacity: 60%;
+  /* height: 100%; */
+}
+.item-description {
+  height: auto !important;
+  /* border: 1px solid black !important; */
+}
+.blog_items-card_body {
+  padding: 5px;
+}
+.blog_items-card_body h2 {
+  width: 110%;
+  font-size: 17px;
+  height: 35px;
+  white-space: no-wrap;
+  overflow: hidden;
+  z-index: 1;
+}
+.blog_items-card_body h2::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 100%;
+  position: relative;
+  top: -35px;
+  right: 85%;
+  z-index: 5;
+  background: linear-gradient(to right, #fcfdfe, rgba(39, 36, 67, 0));
+}
+.blog_items-card_body h2:hover a {
+  color: #fee6b5;
+}
+
+.blog_items-card_body p {
+  height: 45px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 100;
+  color: #9d9d9d;
+}
+
+.pagination {
+  margin-bottom: 20px;
+}
+.pagination button {
+  margin: 5px;
+  background: none;
+  color: #9d9d9d;
+}
+.pagination p {
+  position: relative;
+  top: -5px;
+  width: 30px;
+  text-align: center;
+}
+.pagination button:hover {
+  color: #7a76ff;
+  background: #efefef;
+}
+
+.disabled {
+  background: #efefef !important;
+  opacity: 60%;
+  cursor: not-allowed !important;
+}
+
+@media screen and (min-width: 600px) {
+  .blog_items-item {
+    width: 48%;
+  }
+  .blog_items {
+    width: 95%;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .blog_items-item {
+    width: 28%;
+  }
+  .blog_items {
+    width: 100%;
+  }
+  .blog_items-container {
+    width: 100%;
+  }
+}

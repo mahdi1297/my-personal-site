@@ -1,0 +1,93 @@
+.header-wrapper {
+  height: 83px;
+}
+
+.header_body {
+  height: 83px;
+}
+
+.header-lg-wrapper {
+  display: none;
+}
+.header-sm-wrapper {
+  display: flex;
+}
+
+.header_logo a:hover {
+  color: #ecedff;
+}
+
+.header-sm-wrapper i-feather {
+  cursor: pointer !important;
+}
+.header-sm-wrapper i-feather:hover {
+  color: #7a76ff !important;
+}
+.header-nav {
+  height: 83px;
+  margin-left: 20px;
+}
+.header-nav li a {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  padding-left: 30px;
+  padding-bottom: 2px;
+  color: #272443;
+  font-size: 15px;
+}
+.sidebar-container {
+  transform: translateX(-30px);
+  position: fixed;
+  width: 0 !important;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  background: #fff;
+  z-index: 100000;
+  width: 200px;
+  visibility: visible;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  padding: 30px;
+}
+
+.sidebar-close {
+  visibility: hidden;
+  width: 0;
+  opacity: 0;
+}
+.sidebar-open {
+  width: 290px !important;
+  transform: translateX(30px);
+}
+.user-data-herader {
+  padding-bottom: 5px;
+}
+.username {
+  font-size: 12px;
+  margin-top: 17px;
+  margin-left: 10px;
+  color: #9d9d9d;
+}
+.username ~ img {
+  border: 1px solid #46afb2;
+  padding: 2px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 800px) {
+  .header-lg-wrapper {
+    display: flex;
+  }
+  .header-sm-wrapper {
+    display: none;
+  }
+}
