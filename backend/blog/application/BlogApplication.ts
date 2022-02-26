@@ -59,13 +59,12 @@ class BlogApplication {
         try {
             const commentsCount = await this._repo.count();
 
-            if (commentsCount === null) {
+            if (!commentsCount) {
                 return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
             }
 
             const result = await this._repo.editList(page);
-            if (result === null)
-                return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
+            if (!result) return resError(res, 400, PROBLEM_IN_GETTING_BLOG);
 
             res.json({
                 status: 200,

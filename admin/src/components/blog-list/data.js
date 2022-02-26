@@ -7,7 +7,7 @@ const PUBLISH_BLOG = `${process.env.REACT_APP_DEV_API}blog/publish`;
 async function getBlogList(pageParam, Token) {
   const { data } = await post(
     `${GET_BLOG_LIST_URL}/${pageParam}`,
-    { x: "" },
+    { pageNumber: pageParam },
     false,
     true,
     Token

@@ -16,7 +16,7 @@ const PortfolioList = () => {
       const { data } = await getPortfolioList();
       if (data.result) {
         setColumnsLength(data.result.length);
-        let cols = tableColumns(data.result, removerFunction, responseFunction);
+        let cols = tableColumns(data.result);
         setColumns(cols);
         setTimeout(() => {
           setIsLoading(false);
@@ -26,9 +26,6 @@ const PortfolioList = () => {
     request();
     return () => {};
   }, []);
-
-  function removerFunction() {}
-  function responseFunction() {}
 
   return (
     <>
