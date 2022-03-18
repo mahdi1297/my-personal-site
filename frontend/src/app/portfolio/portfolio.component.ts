@@ -30,7 +30,9 @@ export class PortfolioCompoent implements OnInit {
       }
       this.apiService.get(`portfolio/${param.slug}`).subscribe(
         (data: any) => {
-          this.portfolio = data.result;
+          setTimeout(() => {
+            this.portfolio = data.result;
+          }, 1200);
           this.titleService.setTitle(`Mahdi Alipoor | ${data.result.title} `);
           this.metaTagService.addTags([
             { name: 'robots', content: 'index, follow' },
@@ -49,7 +51,5 @@ export class PortfolioCompoent implements OnInit {
         }
       );
     });
-
-    // this.apiService.get()
   }
 }

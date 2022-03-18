@@ -17,18 +17,15 @@
         [tags]="blogDetail.result.tags"
         [tokenData]="tokenData"
       >
-        ></app-blog-detail-footer
-      >
+      </app-blog-detail-footer>
 
       <app-blog-detail-comments
         [_id]="blogDetail.result._id"
         [tokenData]="tokenData"
       ></app-blog-detail-comments>
-
-      <!-- <shared-comment [tokenData]="tokenData"></shared-comment> -->
     </div>
   </div>
 </article>
 <ng-template #loading>
-  <app-loading></app-loading>
+  <app-loading-container></app-loading-container>
 </ng-template>

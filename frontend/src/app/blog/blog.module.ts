@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '../icons/icons.module';
 import { CommentComponent } from '../shared/comment/comment.component';
 
-import { LoadingComponent } from '../shared/loading/loading.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { CommentsComponent } from './blog-detail/comments/comments.component';
 import { BlogListComponent } from './blog-detail/comments/list/list.component';
@@ -21,6 +20,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { HeroComponent } from './hero/hero.component';
 import { ItemsComponent } from './items/items.component';
 import { SafeHtml } from '../pipes/safehtml.pipe';
+import { SharedModule } from '../shared-module/shared.module';
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { SafeHtml } from '../pipes/safehtml.pipe';
     IconsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
   declarations: [
     BlogComponent,
@@ -38,7 +39,6 @@ import { SafeHtml } from '../pipes/safehtml.pipe';
     HeadComponent,
     ContentComponent,
     BlogDetailFooterComponent,
-    LoadingComponent,
     CategoriesComponent,
     CommentsComponent,
     BlogListComponent,

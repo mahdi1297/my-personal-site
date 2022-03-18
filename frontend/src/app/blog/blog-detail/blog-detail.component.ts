@@ -6,6 +6,7 @@ import { TimeService } from 'src/app/services/time.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-blog-detail',
@@ -41,17 +42,15 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
           data.result.createdAt = this.timeService.toShamsi(
             data.result.createdAt
           );
-          let description = data.result.description;
-          this.blogDetail = data;
           this.titleService.setTitle(`Mahdi Alipoor | ${data.result.title} `);
           this.metaTagService.updateTag({
             name: 'description',
-            content: 'description',
+            content: `${data.result.description}`,
           });
           this.metaTagService.addTags([
             {
               name: 'description',
-              content: 'description',
+              content: `${data.result.description}`,
             },
             { name: 'robots', content: 'index, follow' },
             { name: 'author', content: 'Mahdi Alipoor' },
@@ -83,6 +82,10 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
               content: `${environment.api_image_url}${data.result.main_image}`,
             },
           ]);
+
+          setTimeout(() => {
+            this.blogDetail = data;
+          }, 700);
         });
     });
   }

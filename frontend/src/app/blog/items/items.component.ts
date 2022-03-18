@@ -16,7 +16,6 @@ export class ItemsComponent implements OnInit {
 
   imageUrl: string = environment.api_image_url;
 
-
   constructor(private http: HttpClient, private apiService: ApiService) {
     this.readEmployee(this.pageNumber);
   }
@@ -46,7 +45,9 @@ export class ItemsComponent implements OnInit {
         this.isEnd = true;
       }
       if (data.result && data.result.length !== 0) this.isEnd = false;
-      this.blogs = data;
+      setTimeout(() => {
+        this.blogs = data;
+      }, 700);
     });
   }
 }

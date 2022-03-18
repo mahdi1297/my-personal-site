@@ -25,6 +25,23 @@ form.ng-submitted input.ng-invalid.ng-touched {
   transition: border ease-in 0.2s;
 }
 
+.auth-not {
+  padding: 10px 0;
+  font-size: 14px;
+  display: flex;
+}
+.auth-not span:first-child {
+  color: #ccc;
+}
+.auth-not span a {
+  color: #46afb2;
+  margin-right: 20px;
+  display: block;
+}
+.auth-not span a:hover {
+  opacity: 50%;
+}
+
 @media screen and (min-width: 600px) {
   .auth {
     width: 50%;

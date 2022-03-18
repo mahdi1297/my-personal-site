@@ -53,14 +53,15 @@ export class RegisterComponent implements OnInit {
               setTimeout(() => {
                 window.location.href = '/auth/login';
               }, 3000);
-            } else {
-              this.toast.error('لطفا مججدا امتحان کنید', 'خطا');
             }
           }
         },
         (error) => {
           console.log(error);
-          this.toast.error('لطفا مججدا امتحان کنید', 'خطا');
+          this.toast.error(
+            'خطا',
+            error.message || 'نام کاربری یا ایمیل تکراریست'
+          );
         }
       );
       this.isLoading = false;
