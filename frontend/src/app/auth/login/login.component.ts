@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // toast_indicator
+
   async onSubmit() {
     if (this.form.valid) {
       this.isSubmited = true;
@@ -45,19 +47,22 @@ export class LoginComponent implements OnInit {
             this.cookieService.set('u_t', data.result, 100000, '/');
             if (this.cookieService.check('u_t')) {
               this.toast.success(
-                'بعد از 5 ثانیه به خانه منتقل میشوید',
+                'بعد از 3 ثانیه به خانه منتقل میشوید',
                 'ورود موفق'
               );
+
               setTimeout(() => {
                 window.location.href = '/';
-              }, 5000);
-            } else {
-              this.toast.error('لطفا مججدا امتحان کنید', 'خطا');
+              }, 3000);
             }
           }
         },
         (error) => {
-          this.toast.error('لطفا مججدا امتحان کنید', 'خطا');
+          console.log(error);
+          this.toast.error(
+            'خطا',
+            error.message || 'ایمیل یا رمز عبور اشتباه است'
+          );
         }
       );
       this.isLoading = false;

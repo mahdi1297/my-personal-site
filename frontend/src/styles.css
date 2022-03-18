@@ -121,6 +121,7 @@ pre {
   padding: 10px;
   border-radius: 10px;
   overflow-x: auto;
+  line-height: 22px;
 }
 button {
   display: -webkit-box;

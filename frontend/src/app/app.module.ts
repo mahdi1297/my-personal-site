@@ -12,6 +12,7 @@ import { CvComponent } from './cv/cv.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared-module/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     IconsModule,
     BrowserAnimationsModule,
+    SharedModule,
     ToastrModule.forRoot({
+      timeOut: 30000,
       positionClass: 'toast-top-right',
+      preventDuplicates: true,
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

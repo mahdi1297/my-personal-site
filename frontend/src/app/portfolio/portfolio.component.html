@@ -1,5 +1,5 @@
-<section class="container">
-  <div *ngIf="portfolio">
+<section class="container" *ngIf="portfolio; else loading">
+  <div>
     <div class="flex justify-between w-100 portfolio_container">
       <div class="content">
         <portfolio-content
@@ -19,3 +19,7 @@
     </div>
   </div>
 </section>
+
+<ng-template #loading>
+  <app-loading-container></app-loading-container>
+</ng-template>

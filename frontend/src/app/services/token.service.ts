@@ -20,7 +20,7 @@ export class TokenService {
     this.cookieValue = this.cookieService.get('u_t');
     const isExistsCookie = this.cookieService.check('u_t');
 
-    if (isExistsCookie) {
+    if (isExistsCookie === true) {
       this.apiService
         .post(this.TOKEN_API_ADDRESS, { token: this.cookieValue })
         .subscribe(

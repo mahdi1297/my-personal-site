@@ -1,14 +1,12 @@
 import express from "express";
-import cluster from "cluster";
 import helmet from "helmet";
-import totalCPUs from "os";
 import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 import BaseRoutes from "./BaseRoutes";
 import path from "path";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
-import { SeedUser } from "./Seeder";
+// import { SeedUser } from "./Seeder";
 const cors = require("cors");
 
 const app = express();
@@ -16,27 +14,19 @@ const app = express();
 dotenv.config({ path: __dirname + "/.env" });
 dotenv.config();
 
-// app.use("/favicon.png", express.static("uploads/static/favicon.png"));
-
 app.use(express.static(path.resolve("./public")));
 app.use("/public", express.static(path.resolve("./public")));
 
-// if (cluster.isPrimary) {
-//     for (let i = 0; i < totalCPUs.cpus().length; i++) {
-//         cluster.fork();
-//     }
-
-//     cluster.on("exit", (worker, code, signal) => {
-//         console.log(`worker ${worker.process.pid} died`);
-//         console.log("Let's fork another worker!");
-//         cluster.fork();
-//     });
-// } else {
 app.use(express.static("public"));
 
 app.use(
     cors({
-        origin: ["http://admin.mahdialipoor.ir", "http://localhost:3006"],
+        origin: [
+            "http://admin.mahdialipoor.ir",
+            "http://localhost:3006",
+            "http://127.0.0.1:8080",
+            "http://localhost:4200",
+        ],
         optionsSuccessStatus: 200,
     })
 )

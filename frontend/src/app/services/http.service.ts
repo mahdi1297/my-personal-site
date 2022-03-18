@@ -36,13 +36,6 @@ export class ApiService {
     );
   }
 
-  //   updateEmployee(id, data): Observable<any> {
-  //     let url = `${this.baseUri}/update/${id}`;
-  //     return this.http
-  //       .put(url, data, { headers: this.headers })
-  //       .pipe(catchError(this.errorMgmt));
-  //   }
-
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -52,7 +45,6 @@ export class ApiService {
     }
 
     if (error.status === 404) {
-      alert(error.error.message);
     }
 
     return throwError(error.error);

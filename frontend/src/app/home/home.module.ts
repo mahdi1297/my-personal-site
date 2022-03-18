@@ -8,6 +8,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { WorksComponent } from './works/works.component';
+import { SharedModule } from '../shared-module/shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { WorksComponent } from './works/works.component';
     IconsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
   declarations: [
     HomeComponent,

@@ -10,6 +10,7 @@ import { IconsModule } from '../icons/icons.module';
 import { PortfolioCompoent } from './portfolio.component';
 import { PortfolioContentComponent } from './portfolio-content/portfolio-content.component';
 import { PortfolioImagesComponent } from './portfolio-images/portfolio-image.component';
+import { SharedModule } from '../shared-module/shared.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { PortfolioImagesComponent } from './portfolio-images/portfolio-image.com
     IconsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
   declarations: [
     PortfolioCompoent,
