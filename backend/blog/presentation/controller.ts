@@ -46,6 +46,11 @@ class BlogController {
         const _app = new BlogApplication();
         await _app.update(req, res);
     }
+
+    async getByCategory(req: express.Request, res: express.Response) {
+        const _app = new BlogApplication();
+        await _app.getByCategory(req, res);
+    }
 }
 
 export default BlogController;

@@ -39,9 +39,8 @@ const modules = {
   },
 
   imageUploader: {
-    upload: async (file, data) => {
+    upload: async (file) => {
       console.log(file);
-      console.log(data);
       const bodyFormData = new FormData();
 
       bodyFormData.append("image", file);

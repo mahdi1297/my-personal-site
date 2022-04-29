@@ -1,24 +1,105 @@
-<div class="container">
-  <div class="home_hero">
-    <h1>سلام من <span class="c-theme">مهدی</span> هستم!!!</h1>
-    <p>من طراح و برنامه نویس وب و قالب وبسایت هستم</p>
-  </div>
-</div>
-
-<div class="technologies">
+<div class="hero-container">
   <div class="container">
-    <div class="inner_technologies flex">
-      <div>
-        <img src="./../../../assets/img/logos/react.jpg" width="80" alt="" />
+    <div class="hero-wrapper">
+      <div class="hero-description">
+        <p class="hero_hello primary">سلام!</p>
+        <p class="hero_name" [innerHtml]="effectedText"></p>
+        <p class="hero_job-desc">
+          من یک برنامه نویسم. کار من طراحی وبسایت و قالب وبسایته. من عاشق این
+          کارم
+        </p>
+
+        <div class="hero_contact-me">
+          <button class="btn btn-primary">ارتباط با من</button>
+        </div>
       </div>
-      <div>
-        <img src="./../../../assets/img/logos/angular2.png" width="80" alt="" />
-      </div>
-      <div>
-        <img src="./../../../assets/img/logos/node.png" width="80" alt="" />
-      </div>
-      <div>
-        <img src="./../../../assets/img/logos/asp.png" width="110" alt="" />
+      <div class="hero-techs">
+        <!-- <div class="hero-techs_main-image">
+          <img src="/assets/img/header-banner.png" />
+        </div> -->
+        <div class="hero-techs_items">
+          <div>
+            <div
+              class="items-active absolute m-t-5 m-b-30 animator hover-animation"
+            >
+              <div>
+                <figure>
+                  <img
+                    src="/assets/img/logos/node.png"
+                    width="38"
+                    class="opacity-80"
+                  />
+                </figure>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+            <div class="items-active animator hover-animation">
+              <div>
+                <figure>
+                  <img src="/assets/img/techs/js.svg" />
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div></div>
+            <div class="items-active animator-to-bottom hover-animation">
+              <div>
+                <figure>
+                  <img src="/assets/img/techs/react.svg" width="70" />
+                </figure>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+
+          <div>
+            <div class="items-active animator-to-bottom hover-animation">
+              <div>
+                <figure>
+                  <img src="/assets/img/techs/ts.svg" />
+                </figure>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+            <div
+              class="items-active absolute m-t-5 m-b-30 animator hover-animation"
+            >
+              <div>
+                <figure>
+                  <img src="/assets/img/techs/angular.svg" />
+                </figure>
+              </div>
+            </div>
+            <div></div>
+          </div>
+
+          <div>
+            <div></div>
+            <div
+              class="items-active animator absolute m-b-30 m-l-5 hover-animation"
+            >
+              <div>
+                <figure>
+                  <img src="/assets/img/techs/next.svg" width="50" />
+                </figure>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+            <div class="items-active animator-to-bottom hover-animation">
+              <div>
+                <figure>
+                  <img src="/assets/img/techs/redux.svg" />
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

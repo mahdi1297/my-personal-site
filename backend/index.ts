@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import BaseRoutes from "./BaseRoutes";
 import path from "path";
 import morgan from "morgan";
+import mongoSanitize from "express-mongo-sanitize";
 import * as dotenv from "dotenv";
 // import { SeedUser } from "./Seeder";
 const cors = require("cors");
@@ -33,9 +34,10 @@ app.use(
     .use(express.json({ limit: "50mb" }))
     .use(express.urlencoded({ limit: "50mb" }))
     .use(fileUpload())
-    .use(helmet())
+    .use(helmet.frameguard({ action: "SAMEORIGIN" }))
     .use(cookieParser())
-    .use(morgan("dev"));
+    .use(morgan("dev"))
+    .use(mongoSanitize());
 
 const route = express.Router();
 

@@ -19,16 +19,28 @@
       </div>
     </div>
     <!-- ///// -->
-    <!-- <div>
+    <div>
       <div class="title">
         <h3>مقالات مرتبط</h3>
-        <ul>
-          <li class="flex">
-            <div></div>
-            <div></div>
-          </li>
-        </ul>
+        <div *ngIf="related_posts_length !== 0; else noitem">
+          <ul class="related_posts_items">
+            <li class="flex" *ngFor="let item of related_posts">
+              <div>
+                <a href="/blog/{{ item.slug }}">
+                  <img src="{{ image_url }}{{ item.main_image }}" />
+                </a>
+              </div>
+              <p>
+                <a href="/blog/{{ item.slug }}">{{ item.title }}</a>
+              </p>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </section>
+
+<ng-template #noitem>
+  <span>آیتمی وجود ندارد</span>
+</ng-template>

@@ -32,10 +32,13 @@ class BlogSchema {
                 keywords: {
                     type: String,
                 },
-                main_keywork: {
+                main_keyword: {
                     type: String,
                 },
                 content: {
+                    type: String,
+                },
+                category: {
                     type: String,
                 },
                 writer: {

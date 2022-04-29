@@ -1,6 +1,4 @@
 <div class="blog_items w-100">
-  <app-blog-categories></app-blog-categories>
-
   <div *ngIf="blogs.result; else loading">
     <div class="blog_items-container">
       <div *ngFor="let item of blogs.result" class="blog_items-item">
@@ -8,6 +6,11 @@
           <a routerLink="/blog/{{ item.slug }}">
             <img src="{{ imageUrl }}{{ item.thumbnail }}" alt="" width="100%" />
           </a>
+          <span class="post-type" *ngIf="item.main_keyword">
+            <a href="/blog/something">
+              {{ item.main_keyword }}
+            </a>
+          </span>
         </div>
         <div class="blog_items-card_body">
           <h2>
@@ -20,16 +23,17 @@
           </p>
         </div>
       </div>
+
       <div class="pagination w-100 flex justify-center">
         <button
-          [ngClass]="blogs.result.length === 0 ? 'disabled' : ''"
+          [ngClass]="blogs.result.length === 0 ? 'disabled' : 'primary'"
           (click)="nextPageBtnHandler($event)"
         >
           <i-feather name="chevron-right"></i-feather>
         </button>
         <p>{{ pageNumber }}</p>
         <button
-          [ngClass]="pageNumber === 1 ? 'disabled' : ''"
+          [ngClass]="pageNumber === 1 ? 'disabled' : 'primary'"
           (click)="prevPageBtnHandler($event)"
         >
           <i-feather name="chevron-left"></i-feather>

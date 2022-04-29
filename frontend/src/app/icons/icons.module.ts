@@ -14,6 +14,7 @@ import {
   CornerUpLeft,
   Tag,
   X,
+  Search,
 } from 'angular-feather/icons';
 
 const icons = {
@@ -30,6 +31,7 @@ const icons = {
   Menu,
   Link,
   X,
+  Search,
 };
 
 @NgModule({

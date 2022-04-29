@@ -45,14 +45,14 @@ const formStructure = [
     id: 6,
     size: 12,
     type: "text",
-    name: "main_keywork",
+    name: "main_keyword",
     placeholder: "مثلا react.js",
-    label: "کلمه اصلی",
+    label: "کلمه کلیدی اصلی",
     labelRequired: true,
     validation: {
       required: true,
       minLength: 5,
-      maxLength: 160,
+      maxLength: 250,
     },
   },
   {
@@ -93,10 +93,10 @@ const textEditorStructure = {
 };
 
 const typeheadStructure = {
-  name: "tags",
-  label: "تگ ها",
-  placeholder: "تگ ها را وارد کنید",
-  newSelectionPrefix: "اضافه کردن تگ :",
+  name: "category",
+  label: "دسته بندی ها",
+  placeholder: "دسته بندی ها ها را وارد کنید",
+  newSelectionPrefix: "اضافه کردن دسته بندی :",
 };
 
 export { textEditorStructure, typeheadStructure, formStructure };

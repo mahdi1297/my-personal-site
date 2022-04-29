@@ -17,6 +17,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   blogDetail: any = {};
   tokenSub: Subscription;
   tokenData: any;
+  keyword: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       this.apiService
         .post('blog/get-by-slug', { slug: param.slug })
         .subscribe((data: any) => {
+          this.keyword = data.result.main_keyword;
           data.result.createdAt = this.timeService.toShamsi(
             data.result.createdAt
           );

@@ -151,8 +151,9 @@ class BlogApplication {
                 description: req.body.description,
                 keyword: req.body.keyword,
                 content: req.body.content,
-                tags: req.body.tags,
+                main_keyword: req.body.main_keyword,
                 writer: req.body.writer,
+                category: req.body.category,
                 comments_length: 0,
                 isPublished: "false",
             };
@@ -279,7 +280,9 @@ class BlogApplication {
                     }`,
                     description: req.body.description,
                     keyword: req.body.keyword,
+                    main_keyword: req.body.main_keyword,
                     content: req.body.content,
+                    category: req.body.category,
                     tags: req.body.tags,
                     writer: req.body.writer,
                     comments_length: 0,
@@ -308,10 +311,12 @@ class BlogApplication {
                     main_image: req.body.main_image,
                     thumbnail: req.body.main_image,
                     description: req.body.description,
+                    main_keyword: req.body.main_keyword,
                     keyword: req.body.keyword,
                     content: req.body.content,
                     tags: req.body.tags,
                     writer: req.body.writer,
+                    category: req.body.category,
                     comments_length: 0,
                 };
 
@@ -327,6 +332,31 @@ class BlogApplication {
             } catch (err) {
                 return resError(res, 400, PROBLEM_IN_UPDATING_BLOG);
             }
+        }
+    }
+
+    async getByCategory(req: any, res: any) {
+        const { category } = req.body;
+        if (!category) {
+            return res
+                .status(400)
+                .json({ status: 400, message: "لطفا category را وارد نمایید" });
+        }
+
+        try {
+            const result = await this._repo.getByCategory(category);
+            if (!result) {
+                return resError(res, 400, BLOG_NOT_FOUND);
+            }
+            return res.json({
+                status: 200,
+                count: result.length,
+                message: OK,
+                result,
+            });
+        } catch (err) {
+            console.log(err);
+            return resError(res, 400, "Something bad happened");
         }
     }
 }

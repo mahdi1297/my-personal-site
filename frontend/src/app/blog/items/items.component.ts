@@ -41,6 +41,7 @@ export class ItemsComponent implements OnInit {
 
   readEmployee(pageNumber: number) {
     this.apiService.get(`blog/list/${pageNumber}`).subscribe((data: any) => {
+      console.log(data);
       if (data.result && data.result.length === 0) {
         this.isEnd = true;
       }

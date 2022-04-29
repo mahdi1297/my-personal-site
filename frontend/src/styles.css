@@ -1,10 +1,14 @@
-@font-face {
-  font-family: "main";
-  src: url("./assets/fonts/iranyekanwebregular(fanum).eot") format("eot"),
-    url("./assets/fonts/iranyekanwebregular(fanum).ttf") format("truetype"),
-    url("./assets/fonts/iranyekanwebregular(fanum).woff") format("woff"),
-    url("./assets/fonts/iranyekanwebregular(fanum).woff2") format("woff2");
+:root {
+  --primary: #fe5f50;
+  --white: #fdfdfd;
+  --black: #313030;
+  --success: #46afb2;
+  --danger: #952f38;
+  --warning: #8d7f25;
+  --gray: #f3f2f0;
+  --light-primary: #ffedec;
 }
+
 * {
   font-family: main;
   box-sizing: border-box;
@@ -13,11 +17,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #fcfdfe;
+  background: var(--white);
   direction: rtl;
   scroll-behavior: smooth;
   max-width: 2000px;
   margin: auto;
+}
+@font-face {
+  font-family: "main";
+  src: url("./assets/fonts/iranyekanwebregular(fanum).eot") format("eot"),
+    url("./assets/fonts/iranyekanwebregular(fanum).ttf") format("truetype"),
+    url("./assets/fonts/iranyekanwebregular(fanum).woff") format("woff"),
+    url("./assets/fonts/iranyekanwebregular(fanum).woff2") format("woff2");
 }
 a {
   text-decoration: none;
@@ -44,7 +55,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #272443 !important;
+  color: var(--black);
 }
 p a,
 h1 a,
@@ -53,7 +64,23 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  color: #272443 !important;
+  color: var(--black);
+}
+
+.m-t-5 {
+  margin-top: 5px;
+}
+.m-r-5 {
+  margin-right: 5px;
+}
+.m-l-5 {
+  margin-left: 5px;
+}
+.m-b-5 {
+  margin-bottom: 5px;
+}
+.m-b-30 {
+  margin-bottom: 30px;
 }
 /* layout */
 .container {
@@ -97,38 +124,109 @@ h6 a {
 .br-100 {
   border-radius: 100%;
 }
+
+/* buttons */
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--primary) !important;
+  color: var(--white) !important;
+}
+.btn-primary a {
+  color: var(--white);
+}
+
+.btn-light {
+  background: var(--white);
+  color: var(--black);
+}
+.btn-light a {
+  color: var(--black);
+}
+
+.btn-dark {
+  background: var(--black);
+  color: var(--white);
+}
+.btn-dark a {
+  color: var(--white);
+}
+
+.btn-success {
+  background: var(--success);
+  color: var(--white);
+}
+.btn-success a {
+  color: var(--white);
+}
+.btn-danger {
+  background: var(--danger);
+  color: var(--white);
+}
+.btn-danger a {
+  color: var(--white);
+}
+.btn-warning {
+  background: var(--warning);
+  color: var(--white);
+}
+.btn-warning a {
+  color: var(--white);
+}
+
+/* ///////////////// */
+.bg-primary {
+  background: var(--primary);
+}
+.bg-succes {
+  background: var(--success);
+}
+.bg-warning {
+  background: var(--warning);
+}
+.bg-dark {
+  background: var(--black);
+}
+.bg-danger {
+  background: var(--danger);
+}
+.bg-light {
+  background: var(--white);
+}
+.light {
+  color: var(--white);
+}
+.primary {
+  color: var(--primary);
+}
+.succes {
+  color: var(--success);
+}
+.warning {
+  color: var(--warning);
+}
+.dark {
+  color: var(--black);
+}
+.danger {
+  color: var(--danger);
+}
 /* colors */
-.bg-theme {
-  background: #46afb2;
-}
-.bg-yellow {
-  background: #8d7f25;
-}
-.c-yellow {
-  color: #8d7f25;
-}
-.c-theme {
-  color: #46afb2 !important;
-}
-.bg-blcak {
-  background: #272443;
-}
-.c-black {
-  color: #272443 !important;
-}
-.bg-white {
-  background: #fcfdfe;
-}
-.c-white {
-  color: #fcfdfe !important;
+.bg-dark-white {
+  background: var(--white);
 }
 
 .border {
-  border: 1px solid black;
+  border: 1px solid var(--black);
 }
 pre {
-  background: #46afb282;
-  color: #5e5939;
+  background: var(--success);
+  color: var(--warning);
   overflow: visible;
   text-align: left;
   direction: ltr !important;
@@ -155,26 +253,20 @@ button {
   border-radius: 5px;
   border: none;
 }
-.btn-primary,
-.btn-primary a {
-  color: #fff !important;
-  background: #46afb2;
-}
-
 blockquote {
-  border-right: 5px solid #46afb282;
+  border-right: 5px solid var(--success);
   font-size: 16px;
-  color: #606060;
+  color: var(--gray);
   padding: 10px;
 }
 
 .btn-primary:hover,
 .btn-primary:hover a {
-  color: #8d7f25;
+  color: var(--warning);
 }
 button:hover,
 button:hover a {
-  color: #8d7f25;
+  color: var(--warning);
   opacity: 80%;
 }
 button a {
@@ -236,12 +328,13 @@ form.ng-submitted input.ng-invalid.ng-untouched,
 form.ng-submitted textarea.ng-invalid.ng-untouched,
 form.ng-submitted input.ng-invalid.ng-touched,
 form.ng-submitted textarea.ng-invalid.ng-touched {
-  border: 2px solid #ff7a76 !important;
+  border: 2px solid var(--primary) !important;
   transition: border ease-in 0.2s;
 }
 @media screen and (min-width: 1000px) {
   .container {
-    width: 82%;
+    width: 75%;
+    max-width: 1200px;
   }
 }
 .dark-page-wrapper {
@@ -310,7 +403,7 @@ form.ng-submitted textarea.ng-invalid.ng-touched {
 }
 .toast-message a,
 .toast-message label {
-  color: #ffffff;
+  color: var(--white);
 }
 .toast-message a:hover {
   color: #cccccc;
@@ -323,13 +416,13 @@ form.ng-submitted textarea.ng-invalid.ng-touched {
   float: right;
   font-size: 20px;
   font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0 1px 0 #ffffff;
+  color: var(--white);
+  text-shadow: 0 1px 0 var(--white);
   /* opacity: 0.8; */
 }
 .toast-close-button:hover,
 .toast-close-button:focus {
-  color: #000000;
+  color: var(--black);
   text-decoration: none;
   cursor: pointer;
   opacity: 0.4;
@@ -359,7 +452,7 @@ button.toast-close-button {
   background-repeat: no-repeat;
   background-size: 24px;
   box-shadow: 0 0 12px #999999;
-  color: #ffffff;
+  color: var(--white);
 }
 .toast-container .ngx-toastr:hover {
   box-shadow: 0 0 12px #000000;
@@ -391,29 +484,34 @@ button.toast-close-button {
   margin-right: auto;
 }
 .ngx-toastr {
-  background-color: #030303;
+  background-color: var(--black);
   pointer-events: auto;
 }
 .toast-success {
-  background-color: #51a351;
+  background-color: var(--success);
 }
 .toast-error {
-  background-color: #bd362f;
+  background-color: var(--danger);
 }
 .toast-info {
   background-color: #2f96b4;
 }
 .toast-warning {
-  background-color: #f89406;
+  background-color: var(--warning);
 }
 .toast-progress {
   position: absolute;
   left: 0;
   bottom: 0;
   height: 4px;
-  background-color: #000000;
+  background-color: var(--black);
   opacity: 0.4;
 }
+
+.opacity-80 {
+  opacity: 80%;
+}
+
 @media all and (max-width: 240px) {
   .toast-container .ngx-toastr.div {
     padding: 8px 8px 8px 50px;
