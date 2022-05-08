@@ -5,6 +5,7 @@ interface IBlogRepository<T> {
     getDetailByID: (_id: string) => any;
     publish: (_id: string, isPublished: string) => any;
     getBySlug: (slug: string) => any;
+    getByCategory: (category: any) => any;
     existsSlug: (slug: string) => any;
     existsTitle: (title: string) => any;
     create: (item: T) => any;

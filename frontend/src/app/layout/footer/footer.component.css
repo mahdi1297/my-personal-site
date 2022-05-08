@@ -2,14 +2,14 @@ footer {
   height: auto;
   padding-bottom: 30px;
   margin-top: 150px;
+  background: var(--gray);
 }
 .footer_logo {
   margin-top: 60px;
-  color: #fff !important;
 }
 
 .footer_logo a:hover {
-  color: #141c3a;
+  color: var(--primary);
 }
 .footer-list {
   margin: 0;
@@ -20,10 +20,10 @@ footer {
   padding: 10px 0 10px 30px;
 }
 .footer-list li a {
-  color: #fcfdfe;
+  color: var(--black);
 }
 .footer-list li a:hover {
-  color: #141c3a;
+  color: var(--primary);
 }
 .footer-container {
   width: 100%;

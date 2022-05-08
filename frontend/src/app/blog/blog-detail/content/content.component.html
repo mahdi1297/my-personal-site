@@ -1,3 +1,5 @@
 <div *ngIf="content" class="blog_detail-content" id="blog_content">
-  <div class="content" [innerHtml]="content | safeHtml"></div>
+  <section>
+    <div class="content" [innerHtml]="content | safeHtml"></div>
+  </section>
 </div>

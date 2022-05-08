@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import Context from "../../../config/context";
+import DbContext from "../../../service-host/config/DbContext";
 import { ICommentsDomain } from "../../domain/ICommentsDomain";
 
-var Schema = mongoose.Schema;
-var dbConnection = Context.mongooseConnection;
+const Schema = mongoose.Schema;
+const dbConnection = DbContext.connection;
 
 class CommentSchema {
     static get schema() {
@@ -44,7 +44,7 @@ class CommentSchema {
     }
 }
 
-var schema = dbConnection.model<ICommentsDomain>(
+const schema = dbConnection.model<ICommentsDomain>(
     "comments",
     CommentSchema.schema
 );

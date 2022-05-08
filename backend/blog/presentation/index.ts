@@ -35,7 +35,8 @@ class BlogRoutes {
             .post("/get-by-slug", controller.getBySlug)
             .post("/image-upload", controller.imageUpload)
             .post("/get-by-id", AuthTokenMiddleware, controller.getById)
-            .post("/get-detail", controller.getDetailById);
+            .post("/get-detail", controller.getDetailById)
+            .post("/get-related", controller.getByCategory);
         return route;
     }
 }

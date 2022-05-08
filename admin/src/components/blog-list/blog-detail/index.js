@@ -1,27 +1,36 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
+import TypeaheadProvider from "../../../shared/form/typehead";
 import MultipleUpload from "./../../../shared/form/multiple-upload";
 import FormContainer from "./../../../shared/form/form-container";
 import TextEditor from "./../../../shared/text-editor";
-import { textEditorStructure, formStructure } from "./form-structure";
-import { getBlog, updateBlog } from "./data";
+import Cookies from "universal-cookie";
+import Loader from "../../../shared/loader";
 import { Button, Col, Form, ModalBody } from "reactstrap";
-import { setInputsValues } from "./core";
+import { getBlog, updateBlog } from "./data";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../../helper/slugger";
 import { Body } from "./style";
-import Cookies from "universal-cookie";
+import {
+  textEditorStructure,
+  typeheadStructure,
+  formStructure,
+} from "./form-structure";
 
 const cookie = new Cookies();
 const Token = cookie.get("i_v_c");
 
 const BlogDetail = ({ _id }) => {
-  const [blogInfo, setBloginfo] = useState({});
-  const [content, setContent] = useState("");
   const [image, setImage] = useState([]);
   const [editorLengthErr, setEditorLengthErr] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
+  const [categories, setCategories] = useState("");
+
+  const [blogData, setBlogData] = useState({
+    blogInfo: {},
+    typeheads: [],
+  });
 
   const {
     formState: { errors },
@@ -35,26 +44,50 @@ const BlogDetail = ({ _id }) => {
   useEffect(() => {
     const getData = async () => {
       if (_id) {
-        const { data } = await getBlog(_id, setBloginfo, Token);
-        console.log(data);
+        const { data } = await getBlog(_id, Token);
         if (data.status === 200) {
-          setContent(data.result.content);
+          const valuesToSet = [
+            { title: data.result.title },
+            { slug: data.result.slug },
+            { keywords: data.result.keywords },
+            { main_keyword: data.result.main_keyword },
+            { category: data.result.category },
+            { description: data.result.description },
+          ];
+
+          valuesToSet.forEach((item) => {
+            setValue(Object.keys(item)[0], Object.values(item)[0]);
+          });
+
+          setBlogData({
+            blogInfo: data.result,
+            typeheads: data.result.category
+              ? data.result.category.split(",")
+              : [],
+          });
+          if (data.result.category) {
+            setCategories(data.result.category.split(","));
+          } else {
+            setCategories([]);
+          }
+
+          setImage(data.result.main_image);
         }
       }
     };
     getData();
-    return () => {
-      setBloginfo({});
-      setContent("");
-    };
-  }, [_id]);
 
-  const valueDispatcher = () =>
-    setInputsValues(setValue, blogInfo, setBloginfo, setImage);
+    return () => {
+      setBlogData({
+        blogInfo: {},
+        typeheads: [],
+      });
+    };
+  }, [_id, setValue]);
 
   const onSubmitHandler = async (data) => {
     setIsSubmited(true);
-    if (content.length < 100) {
+    if (blogData.blogInfo.content.length < 100) {
       setEditorLengthErr(true);
     } else {
       setEditorLengthErr(false);
@@ -66,24 +99,42 @@ const BlogDetail = ({ _id }) => {
     formData.append("slug", slugger(data.slug));
     formData.append("description", data.description);
     formData.append("keyword", data.keyword);
+    formData.append("main_keyword", data.main_keyword);
     formData.append("tags", "");
     formData.append("writer", user.username);
-    formData.append("content", content);
+    formData.append("content", blogData.blogInfo.content);
+    formData.append("category", categories);
 
     if (Array.isArray(image)) {
       formData.append("main_image", image[0].file);
     } else {
       formData.append("main_image", image);
     }
-
     await updateBlog(formData, Token);
   };
-  valueDispatcher();
+
+  const setTypeheadesHandler = (e) => {
+    setBlogData({
+      blogInfo: blogData.blogInfo,
+      typeheads: e,
+    });
+    setCategories(e);
+  };
+
+  const setContentHandler = (data) => {
+    setBlogData({
+      blogInfo: {
+        ...blogData.blogInfo,
+        content: data,
+      },
+      typeheads: blogData.typeheads,
+    });
+  };
 
   return (
     <ModalBody>
       <Body>
-        {blogInfo ? (
+        {blogData && blogData.blogInfo ? (
           <>
             <Form className={"mt-2"} onSubmit={handleSubmit(onSubmitHandler)}>
               {formStructure.map((x) => (
@@ -95,29 +146,32 @@ const BlogDetail = ({ _id }) => {
                 />
               ))}
 
+              <TypeaheadProvider
+                data={typeheadStructure}
+                setTypeheades={setTypeheadesHandler}
+                defaultValue={categories}
+              />
               <MultipleUpload
                 setFiles={setImage}
                 default_file={image}
                 maxNumber={1}
               />
-
               <Col xl={12} className={"mt-5"}>
                 <TextEditor
                   data={textEditorStructure}
-                  setContent={setContent}
-                  defaultValue={content}
+                  setContent={setContentHandler}
+                  defaultValue={blogData.blogInfo.content}
                   editorLengthErr={editorLengthErr}
                   isSubmited={isSubmited}
                 />
               </Col>
-
               <Button color={"primary"} className={"mt-5"}>
                 Submit
               </Button>
             </Form>
           </>
         ) : (
-          <h1>Loading...</h1>
+          <Loader />
         )}
       </Body>
     </ModalBody>

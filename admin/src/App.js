@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./layout/sidebar";
 import Cookies from "universal-cookie";
-import Header from "./layout/Header";
+import Header from "./layout/header";
 import Auth from "./components/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { addTokenAction } from "./actions/tokenActions";
@@ -19,6 +19,8 @@ const Cookie = new Cookies();
 const token = Cookie.get("i_v_c");
 
 function App() {
+  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+
   const dispatch = useDispatch();
 
   async function handleToken() {
@@ -39,8 +41,8 @@ function App() {
           <Auth />
         ) : (
           <>
-            <Header />
-            <Sidebar />
+            <Header setSidebar={setIsOpenSidebar} />
+            <Sidebar open={isOpenSidebar} setSidebar={setIsOpenSidebar} />
             <Body>
               <Container>
                 <Switch>

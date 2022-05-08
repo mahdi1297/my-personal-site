@@ -7,37 +7,39 @@ import "./style.css";
 const TableContainer = ({ heads, columns, length, isLoading }) => {
   return (
     <>
-      <Table>
-        <thead>
-          <tr>
-            <th>#</th>
-            {heads && heads.map((item) => <th key={item.id}>{item.name}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {!isLoading && length === 0 ? (
-            <tr style={{ width: "100%" }}>
-              <td>آیتمی وجود ندارد</td>
+      <div className="table-body">
+        <Table>
+          <thead>
+            <tr>
+              <th>#</th>
+              {heads && heads.map((item) => <th key={item.id}>{item.name}</th>)}
             </tr>
-          ) : (
-            !isLoading &&
-            columns &&
-            columns.map((x, n) => (
-              <tr key={x.id} style={{ width: "35px" }}>
-                <td>{n + 1}</td>
-                {x.body.map((m, s) => (
-                  <td key={uuidv4()}>{m}</td>
-                ))}
+          </thead>
+          <tbody>
+            {!isLoading && length === 0 ? (
+              <tr style={{ width: "100%" }}>
+                <td>آیتمی وجود ندارد</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </Table>
-      {isLoading && (
-        <div className="">
-          <Loader />
-        </div>
-      )}
+            ) : (
+              !isLoading &&
+              columns &&
+              columns.map((x, n) => (
+                <tr key={x.id} style={{ width: "35px" }}>
+                  <td>{n + 1}</td>
+                  {x.body.map((m, s) => (
+                    <td key={uuidv4()}>{m}</td>
+                  ))}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </Table>
+        {isLoading && (
+          <div className="">
+            <Loader />
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -1,7 +1,69 @@
-<div class="blog_hero">
-  <h1>آخرین اخبار دنیای برنامه نویسی وب در وبلاگ من...</h1>
-  <p>
-    Javascript, <span class="c-theme">React</span>, Vue, Angular, Nodejs,
-    Typescript And More...
-  </p>
+<div class="blog-hero">
+  <div class="container">
+    <section>
+      <h2>مقالات برنامه نویسی</h2>
+      <div class="hero-search">
+        <form class="flex">
+          <input />
+          <button (click)="btnClickHandler()" class="btn btn-primary">
+            <i-feather name="search"></i-feather>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="search-items">
+      <p>دسته بندی ها</p>
+      <ul>
+        <li>
+          <a href="/blog/react" class="active">
+            <div>
+              <img src="/assets/img/techs/react.svg" width="55%" />
+            </div>
+            <span>react.js</span>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/react">
+            <div>
+              <img src="/assets/img/techs/js.svg" width="55%" />
+            </div>
+            <span>javascript</span>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/react">
+            <div>
+              <img src="/assets/img/techs/ts.svg" width="55%" />
+            </div>
+            <span>typescript</span>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/react">
+            <div>
+              <img src="/assets/img/techs/next.svg" width="55%" />
+            </div>
+            <span>next.js</span>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/react">
+            <div>
+              <img src="/assets/img/techs/angular.svg" width="55%" />
+            </div>
+            <span>angular</span>
+          </a>
+        </li>
+        <li>
+          <a href="/blog/react">
+            <div>
+              <img src="/assets/img/logos/node.png" width="55%" />
+            </div>
+            <span>node.js</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
 </div>

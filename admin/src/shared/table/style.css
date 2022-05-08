@@ -1,3 +1,13 @@
+.table-body {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-body table {
+  width: 100%;
+  min-width: 800px;
+}
+
 table tr th {
   color: #9e9ea7;
   border-bottom: 3px solid #d89661 !important;

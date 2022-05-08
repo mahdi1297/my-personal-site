@@ -21,14 +21,14 @@ const updateBlogHandler = async (data, typehead, content, image, user, _id) => {
   await updateBlog(formData);
 };
 
-const setInputsValues = (setValue, blogInfo, setBloginfo, setImage) => {
+const setInputsValues = (setValue, blogInfo, setImage) => {
   if (blogInfo.title) {
-    setBloginfo({});
-
     const valuesToSet = [
       { title: blogInfo.title },
       { slug: blogInfo.slug },
       { keywords: blogInfo.keywords },
+      { main_keyword: blogInfo.main_keyword },
+      { category: blogInfo.category },
       { description: blogInfo.description },
     ];
 

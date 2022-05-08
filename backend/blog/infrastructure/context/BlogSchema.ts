@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import IBlogDomain from "../../domain/IBlogDomain";
-import Context from "../../../config/context";
+import DbContext from "../../../service-host/config/DbContext";
 
 var Schema = mongoose.Schema;
-var mongooseConnection = Context.mongooseConnection;
+var mongooseConnection = DbContext.connection;
 
 class BlogSchema {
     static get schema() {
@@ -32,10 +32,13 @@ class BlogSchema {
                 keywords: {
                     type: String,
                 },
-                main_keywork: {
+                main_keyword: {
                     type: String,
                 },
                 content: {
+                    type: String,
+                },
+                category: {
                     type: String,
                 },
                 writer: {

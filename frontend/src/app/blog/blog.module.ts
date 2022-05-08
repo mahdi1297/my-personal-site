@@ -21,6 +21,10 @@ import { HeroComponent } from './hero/hero.component';
 import { ItemsComponent } from './items/items.component';
 import { SafeHtml } from '../pipes/safehtml.pipe';
 import { SharedModule } from '../shared-module/shared.module';
+import { SidebarComponent } from './blog-detail/sidebar/sidebar.component';
+
+import { ShareModule } from 'ngx-sharebuttons';
+import { AvatarSharedComponent } from '../shared/avatar/avatar.component';
 
 @NgModule({
   imports: [
@@ -30,6 +34,7 @@ import { SharedModule } from '../shared-module/shared.module';
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
+    ShareModule,
   ],
   declarations: [
     BlogComponent,
@@ -42,8 +47,10 @@ import { SharedModule } from '../shared-module/shared.module';
     CategoriesComponent,
     CommentsComponent,
     BlogListComponent,
+    SidebarComponent,
     NewCommentComponent,
     CommentComponent,
+    AvatarSharedComponent,
     SafeHtml,
   ],
   // schemas: [NO_ERRORS_SCHEMA],

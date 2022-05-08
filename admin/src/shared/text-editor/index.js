@@ -12,7 +12,9 @@ Quill.register("modules/imageResize", ImageResize);
 Quill.register({ "formats/video": Video });
 
 const modules = {
+  syntax: true,
   toolbar: [
+    [{ history: { delay: 2500, userOnly: true } }],
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
     [{ color: [] }, { background: [] }],
@@ -39,9 +41,8 @@ const modules = {
   },
 
   imageUploader: {
-    upload: async (file, data) => {
+    upload: async (file) => {
       console.log(file);
-      console.log(data);
       const bodyFormData = new FormData();
 
       bodyFormData.append("image", file);
@@ -66,7 +67,7 @@ const modules = {
       border: "none",
       color: "white",
     },
-    modules: ["Resize", "DisplaySize", "Toolbar"],
+    modules: ["Resize", "DisplaySize", "Toolbar", "syntax"],
   },
 };
 const formats = [
@@ -90,6 +91,7 @@ const formats = [
   "clean",
   "code",
   "imageResize",
+  "syntax",
 ];
 
 const TextEditor = ({ defaultValue, setContent }) => {

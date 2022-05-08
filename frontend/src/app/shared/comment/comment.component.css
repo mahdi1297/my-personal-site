@@ -42,8 +42,6 @@ button {
   opacity: 80%;
 }
 .notallowed-alert {
-  /* background: #7a76ff; */
   padding: 20px;
-  color: #fff;
   border-radius: 5px;
 }

@@ -27,20 +27,20 @@ const formStructure = [
       maxLength: 250,
     },
   },
-  // {
-  //   id: 3,
-  //   size: 12,
-  //   type: "text",
-  //   name: "keyword",
-  //   placeholder: "برنامه نویسی, جاوااسکریپت...",
-  //   label: "keyword",
-  //   labelRequired: true,
-  //   validation: {
-  //     required: true,
-  //     minLength: 5,
-  //     maxLength: 250,
-  //   },
-  // },
+  {
+    id: 4,
+    size: 12,
+    type: "text",
+    name: "main_keyword",
+    placeholder: "مثلا react.js",
+    label: "کلمه کلیدی اصلی",
+    labelRequired: true,
+    validation: {
+      required: true,
+      minLength: 5,
+      maxLength: 250,
+    },
+  },
   {
     id: 5,
     size: 12,
@@ -79,10 +79,10 @@ const textEditorStructure = {
 };
 
 const typeheadStructure = {
-  name: "tags",
-  label: "تگ ها",
-  placeholder: "تگ ها را وارد کنید",
-  newSelectionPrefix: "اضافه کردن تگ :",
+  name: "category",
+  label: "دسته بندی ها",
+  placeholder: "دسته بندی ها ها را وارد کنید",
+  newSelectionPrefix: "اضافه کردن دسته بندی :",
 };
 
 export {

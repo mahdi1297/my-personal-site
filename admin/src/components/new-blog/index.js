@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import FormContainer from "../../shared/form/form-container";
 import TextEditor from "../../shared/text-editor";
 import PageTitle from "../../shared/page-title";
+import Cookies from "universal-cookie";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { textEditorStructure, formStructure } from "./form-structure";
+import {
+  textEditorStructure,
+  formStructure,
+  typeheadStructure,
+} from "./form-structure";
 import { Button, Col, Form } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { slugger } from "../../helper/slugger";
-
-import Cookies from "universal-cookie";
+import TypeaheadProvider from "../../shared/form/typehead";
 
 const cookie = new Cookies();
 const Token = cookie.get("i_v_c");
@@ -24,6 +28,7 @@ const NewBlog = () => {
   const [content, setContent] = useState();
   const [editorLengthErr, setEditorLengthErr] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const onSubmitHandler = async (data) => {
     setIsSubmited(true);
@@ -40,9 +45,10 @@ const NewBlog = () => {
     formData.append("keyword", data.keyword);
     formData.append("content", content);
     formData.append("image", data.image[0]);
+    formData.append("main_keyword", data.main_keyword);
     formData.append("tags", "");
     formData.append("writer", "مهدی علی پور");
-    formData.append("main_keywork", data.main_keywork);
+    formData.append("category", categories);
     formData.append("isPublished", "flase");
 
     try {
@@ -65,6 +71,10 @@ const NewBlog = () => {
     }
   };
 
+  const setTypeheadesHandler = (e) => {
+    setCategories(e);
+  };
+
   return (
     <>
       <PageTitle title="بلاگ جدید" />
@@ -77,6 +87,12 @@ const NewBlog = () => {
             errors={errors}
           />
         ))}
+
+        <TypeaheadProvider
+          data={typeheadStructure}
+          setTypeheades={setTypeheadesHandler}
+          defaultValue={[]}
+        />
 
         <Col xl={12} className={"mt-5"}>
           <TextEditor

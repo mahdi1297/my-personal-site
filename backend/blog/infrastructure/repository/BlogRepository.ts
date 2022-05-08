@@ -24,6 +24,7 @@ class BlogRepository<T extends mongoose.Document>
                 "thumbnail",
                 "createdAt",
                 "isPublished",
+                "category",
             ])
             .limit(12)
             .skip(12 * (pageNumber - 1))
@@ -72,6 +73,15 @@ class BlogRepository<T extends mongoose.Document>
         return await this._model.findOneAndUpdate({ _id: _id }, data);
     }
     remove: (_id: string) => void;
+
+    async getByCategory(category: any) {
+        return await this._model.find(
+            {
+                main_keyword: { $regex: category, $options: "i" },
+            },
+            ["_id", "slug", "main_image", "title"]
+        );
+    }
 }
 
 export default BlogRepository;

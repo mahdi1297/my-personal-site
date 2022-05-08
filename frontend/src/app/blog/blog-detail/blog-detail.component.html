@@ -1,13 +1,14 @@
-<article *ngIf="blogDetail.result; else loading">
+<article class="blog_detail-body" *ngIf="blogDetail.result; else loading">
   <app-blog-detail-head
     [title]="blogDetail.result.title"
+    [slug]="blogDetail.result.slug"
     [writer]="blogDetail.result.writer"
     [createdAt]="blogDetail.result.createdAt"
     [main_image]="blogDetail.result.main_image"
   ></app-blog-detail-head>
 
-  <div class="container">
-    <div class="blog_detail-body">
+  <div class="blog-detail_main">
+    <div class="main-article">
       <app-blog-detail-content
         [content]="blogDetail.result.content"
       ></app-blog-detail-content>
@@ -16,6 +17,7 @@
         [writer]="blogDetail.result.writer"
         [tags]="blogDetail.result.tags"
         [tokenData]="tokenData"
+        [keyword]="keyword"
       >
       </app-blog-detail-footer>
 
@@ -24,8 +26,15 @@
         [tokenData]="tokenData"
       ></app-blog-detail-comments>
     </div>
+    <div class="sidebar">
+      <app-blog-sidebar
+        [slug]="blogDetail.result.slug"
+        [writer]="blogDetail.result.writer"
+      ></app-blog-sidebar>
+    </div>
   </div>
 </article>
+
 <ng-template #loading>
   <app-loading-container></app-loading-container>
 </ng-template>
