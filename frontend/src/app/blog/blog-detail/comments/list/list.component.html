@@ -11,7 +11,7 @@
           <img
             src="http://api.mahdialipoor.ir/{{ item.profile }}"
             alt=""
-            width="50"
+            width="35"
           />
         </div>
         <div class="comment-data">
@@ -60,7 +60,7 @@
                   <img
                     src="http://api.mahdialipoor.ir/{{ subitem.profile }}"
                     alt=""
-                    width="50"
+                    width="35"
                   />
                 </div>
                 <div class="comment-data">
@@ -109,9 +109,11 @@
                       >
                         <div class="user-data">
                           <img
-                            src="http://api.mahdialipoor.ir/{{ subSubitem.profile }}"
+                            src="http://api.mahdialipoor.ir/{{
+                              subSubitem.profile
+                            }}"
                             alt=""
-                            width="50"
+                            width="35"
                           />
                         </div>
                         <div class="comment-data">
@@ -151,5 +153,5 @@
 
 <ng-template #loader></ng-template>
 <ng-template #emptyComments>
-  <p class="first-comment">اولین دیدگاه را شما ثبت کنید</p>
+  <p class="first-comment">دیدگاه خود را ثبت کنید</p>
 </ng-template>

@@ -1,0 +1,44 @@
+<div class="sidebar-container">
+  <div class="socials">
+    <p>اشتراک گذاری</p>
+    <ul>
+      <li>
+        <button (click)="clipboardCopyHandler()">
+          <span class="share-btn-icon" *ngIf="!isCoppied; else notcoppied">
+            <i-feather name="copy"></i-feather>
+          </span>
+          <span class="share-btn-text">آدرس</span>
+        </button>
+      </li>
+      <li>
+        <button shareButton="linkedin" title="" url="{{ pageAddress }}">
+          <span class="share-btn-icon">
+            <i-feather name="linkedin"></i-feather>
+          </span>
+          <span class="share-btn-text">Linkedin</span>
+        </button>
+      </li>
+      <li>
+        <button shareButton="twitter" title="" url="{{ pageAddress }}">
+          <span class="share-btn-icon">
+            <i-feather name="twitter"></i-feather>
+          </span>
+          <span class="share-btn-text">Twitter</span>
+        </button>
+      </li>
+    </ul>
+    <br />
+    <br />
+
+    <p>نویسنده</p>
+    <div>
+      <avatar-shared [writer]="'Mahdi Alipoor'"></avatar-shared>
+    </div>
+  </div>
+</div>
+
+<ng-template #notcoppied>
+  <span class="share-btn-icon">
+    <i-feather name="check-circle"></i-feather>
+  </span>
+</ng-template>

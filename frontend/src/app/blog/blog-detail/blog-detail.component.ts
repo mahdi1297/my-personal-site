@@ -6,7 +6,6 @@ import { TimeService } from 'src/app/services/time.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-blog-detail',
@@ -60,7 +59,10 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
               name: 'viewport',
               content: 'width=device-width, initial-scale=1',
             },
-            // { rel: 'canonical', href: `${window.location.href}` },
+            {
+              rel: 'canonical',
+              href: `http://mahdialipoor.ir/blog/${data.result.title}`,
+            },
             { charset: 'UTF-8' },
             { name: 'theme-color', content: '#46afb2' },
             {
@@ -75,10 +77,10 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
               property: 'og:description',
               content: `${data.result.description}`,
             },
-            // {
-            //   property: 'og:url',
-            //   content: `${window.location.href}`,
-            // },
+            {
+              property: 'og:url',
+              content: `http://mahdialipoor.ir/blog/${data.result.title}`,
+            },
             {
               property: 'og:image',
               content: `${environment.api_image_url}${data.result.main_image}`,

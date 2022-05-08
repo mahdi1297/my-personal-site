@@ -1,24 +1,13 @@
 <section class="blog_detail-footer">
   <div class="flex justify-between flex-wrap">
-    <div class="writer-tags">
+    <div class="writer-tags avatar">
       <div class="title">
         <h3>درباره نویسنده</h3>
       </div>
-      <div>
-        <a href="/">
-          <div *ngIf="writer !== undefined" class="flex align-center">
-            <img
-              src="./../../../../assets/img/avatar.png"
-              width="50"
-              class="br-100"
-              alt=""
-            />
-            <span class="c-black">{{ writer }}</span>
-          </div>
-        </a>
+      <div class="avatar-body">
+        <avatar-shared [writer]="writer"></avatar-shared>
       </div>
     </div>
-    <!-- ///// -->
     <div>
       <div class="title">
         <h3>مقالات مرتبط</h3>

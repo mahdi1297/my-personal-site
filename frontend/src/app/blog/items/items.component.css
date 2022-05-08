@@ -54,7 +54,7 @@ h2 {
   width: 100%;
   height: 200px;
   background-size: cover;
-  box-shadow: 1px 14px 13px #27244336;
+  /* box-shadow: 1px 14px 13px #27244336; */
 }
 .blog_items-card_header img:hover {
   opacity: 60%;

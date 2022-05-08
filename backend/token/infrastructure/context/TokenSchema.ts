@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import Context from "../../../config/context";
+import DbContext from "../../../service-host/config/DbContext";
 import ITokenDomain from "../../domain/ITokenDomain";
 
 const Schema = mongoose.Schema;
-const mongooseConnection = Context.mongooseConnection;
+const dbContextConnection = DbContext.connection;
 
 class TokenSchema {
     static get schema() {
@@ -22,7 +22,7 @@ class TokenSchema {
     }
 }
 
-let schema = mongooseConnection.model<ITokenDomain>(
+const schema = dbContextConnection.model<ITokenDomain>(
     "tokens",
     TokenSchema.schema
 );

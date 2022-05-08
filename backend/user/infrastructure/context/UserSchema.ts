@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
+import DbContext from "../../../service-host/config/DbContext";
 import IUserDomain from "../../domain/IUserDomain";
-import Context from "../../../config/context";
 
-var Schema = mongoose.Schema;
-var mongooseConnection = Context.mongooseConnection;
+const Schema = mongoose.Schema;
+const dbContextConnection = DbContext.connection;
 
 class UserSchema {
     static get schema() {
@@ -39,5 +39,8 @@ class UserSchema {
         return schema;
     }
 }
-var schema = mongooseConnection.model<IUserDomain>("users", UserSchema.schema);
+const schema = dbContextConnection.model<IUserDomain>(
+    "users",
+    UserSchema.schema
+);
 export default schema;

@@ -15,6 +15,9 @@ import {
   Tag,
   X,
   Search,
+  CheckCircle,
+  MessageSquare,
+  Copy,
 } from 'angular-feather/icons';
 
 const icons = {
@@ -32,6 +35,9 @@ const icons = {
   Link,
   X,
   Search,
+  MessageSquare,
+  Copy,
+  CheckCircle,
 };
 
 @NgModule({

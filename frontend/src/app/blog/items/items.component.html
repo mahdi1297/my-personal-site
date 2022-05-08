@@ -26,15 +26,19 @@
 
       <div class="pagination w-100 flex justify-center">
         <button
-          [ngClass]="blogs.result.length === 0 ? 'disabled' : 'primary'"
-          (click)="nextPageBtnHandler($event)"
+          [ngClass]="
+            this.blogs.result.length >= this.blogsLength
+              ? 'disabled'
+              : 'primary'
+          "
+          (click)="nextPageBtnHandler()"
         >
           <i-feather name="chevron-right"></i-feather>
         </button>
         <p>{{ pageNumber }}</p>
         <button
           [ngClass]="pageNumber === 1 ? 'disabled' : 'primary'"
-          (click)="prevPageBtnHandler($event)"
+          (click)="prevPageBtnHandler()"
         >
           <i-feather name="chevron-left"></i-feather>
         </button>

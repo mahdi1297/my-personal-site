@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import Context from "../../../config/context";
+import DbContext from "../../../service-host/config/DbContext";
 import { IPortfolioDomain } from "../../domain/IPortfolioDomain";
 
-var Schema = mongoose.Schema;
-var dbConnection = Context.mongooseConnection;
+const Schema = mongoose.Schema;
+const dbConnection = DbContext.connection;
 
 class PortfolioSchema {
     static get schema() {
@@ -42,7 +42,7 @@ class PortfolioSchema {
     }
 }
 
-var schema = dbConnection.model<IPortfolioDomain>(
+const schema = dbConnection.model<IPortfolioDomain>(
     "portfolios",
     PortfolioSchema.schema
 );

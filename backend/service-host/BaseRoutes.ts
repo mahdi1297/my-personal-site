@@ -1,8 +1,8 @@
 import express from "express";
-import UserRoutes from "./user/presentation";
-import BlogRoutes from "./blog/presentation";
-import CommentsRoutes from "./comments/presentation";
-import PortfolioRoute from "./portfolio/presentation";
+import UserRoutes from "../user/presentation";
+import BlogRoutes from "../blog/presentation";
+import CommentsRoutes from "../comments/presentation";
+import PortfolioRoute from "../portfolio/presentation";
 const app = express();
 
 class BaseRoutes {

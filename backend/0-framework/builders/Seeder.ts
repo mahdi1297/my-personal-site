@@ -1,8 +1,8 @@
 import express from "express";
-import { hashPassword } from "./0-framework/middlewares/bcrypt";
-import { Signjwt } from "./0-framework/middlewares/jwt";
-import User from "./user/infrastructure/context/UserSchema";
-import Token from "./token/infrastructure/context/TokenSchema";
+import { hashPassword } from "../middlewares/bcrypt";
+import { Signjwt } from "../middlewares/jwt";
+import User from "../../user/infrastructure/context/UserSchema";
+import Token from "../../token/infrastructure/context/TokenSchema";
 
 export async function SeedUser() {
     try {

@@ -1,33 +1,55 @@
-<div class="container">
-  <div class="blog_detail-container">
-    <div class="blog_detail-head dark">
-      <section class="blog_detail-head-info">
-        <h1 class="dark">{{ title }}</h1>
-        <div class="flex align-center">
-          <div>
-            <div>
-              {{ writer }}
-              <i-feather name="pen-tool"></i-feather>
-            </div>
-          </div>
-          <div>
-            <div>
-              <span style="direction: ltr">
-                {{ createdAt }}
-                <i-feather name="link"></i-feather>
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="blog_detail-head-img">
-        <img
-          src="{{ imageUrl }}{{ main_image }}"
-          width="100%"
-          height="auto"
-          alt="{{ title }}"
-        />
-      </section>
+<div class="blog-detail_head">
+  <div class="blog-detail_keyword">
+    <span class="dark">react.js</span>
+  </div>
+  <div class="blog-detail_container">
+    <h1 class="dark">{{ title }}</h1>
+
+    <div class="blog-detail_meta">
+      {{ createdAt }} - زمان مورد نیاز: 10 دقیقه
+    </div>
+
+    <div>
+      <ul class="sm_socials">
+        <li>
+          <p>اشتراک گذاری:</p>
+        </li>
+        <li>
+          <button shareButton="twitter" title="" url="{{ pageAddress }}">
+            <span>
+              <i-feather name="twitter"></i-feather>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button shareButton="linkedin" title="" url="{{ pageAddress }}">
+            <span>
+              <i-feather name="linkedin"></i-feather>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button (click)="clipboardCopyHandler()">
+            <span *ngIf="!isCoppied; else notcoppied">
+              <i-feather name="copy"></i-feather>
+            </span>
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
+  <section class="blog-detail_image">
+    <img
+      src="{{ imageUrl }}{{ main_image }}"
+      width="100%"
+      height="auto"
+      alt="{{ title }}"
+    />
+  </section>
 </div>
+
+<ng-template #notcoppied>
+  <span class="share-btn-icon">
+    <i-feather name="check-circle"></i-feather>
+  </span>
+</ng-template>
