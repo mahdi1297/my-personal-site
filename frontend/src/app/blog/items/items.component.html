@@ -1,5 +1,5 @@
 <div class="blog_items w-100">
-  <div *ngIf="blogs.result; else loading">
+  <div *ngIf="blogs.result && blogs.result[0]; else loading">
     <div class="blog_items-container">
       <div *ngFor="let item of blogs.result" class="blog_items-item">
         <div class="blog_items-card_header">

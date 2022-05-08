@@ -7,25 +7,22 @@ import { ApiService } from './http.service';
 })
 class BlogService {
   blogList = new ReplaySubject<any>();
-  blogLength = new ReplaySubject<number>();
 
   page: number = 1;
 
-  constructor(private apiService: ApiService) {
-    this.getData();
-  }
+  constructor(private apiService: ApiService) {}
 
   getBlogList(pageNumber: number) {
+    this.getData();
     this.page = pageNumber;
-    return this.blogList.next();
+    const data = this.blogList;
+    return data;
   }
 
   getData() {
     this.apiService.get(`blog/list/${this.page}`).subscribe(
       (data: any) => {
-        this.blogLength = data.count;
-
-        this.blogList = data;
+        this.blogList.next(data);
       },
       (error: any) => {
         alert('error');
